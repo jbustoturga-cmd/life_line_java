@@ -7,6 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+
 <style>
 :root {
     --color-primary: #3d5273;
@@ -28,7 +29,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ---------------------- BODY ---------------------- */
+/* ---------------------- BODY. ---------------------- */
 
 body {
     font-family: 'Inter', sans-serif;
@@ -104,7 +105,7 @@ a { text-decoration: none; }
     object-fit: cover;
 }
 
-/* ---------------------- MENÚ ---------------------- */
+/* ---------------------- MENÚ. ---------------------- */
 
 .main-tabs {
     background-color: #2d3e5f;
@@ -176,6 +177,7 @@ a { text-decoration: none; }
     margin-right: 12px;
     border: 2px solid var(--color-bg-light);
 }
+
 
 .post-input {
     flex-grow: 1;
@@ -252,7 +254,7 @@ a { text-decoration: none; }
     object-fit: contain;
 }
 
-/* ---------------------- MODAL ---------------------- */
+/* ---------------------- MODAL. ---------------------- */
 
 .modal-overlay {
     position: fixed;
@@ -344,7 +346,7 @@ a { text-decoration: none; }
     </div>
 </div>
 
-<!-- MENÚ PRINCIPAL (CONTROL DE VISTAS) -->
+<!-- MENÚ PRINCIPAL (CONTROL DE VISTAS). -->
 <nav class="main-tabs">
     <a href="#" onclick="changeView('mural')" id="tab-mural"><i class="fas fa-user-friends"></i>Mural</a>
     <a href="#" onclick="changeView('store')" id="tab-store" class="active"><i class="fas fa-store"></i>Productos</a>
@@ -371,7 +373,7 @@ a { text-decoration: none; }
 
 <script>
 // ============================================================
-// DATOS SIMULADOS (MOCK DATA) DE PRODUCTOS
+// DATOS SIMULADOS (MOCK DATA) DE PRODUCTOS.
 // Simula la información que vendría de su base de datos MySQL.
 // ============================================================
 
@@ -435,7 +437,7 @@ function updateCartBadge() {
 }
 
 function showTemporaryMessage(message, type = 'info') {
-    // Limpia mensajes anteriores
+    // Limpia mensajes anteriores.
     document.querySelectorAll('.temp-message').forEach(el => el.remove());
 
     const messageDiv = document.createElement('div');
@@ -501,7 +503,7 @@ function renderStoreView() {
         grid.appendChild(card);
     });
 
-    // Agregar listener a los botones de agregar al carrito
+    // Agregar listener a los botones de agregar al carrito.
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = parseInt(e.target.dataset.id);
