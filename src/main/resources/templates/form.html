@@ -13,17 +13,20 @@ body {
   color: #1a1a1a;
   padding: 20px 0;
 }
+
 .back-arrow {
   position: absolute; top: 25px; left: 25px;
   font-size: 32px; color: #2d3e5f;
   cursor: pointer; text-decoration: none;
 }
+
 .container {
   max-width: 550px; margin: 30px auto;
   background-color: white; padding: 45px 50px;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0,0,0,0.15);
 }
+
 .logo {
   display: flex; justify-content: center;
   align-items: center; font-size: 55px;
@@ -282,6 +285,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
 
   if (hasError) e.preventDefault();
 });
+
 
 function showError(element, id) {
   element.classList.add('error');
