@@ -9,8 +9,9 @@ public class PerfilController {
     
     @GetMapping("/Perfil")
     public String mostrarPerfil() {
-        // Retorna el nombre del archivo HTML (ubicado en /templates/perfil.html)
+        // Retorna el nombre del archivo HTML (ubicado en /templates/perfil.html).
         return "perfil";
     }
 }
 
+//
