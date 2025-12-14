@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+//
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -29,19 +29,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Usuario usuario = usuarioOpt.get();
 
         // ============================================
-        // 🔧 Agregado: garantizar que el rol nunca sea null
+        // 🔧 Agregado: garantizar que el rol nunca sea null.
         // ============================================
         String rol = usuario.getRol();
         if (rol == null || rol.isBlank()) {
-            rol = "USER";  // Rol por defecto
+            rol = "USER";  // Rol por defecto.
         }
         // ============================================
 
         return User.builder()
                 .username(usuario.getUserName())
                 .password(usuario.getPassword())
-                .roles(rol)          // Mantengo tu lógica exacta
+                .roles(rol)          // Mantengo tu lógica exacta.
                 .build();
     }
 }
 
+//
