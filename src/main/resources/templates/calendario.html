@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mural Digital de Post-its (MySQL Ready)</title>
-    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -24,7 +24,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; /* Fondo gris claro */
         }
-        /* Estilo para simular el borde rasgado de un post-it */
+        /* Estilo para simular el borde rasgado de un post-it. */
         .post-it {
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, box-shadow 0.2s;
@@ -48,7 +48,7 @@
             --border-radius-sm: 5px;
 
             /* Colores para el formulario de citas */
-            --form-bg: #e2eaf5; /* Fondo claro para el formulario */
+            --form-bg: #e2eaf5; /* Fondo claro para el formulario. */
             --input-bg: white;
             --button-bg: #5b6e94;
             --button-hover: #3d5273;
@@ -159,7 +159,7 @@
         }
         .appointment-item:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
 
-        /* Columna Derecha: Notificaciones e Historial - Mantenido */
+        /* Columna Derecha: Notificaciones e Historial - Mantenido. */
         .sidebar-area {
             flex: 1;
             display: flex;
@@ -317,7 +317,7 @@
             background-color: var(--button-hover);
         }
 
-        /* Media Queries */
+        /* Media Queries. */
         @media (max-width: 1100px) {
             .calendar-module-container {
                 flex-direction: column;
@@ -379,7 +379,7 @@
             <button class="action-button" id="toggleFormButton"><i class="fas fa-plus-circle"></i> Nueva Cita</button>
         </div>
 
-        <!-- LISTA DE CITAS EXISTENTES (Mantenido) -->
+        <!-- LISTA DE CITAS EXISTENTES .(Mantenido) -->
         <ul class="appointment-list">
             <li class="appointment-item" style="border-left-color: #e74c3c;">
                 <div class="appointment-icon" style="color: #e74c3c;"><i class="fas fa-pills"></i></div>
@@ -433,7 +433,7 @@
                 <button class="type-button">Nutrición</button>
             </div>
             
-            <!-- Detalles de la Cita (Base de la imagen) -->
+            <!-- Detalles de la Cita .(Base de la imagen) -->
             <div class="appointment-details-input">
                 <p>programa tu próxima cita y recibe recordatorios</p>
                 <div class="input-group">
@@ -532,7 +532,7 @@
             Agrega ideas, tareas o pendientes.
         </p>
 
-        <!-- Formulario para agregar/editar notas -->
+        <!-- Formulario para agregar/editar notas. -->
         <div class="mb-8 p-4 bg-blue-50 rounded-lg shadow-inner border border-blue-200">
             <form id="note-form">
                 <input type="hidden" id="note-id" value="">
@@ -611,7 +611,7 @@
 
     });
  let notes = [];
-        let nextId = 1; // Para simular auto-incremento de ID
+        let nextId = 1; // Para simular auto-incremento de ID.
 
         const noteMural = document.getElementById('note-mural');
         const noteForm = document.getElementById('note-form');
@@ -691,7 +691,7 @@
 
         /**
          * @async
-         * Guarda una nota nueva o actualiza una existente en MySQL.
+         * Guarda una nota nueva o actualiza una existente en MySQL..
          * REEMPLAZA este cuerpo por una llamada 'fetch' (POST para nuevo, PUT/PATCH para actualizar).
          */
         async function saveNote(noteData) {
@@ -768,7 +768,7 @@
             submitButton.textContent = 'Agregar Post-it';
         });
 
-        // Maneja clicks en los botones de la lista (editar, eliminar)
+        // Maneja clicks en los botones de la lista (editar, eliminar).
         noteMural.addEventListener('click', async (e) => {
             const button = e.target.closest('button');
             if (!button) return;
@@ -841,7 +841,7 @@
             });
         }
 
-        // Iniciar la aplicación cargando las notas
+        // Iniciar la aplicación cargando las notas.
         window.onload = loadNotes;
 
     </script>
