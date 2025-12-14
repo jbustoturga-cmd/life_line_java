@@ -25,7 +25,7 @@ public class TiendaController {
             userId = 1L;
         }
         
-        // ✅ Cambiar aquí
+        // ✅ Cambiar aquí.
         model.addAttribute("usuarioId", userId);
         
         List<Producto> productos = productoService.listar();
@@ -42,7 +42,7 @@ public class TiendaController {
             userId = 1L;
         }
         
-        // ✅ Cambiar aquí
+        // ✅ Cambiar aquí.
         model.addAttribute("usuarioId", userId);
         
         return "carrito";
@@ -58,7 +58,7 @@ public class TiendaController {
             userId = 1L;
         }
         
-        // ✅ Cambiar aquí
+        // ✅ Cambiar aquí.
         model.addAttribute("usuarioId", userId);
         
         List<Producto> productos = productoService.listarPorCategoria(categoria);
@@ -78,7 +78,7 @@ public class TiendaController {
             userId = 1L;
         }
         
-        // ✅ Cambiar aquí
+        // ✅ Cambiar aquí.
         model.addAttribute("usuarioId", userId);
         
         Producto producto = productoService.obtenerPorId(id);
@@ -87,3 +87,4 @@ public class TiendaController {
         return "producto-detalle";
     }
 }
+//
