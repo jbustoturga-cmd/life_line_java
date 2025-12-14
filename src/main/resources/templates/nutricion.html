@@ -7,7 +7,7 @@
     
     <!--
         [OPTIMIZACIÓN CLAVE]: La hoja de estilos de Font Awesome ahora se carga de forma no bloqueante
-        utilizando la técnica de precarga y carga asíncrona (media="print" y onload),
+        utilizando la técnica de precarga y carga asíncrona (media="print" y onload),.
         lo que mejora la velocidad de renderizado inicial (FCP/LCP).
     -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,6 +67,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             overflow-x: auto; /* Para móvil */
         }
+
         .main-tabs a {
             color: white;
             padding: 10px 20px;
@@ -140,6 +141,7 @@
             }
         }
     }
+
 </script>
 
 <div class="header-bar">
@@ -174,7 +176,7 @@
         <p class="text-xl font-semibold text-accent">Tu guía dietética para mantener la fuerza y manejar los efectos secundarios.</p>
     </div>
 
-    <!-- SECCIÓN DE ASISTENCIA RÁPIDA (LLM Simulation) -->
+    <!-- SECCIÓN DE ASISTENCIA RÁPIDA (LLM Simulation). -->
     <div class="bg-green-50 p-6 sm:p-8 rounded-xl mb-10 border-2 border-interactive shadow-lg">
         <h2 class="text-2xl font-bold text-interactive mb-4 flex items-center space-x-3">
             <i class="fas fa-comments text-3xl"></i>
@@ -255,7 +257,7 @@
     
 </div>
 
-<!-- SCRIPTS (Mover al final para no bloquear la renderización) -->
+<!-- SCRIPTS (Mover al final para no bloquear la renderización) .-->
 <script>
     // Configuración para simular la llamada a la API
     const MOCK_API_RESPONSE = {
@@ -350,7 +352,7 @@
             }
         }
 
-        // 4. Resetear el botón
+        // 4. Resetear el botón.
         buttonElement.disabled = false;
     }
 
