@@ -9,7 +9,7 @@
 
 <style>
 /* ============================================================
-   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES.
    ============================================================ */
 :root {
     --color-primary: #3d5273;
@@ -30,7 +30,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ============================================================
-   ESTILOS GENERALES DEL CUERPO
+   ESTILOS GENERALES DEL CUERPO.
    ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -42,7 +42,7 @@ body {
 a { text-decoration: none; }
 
 /* ============================================================
-   BARRA SUPERIOR
+   BARRA SUPERIOR.
    ============================================================ */
 .header-bar {
     background-color: var(--color-top-bar-bg);
@@ -69,7 +69,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   MENÚ PRINCIPAL
+   MENÚ PRINCIPAL.
    ============================================================ */
 .main-tabs {
     background-color: #2d3e5f;
@@ -89,7 +89,7 @@ a { text-decoration: none; }
 .main-tabs a.active { background-color: var(--color-menu-bg); }
 
 /* ============================================================
-   LAYOUT GENERAL
+   LAYOUT GENERAL.
    ============================================================ */
 .page-layout {
     display: flex;
@@ -100,7 +100,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   SIDEBAR ADMIN
+   SIDEBAR ADMIN.
    ============================================================ */
 .admin-sidebar {
     width: 250px;
@@ -160,7 +160,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   CONTENIDO PRINCIPAL
+   CONTENIDO PRINCIPAL.
    ============================================================ */
 .main-content {
     flex-grow: 1;
@@ -184,7 +184,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   BUSCADOR
+   BUSCADOR.
    ============================================================ */
 .search-box {
     position: relative;
@@ -206,7 +206,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   GRID PRODUCTOS
+   GRID PRODUCTOS.
    ============================================================ */
 .product-grid {
     display: grid;
@@ -279,7 +279,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE.
    ============================================================ */
 @media (min-width: 1150px) {
     .side-column { display: block; }
@@ -379,7 +379,7 @@ a { text-decoration: none; }
 
         <div class="product-grid">
 
-            <!-- INICIO: Iteración dinámica de productos -->
+            <!-- INICIO: Iteración dinámica de productos. -->
 <div class="product-card" th:each="producto : ${productos}">
     <a th:href="@{/producto/{id}(id=${producto.id})}">
         <div class="product-image-container">
