@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
 /**
  * Controlador encargado de manejar las vistas y reportes relacionados con los
  * clientes.
- * Proporciona endpoints para listar clientes filtrados, listar todos los
+ * Proporciona endpoints para listar clientes filtrados, listar todos los.
  * clientes
  * y generar un reporte en PDF.
  */
@@ -28,7 +28,7 @@ public class ReporteController {
 
     /**
      * Constructor del controlador.
-     * 
+     * .
      * @param servicio     servicio que gestiona la lógica de negocio de clientes
      * @param pdfGenerator utilidad para generar reportes en PDF
      */
@@ -38,7 +38,7 @@ public class ReporteController {
     }
 
     /**
-     * Endpoint para mostrar la vista de clientes filtrados.
+     * Endpoint para mostrar la vista de clientes filtrados..
      * Permite filtrar por nombre y rango de fechas.
      *
      * @param nombre nombre del cliente (opcional)
@@ -62,7 +62,7 @@ public class ReporteController {
     }
 
     /**
-     * Endpoint para listar todos los clientes sin filtros.
+     * Endpoint para listar todos los clientes sin filtros..
      *
      * @param model objeto Model para pasar datos a la vista
      * @return nombre de la vista: plantilla "vista-clientes"
@@ -75,7 +75,7 @@ public class ReporteController {
     }
 
     /**
-     * Endpoint para generar un reporte PDF con filtros aplicados.
+     * Endpoint para generar un reporte PDF con filtros aplicados..
      * El archivo se envía directamente en la respuesta HTTP.
      *
      * @param response objeto HttpServletResponse para escribir el PDF
@@ -93,3 +93,4 @@ public class ReporteController {
     }
 
 }
+//
