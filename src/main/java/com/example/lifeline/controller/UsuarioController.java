@@ -21,7 +21,7 @@ public class UsuarioController {
     private BCryptPasswordEncoder passwordEncoder;
 
     // --- RUTA RAIZ ELIMINADA PARA EVITAR CONFLICTO CON ACCESOCONTROLLER ---
-    // @GetMapping("/")
+    // @GetMapping("/").
     // public String redireccionRaiz() {
     //     return "redirect:/login";
     // }
@@ -29,13 +29,13 @@ public class UsuarioController {
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Asume que tienes una plantilla llamada login.html
+        return "login"; // Asume que tienes una plantilla llamada login.html.
     }
 
     @GetMapping("/home")
     public String home(Model model, Authentication auth) {
         model.addAttribute("rol", auth.getAuthorities().toString());
-        return "home"; // Asume que tienes una plantilla llamada home.html
+        return "home"; // Asume que tienes una plantilla llamada home.html.
     }
 
     @GetMapping("/usuarios")
@@ -47,12 +47,12 @@ public class UsuarioController {
     @GetMapping("/usuarios/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "form"; // Reutiliza el formulario para crear/editar
+        return "form"; // Reutiliza el formulario para crear/editar.
     }
 
     @PostMapping("/usuarios/guardar")
     public String guardar(@ModelAttribute Usuario usuario) {
-        // Encripta la contraseña antes de guardarla
+        // Encripta la contraseña antes de guardarla.
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         repo.save(usuario);
         return "redirect:/usuarios";
@@ -63,7 +63,7 @@ public class UsuarioController {
         Optional<Usuario> usuarioOpt = repo.findById(id);
 
         if (usuarioOpt.isEmpty()) {
-            // Manejo de error si el usuario no existe
+            // Manejo de error si el usuario no existe.
             throw new IllegalArgumentException("Usuario no encontrado con ID: " + id);
         }
 
@@ -77,7 +77,7 @@ public class UsuarioController {
         return "redirect:/usuarios";
     }
 
-    // --- Gestión del Perfil del Usuario Autenticado ---
+    // --- Gestión del Perfil del Usuario Autenticado ---.
 
     @GetMapping("/perfil")
     public String perfil(Model model, Authentication auth) {
@@ -90,7 +90,7 @@ public class UsuarioController {
         }
 
         model.addAttribute("usuario", usuarioOpt.get());
-        // Asumiendo que la edición de perfil usa la misma plantilla 'form' o una específica 'perfilForm'
+        // Asumiendo que la edición de perfil usa la misma plantilla 'form' o una específica 'perfilForm'.
         return "form";
     }
 
@@ -105,7 +105,7 @@ public class UsuarioController {
 
         Usuario actual = actualOpt.get();
 
-        // Actualiza los campos que el usuario puede cambiar desde su perfil
+        // Actualiza los campos que el usuario puede cambiar desde su perfil.
         actual.setEmail(usuario.getEmail());
         actual.setFechaNacimiento(usuario.getFechaNacimiento());
         actual.setTipoDocumento(usuario.getTipoDocumento());
@@ -117,7 +117,7 @@ public class UsuarioController {
             actual.setUserName(usuario.getUserName());
         }
 
-        // Solo actualiza la contraseña si se proporciona una nueva
+        // Solo actualiza la contraseña si se proporciona una nueva.
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
             actual.setPassword(passwordEncoder.encode(usuario.getPassword()));
         }
@@ -126,3 +126,4 @@ public class UsuarioController {
         return "redirect:/home?actualizado";
     }
 }
+//
