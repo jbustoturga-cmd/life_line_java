@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio que contiene la lógica de negocio del carrito de compras.
+ * Servicio que contiene la lógica de negocio del carrito de compras..
  */
 @Service
 @Transactional
@@ -29,7 +29,7 @@ public class CartService {
     }
 
     /**
-     * Obtiene todos los ítems del carrito de un usuario específico.
+     * Obtiene todos los ítems del carrito de un usuario específico..
      */
     public List<CartItem> getCartItems(Long userId) {
         return cartItemRepository.findByUserId(userId);
@@ -48,17 +48,17 @@ public class CartService {
         Producto producto = productoRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + productId));
 
-        // Verificar si ya existe el producto en el carrito del usuario
+        // Verificar si ya existe el producto en el carrito del usuario.
         Optional<CartItem> existingItem = cartItemRepository
                 .findByUserIdAndProducto_Id(userId, productId);
 
         if (existingItem.isPresent()) {
-            // Si ya existe, incrementar la cantidad
+            // Si ya existe, incrementar la cantidad.
             CartItem item = existingItem.get();
             item.setQuantity(item.getQuantity() + quantity);
             return cartItemRepository.save(item);
         } else {
-            // Si no existe, crear un nuevo item
+            // Si no existe, crear un nuevo item.
             CartItem newItem = new CartItem();
             newItem.setUserId(userId);
             newItem.setProducto(producto);
@@ -76,7 +76,7 @@ public class CartService {
     }
 
     /**
-     * Actualiza la cantidad de un ítem del carrito.
+     * Actualiza la cantidad de un ítem del carrito..
      * Si la cantidad es 0, elimina el ítem.
      */
     public CartItem updateItemQuantity(Long itemId, int newQuantity) {
@@ -86,7 +86,7 @@ public class CartService {
         if (newQuantity == 0) {
             // Si la cantidad es 0, eliminar el ítem
             cartItemRepository.delete(item);
-            return null; // Indica que se eliminó
+            return null; // Indica que se eliminó.
         }
 
         if (newQuantity < 0) {
@@ -108,7 +108,7 @@ public class CartService {
     }
 
     /**
-     * Vacía completamente el carrito de un usuario.
+     * Vacía completamente el carrito de un usuario..
      */
     public void clearCart(Long userId) {
         List<CartItem> items = cartItemRepository.findByUserId(userId);
@@ -126,7 +126,7 @@ public class CartService {
     }
 
     /**
-     * Obtiene la cantidad total de ítems en el carrito.
+     * Obtiene la cantidad total de ítems en el carrito..
      */
     public int getCartItemCount(Long userId) {
         List<CartItem> items = cartItemRepository.findByUserId(userId);
@@ -135,3 +135,4 @@ public class CartService {
                 .sum();
     }
 }
+//
