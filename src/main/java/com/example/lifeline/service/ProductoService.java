@@ -19,7 +19,7 @@ public class ProductoService {
 
     private final ProductoRepository repo;
 
-    // Ruta absoluta del proyecto
+    // Ruta absoluta del proyecto.
     private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/images/";
 
     public ProductoService(ProductoRepository repo) {
@@ -27,7 +27,7 @@ public class ProductoService {
     }
 
     /**
-     * Lista todos los productos
+     * Lista todos los productos.
      */
     public List<Producto> listar() {
         return repo.findAll();
@@ -35,20 +35,20 @@ public class ProductoService {
 
     /**
      * Lista productos por categoría
-     * Para usar en TiendaController
+     * Para usar en TiendaController.
      */
     public List<Producto> listarPorCategoria(String categoria) {
         // Opción 1: Si tienes el método en el repositorio
         // return repo.findByCategoria(categoria);
         
-        // Opción 2: Filtrar en memoria (funciona sin modificar repositorio)
+        // Opción 2: Filtrar en memoria (funciona sin modificar repositorio).
         return repo.findAll().stream()
                 .filter(p -> categoria.equalsIgnoreCase(p.getCategoria()))
                 .toList();
     }
 
     /**
-     * Lista productos por estado (activo/inactivo)
+     * Lista productos por estado (activo/inactivo).
      */
     public List<Producto> listarPorEstado(Boolean estado) {
         return repo.findAll().stream()
@@ -57,7 +57,7 @@ public class ProductoService {
     }
 
     /**
-     * Lista solo productos activos (para la tienda pública)
+     * Lista solo productos activos (para la tienda pública).
      */
     public List<Producto> listarActivos() {
         return listarPorEstado(true);
@@ -70,7 +70,7 @@ public class ProductoService {
         // Guardar imagen
         String imagenGuardada = manejarSubidaImagen(imagenFile);
 
-        // Asignar nombre/URL al producto
+        // Asignar nombre/URL al producto.
         p.setImagen(imagenGuardada);
 
         return repo.save(p);
@@ -95,7 +95,7 @@ public class ProductoService {
             String nuevaImagen = manejarSubidaImagen(imagenFile);
             existente.setImagen(nuevaImagen);
         } else if (p.getImagen() != null) {
-            // Mantener la imagen existente si no se sube una nueva.
+            // Mantener la imagen existente si no se sube una nueva..
             existente.setImagen(p.getImagen());
         }
 
@@ -103,7 +103,7 @@ public class ProductoService {
     }
 
     /**
-     * Elimina un producto por ID
+     * Elimina un producto por ID.
      */
     public void eliminar(Long id) {
         repo.deleteById(id);
@@ -118,7 +118,7 @@ public class ProductoService {
     }
 
     /**
-     * Busca productos por nombre (útil para buscador)
+     * Busca productos por nombre (útil para buscador).
      */
     public List<Producto> buscarPorNombre(String nombre) {
         return repo.findAll().stream()
@@ -135,7 +135,7 @@ public class ProductoService {
     }
 
     /**
-     * Reduce el stock de un producto (para cuando se realiza una compra)
+     * Reduce el stock de un producto (para cuando se realiza una compra).
      */
     public void reducirStock(Long productoId, int cantidad) {
         Producto producto = obtenerPorId(productoId);
@@ -162,7 +162,7 @@ public class ProductoService {
             String extension = originalName.substring(originalName.lastIndexOf("."));
             String fileName = UUID.randomUUID() + extension;
 
-            // Usar la ruta absoluta
+            // Usar la ruta absoluta.
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath); // Crea la carpeta
@@ -180,3 +180,4 @@ public class ProductoService {
         }
     }
 }
+//
