@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine - Nutrición Oncológica con Asistencia Rápida</title>
+    
+    <!--
+        [OPTIMIZACIÓN CLAVE]: La hoja de estilos de Font Awesome ahora se carga de forma no bloqueante
+        utilizando la técnica de precarga y carga asíncrona (media="print" y onload),
+        lo que mejora la velocidad de renderizado inicial (FCP/LCP).
+    -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <style>
+        :root {
+            /* Colores LifeLine simplificados y centralizados */
+            --color-primary: #3d5273; /* Azul oscuro */
+            --color-secondary: #5b6e94; /* Azul intermedio */
+            --color-accent: #27ae60; /* Verde Esmeralda (Nutrición) */
+            --color-interactive: #2ecc71; /* Verde Lima (Asistencia Rápida) */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #f5fff5;
+            --color-bg-white: white;
+            --color-menu-bg: #526eaa;
+            --border-radius-lg: 10px;
+            --border-radius-sm: 5px;
+        }
+        
+        /* Estilos Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif; /* Usando Inter por buenas prácticas */
+            background: linear-gradient(135deg, #ffffff, #05472e);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* HEADER & NAVBAR */
+        .header-bar {
+            background: linear-gradient(135deg, #fefeff, #d2daf5);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo-section { display: flex; align-items: center; }
+        .logo-text { 
+            font-size: 32px; 
+            font-weight: bold; 
+            line-height: 28px; 
+            color: var(--color-primary); 
+            margin-right: 5px; 
+        }
+        .navbar-right { display: flex; align-items: center; gap: 15px; }
+        .navbar-icon a { color: var(--color-primary); font-size: 24px; transition: color 0.2s; }
+        .navbar-icon a:hover { color: var(--color-accent); }
+        .user-photo { width: 45px; height: 45px; border-radius: 50%; overflow: hidden; border: 2px solid white; background-color: #ccc; display: flex; justify-content: center; align-items: center;}
+        .user-photo i { font-size: 20px; color: var(--color-primary); }
+        
+        .main-tabs {
+            background-color: #2d3e5f;
+            display: flex;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Para móvil */
+        }
+        .main-tabs a {
+            color: white;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            display: flex; align-items: center; gap: 8px;
+            white-space: nowrap;
+        }
+        .main-tabs a:hover { background-color: #3b507b; }
+        .main-tabs a.active { background-color: var(--color-menu-bg); }
+
+        /* Estilo para simular el delay de una llamada API */
+        .loading-animation {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--color-interactive);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nutrition-module-container {
+                margin: 20px 10px;
+                padding: 10px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .module-title h1 {
+                font-size: 28px;
+            }
+            .input-group {
+                flex-direction: column;
+            }
+            .input-group input, .input-group button {
+                width: 100%;
+            }
+            .header-bar { padding: 10px 15px; }
+            .main-tabs { padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+<!--
+    [OPTIMIZACIÓN CLAVE]: La configuración y el motor de Tailwind CSS se cargan AHORA
+    después de la mayor parte del contenido. Esto es esencial para que la página
+    sea visible y usable antes de que se termine de procesar el framework.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    // Configuración de Tailwind CSS (se mantiene al inicio del body para que compile las clases)
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: 'var(--color-primary)',
+                    accent: 'var(--color-accent)',
+                    interactive: 'var(--color-interactive)',
+                    'bg-light': 'var(--color-bg-light)',
+                    'blue-dark': '#2d3e5f',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                }
+            }
+        }
+    }
+</script>
+
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="imagenes/Group 243 (3).png" width="55" alt="logo"> 
+    </div> 
+    <div class="navbar-right">
+        <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+        <div class="user-photo">
+            <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+        </div>
+    </div>
+</div>
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+    <a th:href="@{/nutricion}" class="active"><i class="fas fa-apple-alt" ></i> Nutrición</a>
+    <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a  th:href="@{/Contactanos}">Contactanos</a>
+</nav>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- TÍTULO PRINCIPAL -->
+    <div class="text-center mb-10 p-6 bg-bg-light rounded-xl shadow-lg border-b-4 border-accent">
+        <h1 class="text-4xl font-extrabold text-primary mb-1">Nutrición Oncológica Personalizada</h1>
+        <p class="text-xl font-semibold text-accent">Tu guía dietética para mantener la fuerza y manejar los efectos secundarios.</p>
+    </div>
+
+    <!-- SECCIÓN DE ASISTENCIA RÁPIDA (LLM Simulation) -->
+    <div class="bg-green-50 p-6 sm:p-8 rounded-xl mb-10 border-2 border-interactive shadow-lg">
+        <h2 class="text-2xl font-bold text-interactive mb-4 flex items-center space-x-3">
+            <i class="fas fa-comments text-3xl"></i>
+            <span>Asistencia Rápida: ¿Cómo te sientes hoy?</span>
+        </h2>
+        <p class="mb-5 text-gray-600">
+            Describe tus síntomas (ej: náuseas, fatiga, pérdida de apetito) y obtén sugerencias alimenticias inmediatas y basadas en la evidencia.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-5">
+            <input type="text" id="symptom-input" placeholder="Ej: Hoy me siento mareado y no tengo apetito." 
+                    class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-interactive focus:border-interactive transition duration-200 text-gray-700">
+            <button onclick="getFoodSuggestions()" id="suggestion-button"
+                    class="bg-interactive text-white p-3 rounded-lg font-bold hover:bg-green-600 transition duration-200 flex items-center justify-center space-x-2 whitespace-nowrap">
+                <i class="fas fa-paper-plane"></i> 
+                <span>Sugerir Comida</span>
+            </button>
+        </div>
+
+        <div class="p-4 bg-white rounded-lg shadow-inner border border-gray-200 transition-all duration-300" id="suggestion-output">
+            <p class="text-gray-500">
+                <strong>Sugerencias iniciales:</strong> Para combatir el mareo y la falta de apetito, te recomendamos: 🥣 Sopa de caldo suave (baja en grasa), 🍞 Galletas saladas o tostadas simples, y Té de jengibre (caliente o frío) para las náuseas. Recuerda comer porciones muy pequeñas.
+            </p>
+        </div>
+        <!-- Contenedor para mostrar fuentes de ser necesario -->
+        <div id="sources-output" class="mt-2 text-xs text-gray-500 hidden"></div>
+    </div>
+    
+    <!-- GRID DE FUNCIONALIDADES -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition duration-300 border-t-8 border-accent transform hover:-translate-y-1">
+            <i class="fas fa-clipboard-list text-4xl text-accent mb-3"></i>
+            <h3 class="text-xl font-bold text-primary mb-2">Planes por Tratamiento</h3>
+            <p class="text-gray-600 text-sm">Accede a menús semanales adaptados a tu fase actual: quimioterapia, radioterapia u hormonoterapia. Enfocados en la recuperación y energía.</p>
+            <p class="mt-3 font-semibold text-accent text-sm">Estado Actual: Fase Quimioterapia</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition duration-300 border-t-8 border-accent transform hover:-translate-y-1">
+            <i class="fas fa-blender text-4xl text-accent mb-3"></i>
+            <h3 class="text-xl font-bold text-primary mb-2">Recetas de Bajo Esfuerzo</h3>
+            <p class="text-gray-600 text-sm">Recetas rápidas (menos de 15 minutos de preparación) ideales para los días de mayor fatiga. Batidos nutritivos, sopas suaves y comidas de un solo paso.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition duration-300 border-t-8 border-accent transform hover:-translate-y-1">
+            <i class="fas fa-traffic-light text-4xl text-accent mb-3"></i>
+            <h3 class="text-xl font-bold text-primary mb-2">Semáforo Nutricional</h3>
+            <p class="text-gray-600 text-sm">Listas claras de alimentos recomendados (verde), moderados (amarillo) y los que debes evitar (rojo), adaptadas a los posibles riesgos de tu tratamiento.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE CONSEJOS DETALLADOS -->
+    <div class="mt-10 p-6 sm:p-8 bg-bg-light rounded-xl shadow-lg border border-gray-300">
+        <h2 class="text-2xl font-bold text-primary mb-5 border-b-2 border-accent pb-2 flex items-center space-x-2">
+            <i class="fas fa-utensils"></i>
+            <span>Guías Detalladas de Síntomas</span>
+        </h2>
+        <p class="mb-4 text-gray-600">Haz clic para ver la guía práctica y las recetas específicas para cada molestia:</p>
+        
+        <ul class="flex flex-wrap gap-3 list-none p-0">
+            <li class="bg-white text-gray-800 text-sm md:text-base font-medium py-2 px-4 rounded-full border border-accent hover:bg-accent hover:text-white transition duration-200 cursor-pointer flex items-center space-x-2">
+                <i class="fas fa-stomach text-accent transition duration-200"></i><span>Náuseas y Vómitos</span>
+            </li>
+            <li class="bg-white text-gray-800 text-sm md:text-base font-medium py-2 px-4 rounded-full border border-accent hover:bg-accent hover:text-white transition duration-200 cursor-pointer flex items-center space-x-2">
+                <i class="fas fa-mask text-accent transition duration-200"></i><span>Cambios en el Gusto y Olfato</span>
+            </li>
+            <li class="bg-white text-gray-800 text-sm md:text-base font-medium py-2 px-4 rounded-full border border-accent hover:bg-accent hover:text-white transition duration-200 cursor-pointer flex items-center space-x-2">
+                <i class="fas fa-fire text-accent transition duration-200"></i><span>Diarrea o Estreñimiento</span>
+            </li>
+            <li class="bg-white text-gray-800 text-sm md:text-base font-medium py-2 px-4 rounded-full border border-accent hover:bg-accent hover:text-white transition duration-200 cursor-pointer flex items-center space-x-2">
+                <i class="fas fa-sad-tear text-accent transition duration-200"></i><span>Pérdida de Apetito</span>
+            </li>
+            <li class="bg-white text-gray-800 text-sm md:text-base font-medium py-2 px-4 rounded-full border border-accent hover:bg-accent hover:text-white transition duration-200 cursor-pointer flex items-center space-x-2">
+                <i class="fas fa-burn text-accent transition duration-200"></i><span>Boca Seca y Llagas</span>
+            </li>
+        </ul>
+    </div>
+    
+</div>
+
+<!-- SCRIPTS (Mover al final para no bloquear la renderización) -->
+<script>
+    // Configuración para simular la llamada a la API
+    const MOCK_API_RESPONSE = {
+        text: "Mejores opciones de alimentación ahora: Te sugiero un **batido frío de plátano y yogur** o una porción pequeña de **puré de papas tibio**. Recomendación de acción: Mantente hidratado con sorbos pequeños de agua o caldos y prioriza las comidas suaves y fáciles de tragar. Consulta a tu nutricionista antes de cualquier cambio drástico.",
+        sources: [
+            { uri: "https://ejemplo.com/guia-nauseas-oncologia", title: "Guía de Manejo de Náuseas y Fatiga" },
+            { uri: "https://ejemplo.com/alimentos-suaves-cancer", title: "Alimentos Suaves y de Alta Densidad Calórica" }
+        ]
+    };
+
+    /**
+     * Simula la llamada a la API de Gemini para obtener sugerencias alimenticias.
+     */
+    async function getFoodSuggestions() {
+        const inputElement = document.getElementById('symptom-input');
+        const outputElement = document.getElementById('suggestion-output');
+        const buttonElement = document.getElementById('suggestion-button');
+        const sourcesElement = document.getElementById('sources-output');
+
+        const userQuery = inputElement.value.trim();
+
+        if (userQuery === "") {
+            outputElement.innerHTML = `<p class="text-red-600 font-semibold">Por favor, describe tus síntomas para obtener sugerencias.</p>`;
+            sourcesElement.innerHTML = '';
+            sourcesElement.classList.add('hidden');
+            return;
+        }
+
+        // 1. Mostrar estado de carga
+        outputElement.innerHTML = `<div class="flex items-center space-x-3 text-interactive font-medium">
+                                        <div class="loading-animation"></div>
+                                        <span>Generando sugerencias personalizadas...</span>
+                                   </div>`;
+        buttonElement.disabled = true;
+
+        // --- SIMULACIÓN DE LLAMADA A API DE GEMINI CON EXPONENTIAL BACKOFF ---
+
+        const systemPrompt = "Actúa como un nutricionista oncológico especializado, con empatía y conocimiento científico. Proporciona una sugerencia dietética inmediata (una comida o bebida) y una recomendación de acción concisa para manejar los síntomas descritos. Sé reconfortante.";
+        const apiKey = ""; // Canvas proporciona la clave en tiempo de ejecución
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // Estructura del payload (simulando grounding y systemInstruction)
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            // En un entorno real, para grounding se usaría: tools: [{ "google_search": {} }]
+            systemInstruction: {
+                parts: [{ text: systemPrompt }]
+            },
+        };
+        
+        let attempt = 0;
+        const maxRetries = 3;
+
+        while (attempt < maxRetries) {
+            try {
+                // Simulación del retraso de la red y el procesamiento del LLM
+                await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 500)); 
+
+                // Simular el resultado (En un entorno real, harías el fetch aquí)
+                const result = MOCK_API_RESPONSE; 
+                
+                // 2. Procesar y mostrar la respuesta
+                // Usamos innerHTML para permitir que el texto generado por el LLM pueda contener formato Markdown simple (ej: **negritas**)
+                const formattedText = result.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                outputElement.innerHTML = `<p class="text-gray-800">${formattedText}</p>`;
+                
+                // 3. Mostrar las fuentes de información (simuladas)
+                if (result.sources && result.sources.length > 0) {
+                    sourcesElement.innerHTML = `<strong>Fuentes de Apoyo Nutricional:</strong> ${result.sources.map((src, index) => 
+                        `<a href="${src.uri}" target="_blank" class="text-interactive hover:text-accent underline transition duration-150">${src.title}</a>`
+                    ).join(', ')}`;
+                    sourcesElement.classList.remove('hidden');
+                } else {
+                    sourcesElement.classList.add('hidden');
+                }
+
+                // Salir del bucle si es exitoso
+                break; 
+
+            } catch (error) {
+                attempt++;
+                if (attempt < maxRetries) {
+                    const delay = Math.pow(2, attempt) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                } else {
+                    // 3. Manejar error final
+                    outputElement.innerHTML = `<p class="text-red-600 font-semibold">
+                        <i class="fas fa-exclamation-triangle"></i> Lo sentimos, no pudimos contactar al asistente. Por favor, intenta de nuevo más tarde o consulta a tu profesional de la salud.
+                    </p>`;
+                    sourcesElement.classList.add('hidden');
+                }
+            }
+        }
+
+        // 4. Resetear el botón
+        buttonElement.disabled = false;
+    }
+
+    // Funcionalidad para cambiar el color del ícono al hacer hover en la lista de guías
+    document.addEventListener('DOMContentLoaded', () => {
+        const listItems = document.querySelectorAll('.tip-list li');
+        listItems.forEach(item => {
+            const icon = item.querySelector('i');
+            item.addEventListener('mouseenter', () => {
+                // Se usa CSS nativo en el archivo CSS para esto ahora
+            });
+            item.addEventListener('mouseleave', () => {
+                // Se usa CSS nativo en el archivo CSS para esto ahora
+            });
+        });
+
+        // Asegurar que el icono del corazón esté siempre rojo para LifeLine
+        const logoIcon = document.querySelector('.header-logo-section .fa-heartbeat');
+        if (logoIcon) {
+            logoIcon.classList.remove('text-red-500'); // Remove potential conflicting classes
+            logoIcon.style.color = '#e74c3c'; // Rojo vibrante para el corazón
+        }
+    });
+</script>
+</body>
+</html>

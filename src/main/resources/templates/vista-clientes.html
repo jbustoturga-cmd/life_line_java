@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Clientes</title>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Carga de Tailwind CSS para un estilo moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Lucide Icons para iconos limpios y profesionales -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* ============================================================
+    VARIABLES DE COLOR Y ESTILO PRINCIPALES
+    (Permiten modificar fácilmente los colores del sitio)
+    ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --color-accent: #142ea0; /* Rojo/coral del corazón (para acentos y "Me Gusta") */
+             --color-text-dark: #1a1a1a;
+             --color-text-light: #555;
+              --color-light-blue: #72a4d9;
+             --color-bg-white: white;
+}
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+    ESTILOS GENERALES DEL CUERPO
+    ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #d2daf5);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+    BARRA SUPERIOR (LOGO + ENLACES)
+    ============================================================ */
+.header-bar {
+    background-color: var(--color-top-bar-bg);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+    MENÚ PRINCIPAL (Pestañas de navegación)
+    ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+    RESPONSIVE PARA MÓVILES
+    ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #212b63;
+}
+/* ICONO USUARIO */
+    .user-photo {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     overflow: hidden;
+     border: 2px solid #0e1330;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ 
+    }
+
+    .user-photo img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+    }
+
+      .navbar-icon a {
+             color: var(--color-text-dark);
+             font-size: 24px;
+             padding: 0 10px;
+             transition: color 0.2s;
+         }
+
+         .navbar-icon a:hover {
+             color: var(--color-secondary);
+         }
+
+         .navbar-icon.active a {
+             color: var(--color-primary);
+         }
+         
+         .navbar-right {
+           display: flex;
+     align-items: center;
+     gap: 0px;
+     margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+         @media (min-width: 1150px) {
+             .side-column {
+                 display: block; /* Mostramos las columnas laterales en pantallas grandes */
+             }
+         }
+         
+         @media (max-width: 700px) {
+             .navbar-center {
+                 gap: 20px;
+             }
+             .search-box {
+                 display: none; /* Ocultar búsqueda en móvil */
+             }
+         }
+          /* Campo de búsqueda mejorado y más limpio */
+         .search-box {
+             background-color: var(--color-bg-light);
+             border-radius: 20px;
+             padding: 8px 15px;
+             display: flex;
+             align-items: center;
+         }
+         .search-box input {
+             border: none;
+             background: none;
+             outline: none;
+             font-size: 15px;
+             color: var(--color-text-dark);
+             width: 200px;
+             margin-left: 8px;
+         }
+         .search-box i {
+             color: var(--color-text-light);
+         }
+</style>
+    <script>
+        // Configuración de Tailwind para usar una paleta de colores personalizada
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1D4ED8', // Blue 700 (Más profesional que el índigo)
+                        'primary-dark': '#1E3A8A',  // Blue 800
+                        'secondary-gray': '#F9FAFB', // Gray 50 (Fondo muy ligero)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Flecha de regreso estilizada */
+        .back-arrow {
+          
+            top: 2rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: #4B5563; /* Gray 600 */
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-arrow:hover {
+            color: #1D4ED8; /* Primary Blue */
+        }
+
+    </style>
+</head>
+
+<body onload="lucide.createIcons()">
+<header>
+    <div class="header-bar">
+        <div class="header-logo-section">
+            <div class="logo-text">Life<br>Line</div>
+            <img th:src="@{/imagenes/Group 243 (3).png}" width="55" alt="logo">
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar en LifeLine...">
+        </div>
+
+        <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+            <div class="user-photo">
+                <img th:src="@{/imagenes/Group 244.png}" alt="Logo LifeLine">
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-tabs">
+        <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+        <a th:href="@{/mural}"><i class="fas fa-user-friends"></i>Mural</a>
+        <a th:href="@{/perfil}"><i class="fas fa-user"></i>Perfil</a>
+        <a th:href="@{/productos}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+        <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+        <a th:href="@{/nutricion}"><i class="fas fa-apple-alt"></i>Nutrición</a>
+        <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+        <a th:href="@{/contactanos}">Contactanos</a>
+    </nav>
+</header>
+
+
+    <!-- Flecha de regreso (Icono ArrowLeft de Lucide) -->
+    <a class="back-arrow hidden md:block" onclick="history.back()" title="Volver atrás">
+        <i data-lucide="arrow-left" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Contenedor principal centrado y con sombra -->
+    <div class="max-w-7xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl space-y-8">
+        <h2 class="text-3xl font-bold text-gray-800 border-b border-gray-100 pb-3 mb-6">
+            Reporte de Clientes
+        </h2>
+
+        <!-- Formulario de Filtros con diseño de tarjetas moderno -->
+        <form method="get" action="/vista-clientes" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Card 1: Filtro por Nombre -->
+                <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-md">
+                    <div class="flex items-center text-primary-blue mb-3">
+                        <i data-lucide="user" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-semibold text-gray-700">Filtro por Nombre</h3>
+                    </div>
+                    <div>
+                        <label for="nombre" class="block text-sm font-medium text-gray-600 mb-1">Nombre del Cliente</label>
+                        <div class="flex space-x-2">
+                            <input type="text" name="nombre" id="nombre"
+                                class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue text-gray-800"
+                                th:value="${nombre}" placeholder="nombre cliente">
+                            <button type="button"
+                                class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 transition"
+                                title="Limpiar" onclick="document.getElementById('nombre').value = ''">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Filtro por Fecha de Creación -->
+                <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-md">
+                    <div class="flex items-center text-primary-blue mb-3">
+                        <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-semibold text-gray-700">Filtro por Fecha de Registro</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Desde -->
+                        <div>
+                            <label for="desde" class="block text-sm font-medium text-gray-600 mb-1">Desde</label>
+                            <div class="flex space-x-1">
+                                <input type="date" name="desde" id="desde"
+                                    class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue text-gray-800"
+                                    th:value="${desde}">
+                                <button type="button"
+                                    class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 transition"
+                                    title="Limpiar" onclick="document.getElementById('desde').value = ''">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Hasta -->
+                        <div>
+                            <label for="hasta" class="block text-sm font-medium text-gray-600 mb-1">Hasta</label>
+                            <div class="flex space-x-1">
+                                <input type="date" name="hasta" id="hasta"
+                                    class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-primary-blue focus:border-primary-blue text-gray-800"
+                                    th:value="${hasta}">
+                                <button type="button"
+                                    class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 transition"
+                                    title="Limpiar" onclick="document.getElementById('hasta').value = ''">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Acción de Filtrado -->
+                <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-md flex flex-col justify-center items-center">
+                    <div class="flex items-center text-primary-blue mb-3">
+                        <i data-lucide="filter" class="w-5 h-5 mr-2"></i>
+                        <h3 class="font-semibold text-gray-700">Aplicar Filtros</h3>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3 px-4 bg-primary-blue text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300/50">
+                        <div class="flex items-center justify-center">
+                            <!-- CAMBIO: Se usa el icono 'filter' en lugar de 'search' -->
+                            <i data-lucide="filter" class="w-5 h-5 mr-2"></i>
+                            Filtrar Clientes
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabla de Resultados con diseño limpio -->
+        <div class="overflow-x-auto shadow-lg rounded-xl border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tl-xl">ID</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nombre</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Correo</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Teléfono</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider rounded-tr-xl">Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Iteración de Thymeleaf para los clientes -->
+                    <tr th:each="cliente : ${clientes}" class="hover:bg-blue-50/50 transition duration-150">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" th:text="${cliente.id}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700" th:text="${cliente.nombre}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700" th:text="${cliente.correo}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700" th:text="${cliente.telefono}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700" th:text="${cliente.fechaRegistro}"></td>
+                    </tr>
+                    <!-- Fila opcional para cuando no hay resultados (Thymeleaf logic) -->
+                    <tr th:if="${clientes.isEmpty()}">
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500 italic">
+                            No se encontraron clientes con los filtros aplicados.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón de Descarga de PDF -->
+        <div class="flex justify-end pt-4">
+            <a th:href="@{/reporte-clientes(nombre=${nombre}, desde=${desde}, hasta=${hasta})}"
+                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-md text-white bg-green-600 hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-green-300/50">
+                <i data-lucide="file-text" class="w-5 h-5 mr-2"></i>
+                Descargar PDF
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

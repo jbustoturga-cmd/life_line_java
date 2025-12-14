@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LifeLine - Contáctanos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #3d5273;
+            --color-secondary: #5b6e94;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #f7f7f7;
+         
+            --color-bg-gradient: linear-gradient(150deg, #667599, #24256e);
+            --border-radius-lg: 10px;
+            --border-radius-sm: 5px; --color-bg-light: #f0f2f5; 
+            --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+             --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+        }
+      
+   
+   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+.header-bar {
+        background: linear-gradient(135deg, #ffffff, #d2daf5);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+        * { box-sizing: border-box; }
+
+        body {
+            margin: -18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--color-bg-gradient);
+            color: var(--color-text-dark);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .header-section { padding-top: 20px; }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+            gap: 5px;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .logo span { color: #1a1a1a; }
+
+        .logi {
+            width: 40px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .contac {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-info-block {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 36px;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            margin: 3px 0;
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .contact-card p.info {
+            font-weight: bold;
+            color: var(--color-primary);
+            font-size: 15px;
+        }
+
+        form {
+            text-align: left;
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .terms {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .terms label {
+            color: var(--color-text-light) !important;
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+        .terms input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 0;
+        }
+
+        .button-wrapper { text-align: center; margin-top: 25px; }
+
+        .btn {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 12px 30px;
+            width: 100%;
+            max-width: 250px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn:hover { background-color: var(--color-secondary); }
+        .btn:active { transform: scale(0.98); }
+
+        .back-arrow {
+            display: flex;
+            top: 25px;
+            left: 25px;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 10;
+            margin-left: 28px;
+        }
+
+        .back-link { text-align: center; margin-top: 20px; }
+        .back-link a {
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+        }
+
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #0e1330;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 880px;
+}
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 30px;
+}
+.main-tabs a {
+    color: white;
+    padding: 15px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: #526eaa; }
+a { text-decoration: none; }
+    </style>
+</head>
+
+<body>
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="imagenes/Group 243 (3).png" width="55" alt="logo">
+    </div>
+    <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a href="#"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+        </div>
+<div class="user-photo">
+       <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+    </div>
+   
+
+</div>
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+        <a th:href="@{/nutricion}" ><i class="fas fa-apple-alt" ></i> Nutrición</a>
+        <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a th:href="@{/contactanos}" class="active">Contactanos</a>
+</nav>
+
+
+    <a class="back-arrow" onclick="history.back()">←</a><i class="fas fa-arrow-left"></i></a>
+
+
+        <div class="logo">
+            Life <span>Line</span>
+            <img src="imagenes/Group 243 (3).png" class="logi" alt="Logo LifeLine">
+        </div>
+        <div class="contac">Contáctanos</div>
+
+
+    <div class="container">
+        <div class="contact-info-block">
+            <div class="icon-section">
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <p class="info">000 000 0000</p>
+                    <p>Número Telefónico</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <p class="info">LifeLine@mail.com</p>
+                    <p>Correo Electrónico</p>
+                </div>
+            </div>
+        </div>
+
+        <form>
+            <label>Nombre</label>
+            <input type="text" placeholder="Ingresa tu nombre" required>
+
+            <label>Correo</label>
+            <input type="email" placeholder="Ingresa tu correo" required>
+
+            <label>Comentario</label>
+            <textarea placeholder="Escribe tu comentario o consulta" required></textarea>
+
+            <div class="terms">
+                <input type="checkbox" required id="terms-check">
+                <label for="terms-check">Acepto los Términos y condiciones</label>
+            </div>
+
+            <div class="button-wrapper">
+                <button class="btn" type="submit">Enviar Mensaje</button>
+            </div>
+        </form>
+
+        <div class="back-link"><a href="indeex.html">Volver al Inicio</a></div>
+    </div>
+
+</body>
+</html>

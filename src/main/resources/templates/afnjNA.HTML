@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine - Tienda de Bienestar</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --color-primary: #3d5273;
+            --color-secondary: #5b6e94;
+            --color-accent: #4f3b69;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #f0f2f5;
+            --color-bg-white: rgb(171, 176, 180);
+            --color-menu-bg: #526eaa;
+            --color-menu-hover: #2d3c7e;
+            --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+            --border-radius-lg: 10px;
+            --border-radius-sm: 5px;
+        }
+
+       
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff, #d2daf5);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+/* Estilo del icono del carrito */
+.cart-icon {
+    position: relative;
+    color: white;
+    font-size: 20px;
+}
+
+/* Contador del carrito */
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    min-width: 18px;
+    text-align: center;
+}
+
+        /* Estilo del botón */
+.add-to-cart {
+    padding: 10px;
+    background-color: #3d5273;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+     
+    </style>
+</head>
+</html>
+
+</head>
+
+<body >
+
+
+             <!-- Icono del carrito -->
+<div class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+</div>
+
+        <div class="content-header">
+            <h2 style="color: #2d3e5f;">Catálogo de productos</h2>
+
+            <div class="search-box">
+                <input type="text" placeholder="Buscar Producto">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        
+<!-- Botón para añadir producto -->
+<button class="add-to-cart" onclick="addToCart()">
+    Añadir al Carrito
+</button>
+
+            
+            
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+/* Contador simple del carrito */
+let cartCount = 0;
+
+/* Función que aumenta el número del carrito */
+function addToCart() {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+}
+</script>
+
+</body>
+</html>

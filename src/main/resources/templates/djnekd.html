@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine - Tienda de Bienestar</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* ============================================================
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+}
+
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #d2daf5);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR
+   ============================================================ */
+.header-bar {
+    background-color: var(--color-top-bar-bg);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+
+/* ============================================================
+   LAYOUT GENERAL
+   ============================================================ */
+.page-layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* ============================================================
+   SIDEBAR ADMIN
+   ============================================================ */
+.admin-sidebar {
+    width: 250px;
+    background-color: var(--color-menu-bg);
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    color: white;
+    padding: 15px 0;
+}
+
+.admin-menu-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--color-menu-hover);
+}
+
+.admin-menu a {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.admin-menu a i { margin-right: 10px; }
+.admin-menu a:hover { background-color: var(--color-menu-hover); }
+
+.admin-menu .menu-separator {
+    height: 1px;
+    background-color: var(--color-menu-hover);
+    margin: 10px 20px;
+}
+
+.admin-menu .submenu-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.admin-menu .submenu {
+    padding-left: 20px;
+    background-color: #2d619c;
+}
+
+.admin-menu .submenu a {
+    padding-left: 30px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.admin-menu .submenu a.active {
+    background-color: #243666;
+}
+
+/* ============================================================
+   CONTENIDO PRINCIPAL
+   ============================================================ */
+.main-content {
+    flex-grow: 1;
+    background-color: var(--color-bg-white);
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.content-header h2 {
+    font-size: 24px;
+    color: var(--color-primary);
+}
+
+/* ============================================================
+   BUSCADOR
+   ============================================================ */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    padding: 8px 30px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-sm);
+    width: 250px;
+}
+
+.search-box i {
+    position: absolute;
+    right: 10px;
+    color: #999;
+}
+
+/* ============================================================
+   GRID PRODUCTOS
+   ============================================================ */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.product-image-container {
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-info {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 8px;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-accent);
+    margin-top: 10px;
+}
+
+.add-to-cart {
+    padding: 10px 15px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: var(--color-secondary);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 1150px) {
+    .side-column { display: block; }
+}
+
+@media (max-width: 700px) {
+    .search-box { display: none; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img th:src="@{/imagenes/Group 243 (3).png}" width="55" alt="logo">
+    </div>
+     <div class="search-box">
+             <i class="fas fa-search"></i>
+             <input type="text" placeholder="Buscar en LifeLine...">
+         </div>
+    <div class="navbar-right">
+             <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+         </div>
+<div class="user-photo">
+         <img th:src="@{/imagenes/Group 244.png}" alt="Logo LifeLine" >
+    </div>
+</div>
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}" class="active"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i></i>Calendario</a>
+    <a th:href="@{/nutricion}" ><i class="fas fa-apple-alt" ></i> Nutrición</a>
+    <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a th:href="@{/contactanos}">Contactanos</a>
+</nav>
+
+<div class="page-layout">
+
+    <aside class="admin-sidebar">
+        <div class="admin-menu-title">Menú de Gestión</div>
+
+        <div class="admin-menu">
+            <a th:href="@{/productos/nuevo}"><i class="fas fa-plus-circle"></i>Crear nuevo producto</a>
+            <a th:href="@{/bloques}"><i class="fas fa-layer-group"></i>Gestionar bloques</a>
+             
+             <div class="filter-header">
+             <a href="#" class="submenu-toggle"><i class="fas fa-store"></i>Categoria<i class="fas fa-caret-down"></i></a>
+                     <div class="submenu">
+                 
+                 <div class="filter-content" id="categoryFilter">
+                     <ul class="category-list">
+                      <a th:href="@{/productos}" class="active"><i class="fas fa-angle-right"></i>Todos los productos</a>
+                       <a th:href="@{/productos/categoria/piel}"><i class="fas fa-angle-right"></i>Cuidado de la Piel</a>
+                        <a th:href="@{/productos/categoria/accesorios}"><i class="fas fa-angle-right"></i>Accesorios y Ropa</a>
+                        <a th:href="@{/productos/categoria/bienestar}"><i class="fas fa-angle-right"></i>Bienestar y Relax</a>
+                       <a th:href="@{/productos/categoria/organizacion}"><i class="fas fa-angle-right"></i>Organización y Terapia</a>
+                     </ul>
+                 </div></div></div>
+          
+
+            <a href="#" class="submenu-toggle"><i class="fas fa-store"></i>Tienda<i class="fas fa-caret-down"></i></a>
+
+            <div class="submenu">
+                
+                <a th:href="@{/productos}" class="active"><i class="fas fa-angle-right"></i>Ver todos los Productos</a>
+                <a th:href="@{/productos}"><i class="fas fa-angle-right"></i>lista productos</a>
+                <a th:href="@{/usuarios/nuevo}"><i class="fas fa-angle-right"></i>Crear Cliente nuevo</a>
+            
+            </div>
+
+            <a th:href="@{/descuentos}"><i class="fas fa-tags"></i>Descuentos</a>
+            <a th:href="@{/pedidos}"><i class="fas fa-clipboard-list"></i>Pedidos</a>
+            <a th:href="@{/usuarios}"><i class="fas fa-users"></i>Usuarios registrados</a>
+
+            <div class="menu-separator"></div>
+
+            <a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i>Salir</a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+
+        <div class="content-header">
+            <h2 style="color: #2d3e5f;">Catálogo de productos</h2>
+
+            <div class="search-box">
+                <input type="text" placeholder="Buscar Producto">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="product-grid">
+
+            <!-- INICIO: Iteración dinámica de productos -->
+<div class="product-card" th:each="producto : ${productos}">
+    <a th:href="@{/producto/{id}(id=${producto.id})}">
+        <div class="product-image-container">
+            <!-- Usar la URL de la imagen del producto -->
+            <img th:src="@{${producto.imagenUrl}}" th:alt="${producto.nombre}" class="product-image">
+        </div>
+        <div class="product-info">
+            <!-- Usar el nombre del producto -->
+            <p class="product-name" th:text="${producto.nombre}"></p>
+            <!-- Usar el precio del producto y formatearlo -->
+            <p class="product-price" th:text="${#numbers.formatDecimal(producto.precio, 1, 'POINT', 2, 'COMMA') + ' Cop'}"></p>
+        </div>
+    </a>
+    
+    <!-- Formulario para añadir al carrito (POST) -->
+    <form th:action="@{/carrito/agregar}" method="post">
+        <input type="hidden" name="idProducto" th:value="${producto.id}" />
+        <button type="submit" class="add-to-cart">Añadir al Carrito</button>
+    </form>
+</div>
+<!-- FIN: Iteración dinámica de productos -->
+
+
+
+</body>
+</html>

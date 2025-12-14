@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine - HOME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+     /* ============================================================
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   (Permiten modificar fácilmente los colores del sitio)
+   ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #485a80;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --color-accent: #142ea0; /* Rojo/coral del corazón (para acentos y "Me Gusta") */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            
+            --color-bg-white: white;
+}
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #d2daf5);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR (LOGO + ENLACES)
+   ============================================================ */
+.header-bar {
+    background-color: var(--color-top-bar-bg);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL (Pestañas de navegación)
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #0e1330;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+        @media (min-width: 1150px) {
+            .side-column {
+                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar-center {
+                gap: 20px;
+            }
+            .search-box {
+                display: none; /* Ocultar búsqueda en móvil */
+            }
+        }
+          .search-box {
+            background-color: rgba(213, 188, 235, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(19, 18, 71, 0.3);
+            
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: rgb(15, 17, 54);
+            width: 250px;
+            margin-left: 8px;
+        }
+        .search-box input::placeholder {
+            color: rgba(48, 27, 95, 0.7);
+        }
+        .search-box i {
+            color: rgb(25, 18, 65);
+            font-size: 16px;
+        }
+         /* --- Contenedor Principal del Perfil --- */
+        .profile-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--color-bg-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 4px rgba(55, 0, 255, 0.1);
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+
+
+        /* ---------------- CONTENIDO ---------------- */
+    .contenido {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #2c3b74, #9CAFF3);
+      position: relative;
+      height: 480px;
+    }
+
+    /* FRANJA */
+    .contenido::after {
+      content: "";
+      position: absolute;
+      bottom: -120px;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: white;
+      clip-path: polygon(0 60%, 100% 15%, 100% 100%, 0 100%);
+      z-index: 1;
+    }
+
+    /* TEXTO */
+    .texto {
+      color: #ffffff;
+      z-index: 5;
+    }
+
+    .texto h1 {
+      font-size: 90px;
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow:
+        2px 2px 5px rgba(0,0,0,0.4),
+        0 0 10px rgba(0,0,0,0.25);
+    }
+
+    /* FOTO */
+    .foto img {
+      width: 420px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 5;
+      margin-top: 40px;
+    }
+.menu-opciones {
+      position: absolute;
+      top: 124px;
+      right: -8px;
+      background: #262e4e;
+      padding: 10px;
+      border-radius: 3px;
+      width: 400px;
+      display: none;
+      z-index: 9999;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .menu-opciones .opcion {
+      border: 3px solid #141726;
+      margin: 3px 0;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 18px;
+      background: #cbdbe4;
+      border-radius: 6px;
+    }
+
+    .menu-opciones .opcion:hover {
+      background: #10193b;
+      color: rgb(255, 255, 255);
+    }
+     .main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s;
+    margin-left: 30px;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+.menu-more {
+ color: white;
+    padding: 3px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+    margin-left: 80px;
+    } 
+     .cart-icon {
+  margin-left: -100px;
+}
+
+.cart-icon a {
+    color: #2d3e5f;
+    font-size: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+
+</style>
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("menuOpciones");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+</script>
+<header>
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="imagenes/Group 243 (3).png" width="55" alt="logo">
+    </div>
+     <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar en LifeLine...">
+            </div> 
+    <div class="navbar-right">
+            <div class="navbar-icon cart-icon">
+            <a th:href="@{/carrito}">
+                <i class="fas fa-shopping-cart" title="Carrito"></i>
+            </a>
+        </div>
+<div class="user-photo">
+       <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+    </div>
+   
+
+</div>
+<div id="menuOpciones" class="menu-opciones">
+        <div class="opcion">
+          <a th:href="@{/Erro404}" style="text-decoration:none; color:inherit;">Error</a>
+        </div>
+<div class="opcion">
+<a  th:href="@{/carrito}" style="text-decoration:none; color:inherit;">Carrito</a>
+</div>
+<div class="opcion">
+<a th:href="@{/envios}" style="text-decoration:none; color:inherit;"><i class="fas fa-truck"></i>Envios</a>
+   </div>   
+   <div class="opcion">
+       <a th:href="@{/nutricion}" style="text-decoration:none; color:inherit;" ><i class="fas fa-apple-alt" ></i> Nutrición</a></div>
+     <div class="opcion">
+ <a th:href="@{/ejercicio}" class="active"  style="text-decoration:none; color:inherit;"><i class="fas fa-running"></i> Ejercicios</a>
+       </div>
+        </button></form>
+                    <form th:action="@{/logout}" method="post">
+                    <button class="action-button edit-profile-btn">
+                        Cerrar Sesion
+                    </button></form>
+</header>
+
+
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"class="active"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}" ><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+    <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    
+    <a th:href="@{/contactanos}">Contactanos</a>
+        
+
+    <div class="menu-more" onclick="toggleMenu()">…</div>
+</nav>
+
+</nav>
+  <section class="contenido">
+    <div class="texto">
+      <h1>Bienvenido a<br>Lifeline</h1>
+    </div>
+
+    <div class="foto">
+      <img src="imagenes/img3.jpg" alt="familia">
+    </div>
+  </section>
+
+</body>
+</html>
+
+
+  

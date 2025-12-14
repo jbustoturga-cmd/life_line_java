@@ -1,0 +1,1177 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine - Tienda de Bienestar</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+<style>
+
+/* ============================================================
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   (Permiten modificar fácilmente los colores del sitio)
+   ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --color-accent: #142ea0; /* Rojo/coral del corazón (para acentos y "Me Gusta") */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            
+            --color-bg-white: white;
+             --color-primary:#3d5273;
+    --color-secondary:#5b6e94;
+    --color-accent:#142ea0;
+    --color-text-dark:#1a1a1a;
+    --color-text-light:#555;
+    --color-bg-light:#f0f2f5;
+    --color-bg-white:white;
+    --color-menu-bg:#526eaa;
+    --color-menu-hover:#2d3c7e;
+    --color-top-bar-bg:linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg:10px;
+    --border-radius-sm:5px;
+ 
+    /* Variables para Modo Día Difícil */
+    --day-difficult-bg: #1f1f3a;
+    --day-difficult-text: #ecf0f1;
+    --day-difficult-accent: #f1c40f;
+}
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #d5d8e6, #6f7dad);
+    color: var(--color-text-dark);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR (LOGO + ENLACES)
+   ============================================================ */
+.header-bar {
+     background: linear-gradient(135deg, #ffffff, #d2daf5);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL (Pestañas de navegación)
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #0e1330;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+        @media (min-width: 1150px) {
+            .side-column {
+                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar-center {
+                gap: 20px;
+            }
+            .search-box {
+                display: none; /* Ocultar búsqueda en móvil */
+            }
+        }
+         /* Campo de búsqueda mejorado y más limpio */
+          .search-box {
+            background-color: rgba(213, 188, 235, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(19, 18, 71, 0.3);
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: rgb(15, 17, 54);
+            width: 250px;
+            margin-left: 8px;
+        }
+        .search-box input::placeholder {
+            color: rgba(48, 27, 95, 0.7);
+        }
+        .search-box i {
+            color: rgb(25, 18, 65);
+            font-size: 16px;
+        }
+        
+
+       /* ============================================================
+   LAYOUT PRINCIPAL DEL MURAL
+   ============================================================ */
+.feed-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- Sidebar Izquierda (Filtros/Menú) --- */
+.left-sidebar {
+    width: 250px;
+    background-color: var(--color-menu-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: white;
+    padding: 15px 0;
+    flex-shrink: 0;
+}
+.admin-menu-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--color-menu-hover);
+}
+
+.admin-menu a {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+.admin-menu a i { margin-right: 10px; }
+.admin-menu a:hover { background-color: var(--color-menu-hover); }
+
+.submenu-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+.submenu {
+    padding-left: 20px;
+    background-color: #2d619c;
+}
+.submenu a {
+    padding-left: 30px;
+    font-weight: normal;
+    font-size: 13px;
+    display: block;
+}
+.submenu a.active {
+    background-color: #243666;
+}
+
+
+/* --- Columna Central (Feed/Mural) --- */
+.feed-column {
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.post-creator {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.post-input-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.avatar-small {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    margin-right: 12px;
+    flex-shrink: 0;
+    border: 2px solid var(--color-bg-light);
+    /* Placeholder Icon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+}
+.avatar-small i { color: white; }
+
+.post-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: none;
+    background-color: var(--color-bg-light);
+    border-radius: 25px;
+    font-size: 16px;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.post-input:focus {
+    background-color: #e5e7eb;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-option-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s;
+}
+
+.post-option-item:hover {
+    background-color: #f0f8ff;
+}
+
+.post-option-item i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.icon-novelty { color: var(--color-primary); } 
+.icon-photo { color: var(--color-accent); } 
+
+.post-option-item span {
+    color: var(--color-text-dark);
+    font-weight: 500;
+}
+
+/* --- Tarjeta de Publicación (Post) --- */
+.post-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.post-user-info {
+    flex-grow: 1;
+}
+
+.post-user-info p {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.post-user-info small {
+    color: var(--color-text-light);
+    font-size: 13px;
+}
+
+.post-content p {
+    padding: 0 15px 15px;
+    font-size: 16px;
+    color: var(--color-text-dark);
+}
+
+.post-media {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.post-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.post-stats {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-text-light);
+    border-bottom: 1px solid #eee;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+}
+
+.action-button {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    color: var(--color-text-light);
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.action-button:hover {
+    background-color: #f0f8ff;
+    color: var(--color-primary);
+}
+
+.action-button i {
+    font-size: 18px;
+}
+
+.action-button.like:hover i {
+    color: var(--color-accent);
+}
+
+/* --- Columna Lateral Derecha (Side Column) --- */
+.side-column {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.sidebar-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+}
+.sidebar-card h4 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+.sidebar-card ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar-card li {
+    padding: 5px 0;
+    font-size: 15px;
+    color: var(--color-text-dark);
+}
+.sidebar-card a {
+    color: var(--color-primary);
+}
+.sidebar-card p {
+    margin: 5px 0;
+}
+
+/* --- Emergencia (Día Difícil) --- */
+.emergency-section{
+    background-color: #fee2e2; /* Fondo de alerta suave */
+    padding:20px;
+    border-radius:var(--border-radius-lg);
+    box-shadow:0 4px 15px rgba(255, 0, 0, 0.1);
+    margin-bottom:20px;
+    text-align:center;
+    border:2px solid var(--color-accent);
+}
+
+.emergency-section h2{
+    color: var(--color-accent); /* Color principal de acento */
+    margin-bottom:15px;
+}
+
+.difficult-day-button{
+    background-color: var(--color-accent); /* Color de botón llamativo */
+    color:white;
+    padding:15px 20px;
+    border:none;
+    border-radius:var(--border-radius-lg);
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    width: 100%;
+    box-shadow:0 4px 10px rgba(20, 46, 160, 0.4);
+    transition:all 0.3s;
+}
+
+.difficult-day-button:hover{
+    background-color:#1c37b3;
+    transform:translateY(-2px);
+}
+
+
+/* ============================================================
+   MODAL DE MENSAJE (Reemplazo de alert())
+   ============================================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--color-bg-white);
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-content h3 {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.modal-content button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.modal-content button:hover {
+    background-color: var(--color-secondary);
+}
+
+
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 1100px) {
+    .left-sidebar, .side-column {
+        display: none; /* Ocultar sidebars en pantallas pequeñas */
+    }
+    .feed-container {
+        padding: 0 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .feed-column {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .header-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .logo-area { width: 100%; justify-content: center; margin-bottom: 5px;}
+    .search-box { 
+        order: 3; 
+        width: 90%; 
+        margin: 0 auto;
+        background-color: white; 
+    }
+    .search-box input { color: var(--color-text-dark); }
+    .search-box i { color: var(--color-text-light); }
+    .main-tabs { justify-content: space-between; padding: 0 5px; }
+    .main-tabs a { padding: 10px 10px; font-size: 13px; }
+}
+
+/* ============================================================
+   ESTILOS ESPECÍFICOS DE SEGUIMIENTO
+   ============================================================ */
+
+/* Estilo para el campo de búsqueda de seguimiento */
+.tracking-search-box {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.tracking-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: 2px solid var(--color-secondary);
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-lg);
+    font-size: 16px;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+}
+.tracking-input:focus {
+    border-color: var(--color-accent);
+    background-color: white;
+}
+
+.track-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.track-button:hover {
+    background-color: var(--color-menu-hover);
+    transform: translateY(-1px);
+}
+
+/* Tarjeta de Resumen de Estado */
+.status-summary {
+    padding: 20px;
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid; /* Usado para el color de estado */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.status-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+    flex-shrink: 0;
+}
+
+.status-text h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Estilo para la Línea de Tiempo (Life Line) */
+.timeline-line-container {
+    position: relative;
+    padding-left: 30px; /* Espacio para la línea vertical */
+}
+.timeline-line {
+    width: 3px;
+    background-color: var(--color-bg-light); 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+}
+.timeline-event {
+    position: relative;
+    margin-bottom: 25px;
+}
+.timeline-marker {
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-secondary); /* Color por defecto */
+    border: 3px solid var(--color-bg-white); /* Borde blanco para flotar sobre la línea */
+    z-index: 10;
+}
+.timeline-marker.active {
+    background-color: var(--color-accent); /* Acento para el último evento */
+    border: 3px solid var(--color-bg-light);
+}
+.event-details {
+    padding: 15px;
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--color-primary);
+}
+.event-details p {
+    margin: 0;
+    line-height: 1.4;
+}
+.event-details small {
+    color: var(--color-text-light);
+}
+/* ============================================================
+   ESTILOS ESPECÍFICOS DE SEGUIMIENTO
+   ============================================================ */
+
+/* Estilo para el campo de búsqueda de seguimiento */
+.tracking-search-box {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.tracking-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: 2px solid var(--color-secondary);
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-lg);
+    font-size: 16px;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.tracking-input:focus {
+    border-color: var(--color-accent);
+    background-color: white;
+}
+
+.track-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.track-button:hover {
+    background-color: var(--color-menu-hover);
+    transform: translateY(-1px);
+}
+
+/* Tarjeta de Resumen de Estado */
+.status-summary {
+    padding: 20px;
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.status-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+    flex-shrink: 0;
+}
+
+.status-text h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Estilo para la Línea de Tiempo (Life Line) */
+.timeline-line-container {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-line {
+    width: 3px;
+    background-color: var(--color-bg-light);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+}
+
+.timeline-event {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    border: 3px solid var(--color-bg-white);
+    z-index: 10;
+}
+
+.timeline-marker.active {
+    background-color: var(--color-accent);
+    border: 3px solid var(--color-bg-light);
+}
+
+.event-details {
+    padding: 15px;
+    background-color: var(--color-bg-light);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--color-primary);
+}
+
+.event-details p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.event-details small {
+    color: var(--color-text-light);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+
+
+
+</style>
+
+<!-- BARRA DE NAVEGACIÓN SUPERIOR (Copiada del código base) -->
+<body onload="lucide.createIcons()">
+<header>
+    <div class="header-bar">
+        <div class="header-logo-section">
+            <div class="logo-text">Life<br>Line</div>
+            <img th:src="@{/imagenes/Group 243 (3).png}" width="55" alt="logo">
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar en LifeLine...">
+        </div>
+
+        <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+            <div class="user-photo">
+                <img th:src="@{/imagenes/Group 244.png}" alt="Logo LifeLine">
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-tabs">
+        <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+        <a th:href="@{/mural}"><i class="fas fa-user-friends"></i>Mural</a>
+        <a th:href="@{/perfil}"><i class="fas fa-user"></i>Perfil</a>
+        <a th:href="@{/productos}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+        <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+        <a th:href="@{/nutricion}"><i class="fas fa-apple-alt"></i>Nutrición</a>
+        <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+        <a th:href="@{/contactanos}">Contactanos</a>
+    </nav>
+</header>
+
+
+
+<!-- FIN DE BARRA DE NAVEGACIÓN -->
+
+<!-- Contenedor Principal del Seguimiento -->
+<div class="feed-container">
+    
+    <!-- Columna Izquierda (Se mantiene para consistencia, aunque vacía) -->
+    <aside class="left-sidebar">
+        <div class="admin-menu-title">Opciones de Pedidos</div>
+        <div class="admin-menu">
+            <a href="#"><i class="fas fa-box-open"></i>Todos Mis Pedidos</a>
+            <a href="#" class="active"><i class="fas fa-truck-moving"></i>Seguimiento Actual</a>
+            <a href="#"><i class="fas fa-receipt"></i>Facturas y Garantías</a>
+        </div>
+    </aside>
+
+    <!-- Columna Central (Interfaz de Seguimiento) -->
+    <main class="feed-column">
+        <div class="content-card">
+            <h1 style="font-size: 1.8em; font-weight: 700; color: var(--color-primary); margin-bottom: 20px;">
+                <i class="fas fa-truck-loading" style="margin-right: 10px; color: var(--color-accent);"></i>Seguimiento de Envíos LifeLine
+            </h1>
+
+            <!-- 1. Sección de Búsqueda -->
+            <div class="tracking-search-box mb-8">
+                <input type="text" id="trackingInput" placeholder="Introduce tu código de seguimiento (Ej: LL-876-001)" class="tracking-input" value="LL-876-001">
+                <button id="trackButton" class="track-button">
+                    <i class="fas fa-search"></i>
+                    <span>Rastrear</span>
+                </button>
+            </div>
+
+            <!-- 2. Resultados de Seguimiento -->
+            <div id="trackingResults" class="hidden">
+                <h2 style="font-size: 1.4em; font-weight: 600; color: var(--color-primary); margin-bottom: 15px;">
+                    Paquete: <span id="trackingCodeDisplay" style="color: var(--color-accent);"></span>
+                </h2>
+
+                <!-- Resumen del Estado (Tarjeta de Publicación adaptada) -->
+                <div id="statusSummary" class="status-summary mb-8" style="border-left-color: var(--color-secondary); background-color: var(--color-bg-light);">
+                    <div class="flex items-center gap-4">
+                        <div id="statusIconWrapper" class="status-icon-wrapper" style="background-color: var(--color-secondary);">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="status-text">
+                            <small style="color: var(--color-text-light);">Estado Actual</small>
+                            <h3 id="currentStatus" style="color: var(--color-primary);">En Tránsito</h3>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <small style="color: var(--color-text-light);">Entrega Estimada</small>
+                        <p id="estimatedDate" style="font-size: 1.2em; font-weight: 700; color: var(--color-primary);">20/07/2025</p>
+                    </div>
+                </div>
+
+                <!-- Línea de Tiempo del Historial (Estilo Life Line) -->
+                <h3 style="font-size: 1.2em; font-weight: 600; color: var(--color-primary); margin-bottom: 15px;">
+                    Historial de Vida del Envío
+                </h3>
+                <div id="timelineContainer" class="timeline-line-container">
+                    <div class="timeline-line"></div>
+                    <!-- Los eventos se insertarán aquí por JS -->
+                </div>
+            </div>
+
+            <!-- 3. Mensaje de Error/No Encontrado -->
+            <div id="errorMessage" class="hidden content-card" style="background-color: #fee2e2; border: 2px solid var(--color-accent);">
+                <p style="font-weight: bold; color: var(--color-accent); margin-bottom: 5px;"><i class="fas fa-exclamation-triangle"></i> Envío No Encontrado</p>
+                <p style="color: var(--color-text-dark);">El código de seguimiento introducido no existe. Por favor, verifica el número y vuelve a intentarlo.</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Columna Derecha (Se mantiene para consistencia, aunque vacía) -->
+    <aside class="side-column">
+
+        <div class="content-card">
+            <h4><i class="fas fa-info-circle"></i> Ayuda Rápida</h4>
+            <p style="font-size: 14px; margin-bottom: 10px;">¿Problemas con tu envío? Nuestro equipo de soporte está listo para ayudarte.</p>
+            <button class="track-button" style="background-color: var(--color-accent); width: 100%; padding: 10px;">
+                <i class="fas fa-headset"></i> Contactar Soporte
+            </button>
+        </div>
+
+    </aside>
+</div>
+
+<!-- Modal de Mensaje (Copiado del código base) -->
+<div class="modal-overlay" id="messageModal">
+    <div class="modal-content">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button onclick="closeModal()">Aceptar</button>
+    </div>
+</div>
+
+<script>
+/* =========== FUNCIONES DEL MODAL (Copiado del código base) =========== */
+function showModal(title, message) {
+    const modal = document.getElementById('messageModal');
+    if (!modal) return; // Evita error si el modal no existe
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalMessage').innerText = message;
+    modal.style.display = 'flex';
+    // Pequeño delay para aplicar la animación de transición
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+
+function closeModal() {
+    const modal = document.getElementById('messageModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    // Esconde después de la transición
+    setTimeout(() => modal.style.display = 'none', 300); 
+}
+
+/* =========== MODO DÍA DIFÍCIL (Copiado del código base) =========== */
+// Las funciones toggleDifficultMode() fueron eliminadas ya que no hay botón en esta página específica,
+// pero el CSS para el modo oscuro se mantiene para que funcione si se agrega un botón más tarde.
+
+// Definición de Elementos DOM
+const trackButton = document.getElementById('trackButton');
+const trackingInput = document.getElementById('trackingInput');
+const trackingResults = document.getElementById('trackingResults');
+const errorMessage = document.getElementById('errorMessage');
+const timelineContainer = document.getElementById('timelineContainer');
+const trackingCodeDisplay = document.getElementById('trackingCodeDisplay');
+const currentStatus = document.getElementById('currentStatus');
+const estimatedDate = document.getElementById('estimatedDate');
+const statusSummary = document.getElementById('statusSummary');
+const statusIconWrapper = document.getElementById('statusIconWrapper');
+
+// Variables de Color CSS (para usar en JS)
+const colorPrimary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
+const colorAccent = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
+const colorBgLight = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-light').trim();
+const colorTextLight = getComputedStyle(document.documentElement).getPropertyValue('--color-text-light').trim();
+
+
+// Datos Simulados para el seguimiento (ajustados a la estética)
+const trackingData = {
+    'LL-876-001': {
+        status: 'En Distribución Local',
+        date: '20/07/2025',
+        events: [
+            { time: '14:30', date: '19/07/2025', description: 'En Distribución: Salió para entrega final.' },
+            { time: '09:00', date: '19/07/2025', description: 'Llegada a Centro de Clasificación Local.' },
+            { time: '20:15', date: '17/07/2025', description: 'En Tránsito: Salió de Centro de Operaciones Principal.' },
+            { time: '11:00', date: '15/07/2025', description: 'Paquete Recibido en Origen y Procesado.' },
+            { time: '10:00', date: '15/07/2025', description: 'Creación de Etiqueta y Confirmación de Pedido.' }
+        ],
+        // Colores y Iconos basados en el estado
+        summaryStyle: { borderColor: colorAccent, bgColor: colorBgLight, iconBg: colorAccent, icon: '<i class="fas fa-truck-moving"></i>' },
+    },
+    'LL-450-ENT': {
+        status: 'Entregado Exitosamente',
+        date: '10/07/2025',
+        events: [
+            { time: '10:45', date: '10/07/2025', description: 'Entregado: Firmado por el destinatario.' },
+            { time: '08:00', date: '10/07/2025', description: 'En Ruta de Reparto Final.' },
+            { time: '18:00', date: '09/07/2025', description: 'Llegada a Centro de Clasificación Local.' },
+        ],
+        summaryStyle: { borderColor: '#10b981', bgColor: '#d1fae5', iconBg: '#10b981', icon: '<i class="fas fa-check"></i>' }, // Verde de éxito
+    },
+    'LL-000-PEN': {
+        status: 'Pendiente de Recolección',
+        date: '25/07/2025',
+        events: [
+            { time: '10:00', date: '18/07/2025', description: 'Etiqueta generada. Esperando recolección por LifeLine.' }
+        ],
+        summaryStyle: { borderColor: colorTextLight, bgColor: '#f3f4f6', iconBg: colorTextLight, icon: '<i class="fas fa-clock"></i>' }, // Gris para pendiente
+    }
+};
+
+/**
+ * Renderiza la línea de tiempo de eventos para un envío.
+ * @param {Array<Object>} events - Lista de eventos de seguimiento.
+ */
+function renderTimeline(events) {
+    timelineContainer.innerHTML = ''; // Limpiar historial
+
+    events.forEach((event, index) => {
+        const isFirst = index === 0;
+        const markerClass = isFirst ? 'active' : '';
+        const eventBgColor = isFirst ? 'white' : colorBgLight;
+        
+        const eventHtml = `
+            <div class="timeline-event">
+                <!-- Marcador del Evento -->
+                <div class="timeline-marker ${markerClass}"></div>
+                
+                <!-- Contenido del Evento -->
+                <div class="event-details" style="background-color: ${eventBgColor}; border-left-color: ${isFirst ? colorAccent : colorPrimary};">
+                    <small>${event.date} - ${event.time}</small>
+                    <p style="color: ${isFirst ? colorAccent : colorPrimary}; font-weight: ${isFirst ? '600' : '500'};">${event.description}</p>
+                </div>
+            </div>
+        `;
+        timelineContainer.innerHTML += eventHtml;
+    });
+}
+
+/**
+ * Muestra los resultados o el mensaje de error.
+ */
+function displayTracking() {
+    const code = trackingInput.value.trim().toUpperCase();
+    const data = trackingData[code];
+
+    // 1. Ocultar y mostrar secciones
+    errorMessage.classList.add('hidden');
+    if (data) {
+        trackingResults.classList.remove('hidden');
+    } else {
+        trackingResults.classList.add('hidden');
+        errorMessage.classList.remove('hidden');
+        showModal('Envío No Encontrado', `No se encontró ningún envío con el código ${code}. Por favor, verifique.`);
+        return;
+    }
+
+    // 2. Actualizar el Resumen del Estado
+    trackingCodeDisplay.textContent = code;
+    currentStatus.textContent = data.status;
+    estimatedDate.textContent = data.date;
+
+    // Aplicar estilos de estado
+    statusSummary.style.borderColor = data.summaryStyle.borderColor;
+    statusSummary.style.backgroundColor = data.summaryStyle.bgColor;
+    statusIconWrapper.style.backgroundColor = data.summaryStyle.iconBg;
+    statusIconWrapper.innerHTML = data.summaryStyle.icon;
+
+    // 3. Renderizar la línea de tiempo
+    renderTimeline(data.events);
+}
+
+// --- Event Listener para el botón de seguimiento ---
+trackButton.addEventListener('click', displayTracking);
+
+// Permite buscar presionando Enter en el input
+trackingInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        displayTracking();
+    }
+});
+
+// Simular una carga inicial para mostrar el ejemplo
+window.onload = () => {
+    // Asegura que el modal de JavaScript funcione correctamente
+    const modal = document.getElementById('messageModal');
+    modal.style.display = 'none';
+
+    // Disparar la búsqueda inicial
+    displayTracking();
+};
+</script>
+</body>
+</html>

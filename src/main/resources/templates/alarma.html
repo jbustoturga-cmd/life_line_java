@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine alarma</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <style>
+        :root {
+            /* Colores LifeLine */
+            --color-primary: #3d5273; /* Azul oscuro */
+            --color-secondary: #5b6e94; /* Azul intermedio */
+            --color-accent: #8e44ad; /* Púrpura para Organización/Calendario */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #f3f0f7; /* Cambiado a un tono púrpura muy suave */
+            --color-bg-white: white;
+            --color-menu-bg: #526eaa;
+            --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+            --border-radius-lg: 10px;
+            --border-radius-sm: 5px;
+
+            /* Colores LifeLine */
+            --color-primary: #3d5273; /* Azul oscuro */
+            --color-secondary: #5b6e94; /* Azul intermedio */
+            --color-accent: #e67e22; /* Naranja Ámbar para Alertas/Medicación */
+            --color-success: #2ecc71; /* Verde de éxito */
+            --color-danger: #c0392b; /* Rojo */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #fef8f0; /* Fondo muy claro y cálido */
+            --color-bg-white: white;
+            --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+            --border-radius-lg: 10px;
+            --border-radius-sm: 5px;
+               --color-menu-hover: #002fff;
+        }
+        
+        /* Estilos Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+      /* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #d4792d);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR (LOGO + ENLACES)
+   ============================================================ */
+.header-bar {
+     background: linear-gradient(135deg, #ffffff, #d2daf5);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL (Pestañas de navegación)
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #212b63;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+        @media (min-width: 1150px) {
+            .side-column {
+                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar-center {
+                gap: 20px;
+            }
+            .search-box {
+                display: none; /* Ocultar búsqueda en móvil */
+            }
+        }
+         /* Campo de búsqueda mejorado y más limpio */
+        .search-box {
+            background-color: var(--color-bg-light);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: var(--color-text-dark);
+            width: 200px;
+            margin-left: 8px;
+        }
+        .search-box i {
+            color: var(--color-text-light);
+        }
+
+        /* CONTENEDOR PRINCIPAL DEL MÓDULO */
+        .medication-module-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr; 
+            gap: 25px;
+        }
+
+        .main-content, .history-box {
+            background-color: var(--color-bg-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* TÍTULO Y BOTONES */
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--color-bg-light);
+            padding-bottom: 15px;
+        }
+        
+        .module-header h1 {
+            color: var(--color-primary);
+            font-size: 28px;
+        }
+
+        .action-button {
+            background-color: var(--color-accent);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .action-button:hover { background-color: #d8680b; }
+
+        /* LISTA DE ALARMAS */
+        .alarm-list {
+            list-style: none;
+            padding: 0;
+            min-height: 100px; /* Para mostrar la carga */
+        }
+        
+        .alarm-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        .alarm-item:last-child {
+            border-bottom: none;
+        }
+        .alarm-item.taken {
+            opacity: 0.6;
+            background-color: #f9fff9;
+        }
+
+        .alarm-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alarm-icon-pill {
+            font-size: 24px;
+            color: var(--color-accent);
+        }
+
+        .alarm-info strong {
+            display: block;
+            font-size: 18px;
+            color: var(--color-text-dark);
+        }
+
+        .alarm-info span {
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+        
+        .alarm-status-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time-badge {
+            background-color: #f7f7f7;
+            padding: 5px 10px;
+            border-radius: var(--border-radius-sm);
+            font-weight: bold;
+            color: var(--color-primary);
+            font-size: 12px;
+        }
+
+        .taken-button {
+            background-color: var(--color-success); 
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+        .taken-button:hover { background-color: #27ae60; }
+        
+        /* ALARMA PERDIDA/PENDIENTE */
+        #missed-alarm-section {
+            display: none; /* Ocultar por defecto */
+            background-color: var(--color-bg-light);
+            border: 2px solid var(--color-accent);
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        #missed-alarm-section h3 {
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+
+        #missed-alarm-section .prompt {
+            color: var(--color-text-dark);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .symptom-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .symptom-input-group textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius-sm);
+            resize: vertical;
+        }
+
+        .symptom-input-group button {
+            background-color: var(--color-danger);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .symptom-input-group button:hover { background-color: #a93226; }
+        
+        .late-button {
+            color: var(--color-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .late-button:hover { color: var(--color-primary); }
+
+        /* SECCIÓN DE HISTORIAL */
+        .history-box h3 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .log-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .log-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 14px;
+        }
+        
+        .log-item strong {
+            color: var(--color-success); 
+            margin-right: 5px;
+        }
+
+        .log-item.missed strong {
+            color: var(--color-danger); /* Rojo */
+        }
+        .log-item p {
+            color: var(--color-text-light); 
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        /* MODAL (Nueva Alarma) */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--color-danger);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-section {
+            background-color: var(--color-bg-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--color-primary);
+        }
+        .form-section input, .form-section select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius-sm);
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-col {
+            flex: 1;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        .form-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .cancel-btn {
+            background-color: #ccc;
+            color: var(--color-text-dark);
+        }
+        .create-btn {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        .create-btn:hover { background-color: #314668; }
+
+        /* Estado de carga */
+        #loading-overlay {
+            /* Como no hay autenticación, simplemente lo ocultamos inmediatamente o lo removemos */
+            display: none !important; 
+        }
+
+        /* Media Queries */
+        @media (max-width: 900px) {
+            .medication-module-container {
+                grid-template-columns: 1fr;
+                margin: 20px;
+            }
+        }
+        /* ALARMA PERDIDA/PENDIENTE (Función Inteligente) */
+        .missed-alarm-card {
+            background-color: var(--color-bg-light);
+            border: 2px solid var(--color-accent);
+            padding: 20px;
+            border-radius: var(--border-radius-lg);
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .missed-alarm-card h3 {
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+
+        .missed-alarm-card .prompt {
+            color: var(--color-text-dark);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .symptom-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .symptom-input-group textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius-sm);
+            resize: vertical;
+        }
+
+        .symptom-input-group button {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+        }
+        .symptom-input-group button:hover { background-color: #314668; }
+    </style>
+</head>
+<body>
+<body>
+
+ <div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="img/Group 243 (3).png" width="55" alt="logo">
+    </div>
+     <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar en LifeLine...">
+            </div> 
+    <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+        </div>
+<div class="user-photo">
+       <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+    </div>
+   
+
+</div>
+
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+    <a th:href="@{/nutricion}" ><i class="fas fa-apple-alt" ></i> Nutrición</a>
+    <a th:href="@{/alarma}" class="active" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a  th:href="@{/Contactanos}">Contactanos</a>
+</nav>
+
+
+<div class="medication-module-container">
+
+    <div class="main-content">
+        <div class="module-header">
+            <h1><i class="fas fa-pills"></i> Mis Alarmas de Medicación</h1>
+            <button id="new-alarm-btn" class="action-button"><i class="fas fa-plus"></i> Nueva Alarma</button>
+        </div>
+<div class="missed-alarm-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Dosis Pendiente: Metronidazol</h3>
+            <p class="prompt">La hora para tu dosis de las 12:00 PM ha pasado. ¿Te la saltaste?</p>
+            
+            <p class="prompt">Si no la marcaste: ¿Tuviste algún síntoma inusual? ¿Quieres registrarlo?</p>
+
+            <div class="symptom-input-group">
+                <textarea rows="3" placeholder="Ej: Me salté la dosis. Estoy sintiendo un poco de náuseas y mucha fatiga desde el mediodía."></textarea>
+                <button><i class="fas fa-save"></i> Registrar Síntoma y Marcar como Omitida</button>
+            </div>
+            <p style="text-align: right; margin-top: 10px; font-size: 14px;"><a href="#" style="color: var(--color-secondary);">Marcar como tomada ahora (Tarde)</a></p>
+        </div>
+        <!-- Seccion de Alarma Perdida/Pendiente (Rendido dinámicamente) -->
+        <div id="missed-alarm-section">
+            <h3 id="missed-alarm-title"><i class="fas fa-exclamation-triangle"></i> Dosis Pendiente: </h3>
+            <p id="missed-alarm-prompt" class="prompt">La hora para tu dosis ha pasado. ¿Te la saltaste?</p>
+            
+            <p class="prompt">Si no la marcaste: ¿Tuviste algún síntoma inusual? ¿Quieres registrarlo?</p>
+
+            <div class="symptom-input-group">
+                <textarea id="symptom-input" rows="3" placeholder="Ej: Me salté la dosis. Estoy sintiendo un poco de náuseas y mucha fatiga desde el mediodía."></textarea>
+                <button id="omit-log-btn"><i class="fas fa-save"></i> Registrar Síntoma y Marcar como Omitida</button>
+            </div>
+            <p style="text-align: right; margin-top: 10px;">
+                <a href="#" id="take-late-btn" class="late-button">Marcar como tomada ahora (Tarde)</a>
+            </p>
+        </div>
+        
+        <h2 style="margin-top: 30px; font-size: 24px; color: var(--color-primary);">Alarmas Activas</h2>
+        <ul id="alarm-list" class="alarm-list">
+            <!-- Las alarmas se renderizarán aquí -->
+            <li>Cargando alarmas...</li>
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        
+        <div class="history-box">
+            <h3><i class="fas fa-chart-line"></i> Historial de Dosis</h3>
+            
+            <ul id="log-list" class="log-list">
+                <!-- Los logs se renderizarán aquí -->
+                <li>Cargando historial...</li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Nueva Alarma -->
+<div id="newAlarmModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Nueva Alarma</h2>
+            <span class="close-button">&times;</span>
+        </div>
+        
+        <form id="alarm-form">
+            <div class="form-section">
+                <label>Información del Medicamento</label>
+                <input type="text" id="medication-name" placeholder="Ej: Acetaminofén" required>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Dosis </label>
+                        <input type="number" id="medication-dose" value="1" min="0.1" step="0.1" required>
+                    </div>
+                    <div class="form-col">
+                        <label>Unidad </label>
+                        <select id="medication-unit" required>
+                            <option value="cápsula">Cápsula</option>
+                            <option value="tableta">Tableta</option>
+                            <option value="mg">mg</option>
+                            <option value="ml">ml</option>
+                            <option value="unidad">Unidad</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label>Frecuencia y Horarios</label>
+                <select id="alarm-frequency" required>
+                    <option value="diaria">Diaria</option>
+                    <option value="recurrente">Recurrente (Cada X horas)</option>
+                    <option value="prn">Según Necesidad (PRN)</option>
+                </select>
+
+                <div id="recurrent-options" style="display: none; margin-top: 10px;">
+                    <label>Cada cuántas horas:</label>
+                    <input type="number" id="recurrent-hours" min="1" value="8" placeholder="Ej: 8 horas">
+                </div>
+
+                <label style="margin-top: 10px;">Próximo Horario de Toma (Hora Militar, 24h) *</label>
+                <input type="time" id="alarm-time" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" id="cancel-alarm-btn">Cancelar</button>
+                <button type="submit" class="create-btn"><i class="fas fa-save"></i> Crear Alarma</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // --- Constantes para LocalStorage ---
+    const ALARMS_KEY = 'lifeline_medication_alarms';
+    const LOGS_KEY = 'lifeline_medication_logs';
+
+    // Elementos del DOM
+    const alarmList = document.getElementById('alarm-list');
+    const logList = document.getElementById('log-list');
+    const newAlarmModal = document.getElementById('newAlarmModal');
+    const newAlarmBtn = document.getElementById('new-alarm-btn');
+    const closeBtn = document.querySelector('.close-button');
+    const cancelAlarmBtn = document.getElementById('cancel-alarm-btn');
+    const alarmForm = document.getElementById('alarm-form');
+    const frequencySelect = document.getElementById('alarm-frequency');
+    const recurrentOptions = document.getElementById('recurrent-options');
+    const missedAlarmSection = document.getElementById('missed-alarm-section');
+    const symptomInput = document.getElementById('symptom-input');
+    const omitLogBtn = document.getElementById('omit-log-btn');
+    const takeLateBtn = document.getElementById('take-late-btn');
+
+    // --- Funciones de Utilidad ---
+
+    /**
+     * Genera un ID único para los nuevos objetos.
+     */
+    function generateUniqueId() {
+        return 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+    }
+
+    /**
+     * Formatea una hora Date a hh:mm (24h).
+     * @param {Date} date - Objeto Date.
+     * @returns {string} - Hora formateada.
+     */
+    function formatTime(date) {
+        if (!date || isNaN(date.getTime())) return 'N/A';
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+
+    /**
+     * Formatea la fecha y hora de la dosis.
+     * @param {Date} date - Objeto Date.
+     * @returns {string} - Fecha y hora formateada (Ej: Hoy a las 10:30)
+     */
+    function formatDoseTime(date) {
+        if (!date || isNaN(date.getTime())) return 'N/A';
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+
+        let dateString = '';
+        if (date.toDateString() === today.toDateString()) {
+            dateString = 'Hoy';
+        } else if (date.toDateString() === tomorrow.toDateString()) {
+            dateString = 'Mañana';
+        } else {
+            dateString = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+        }
+        return `${dateString} a las ${formatTime(date)}`;
+    }
+
+    // --- Funciones de LocalStorage (CRUD) ---
+
+    /**
+     * Carga las alarmas de LocalStorage.
+     * @returns {Array} - Lista de objetos de alarma.
+     */
+    function loadAlarms() {
+        const data = localStorage.getItem(ALARMS_KEY);
+        return data ? JSON.parse(data) : [];
+    }
+
+    /**
+     * Guarda la lista de alarmas en LocalStorage.
+     * @param {Array} alarms - Lista de objetos de alarma.
+     */
+    function saveAlarms(alarms) {
+        localStorage.setItem(ALARMS_KEY, JSON.stringify(alarms));
+        renderAlarms(alarms); // Vuelve a renderizar después de guardar
+    }
+
+    /**
+     * Carga los logs de LocalStorage.
+     * @returns {Array} - Lista de objetos de log.
+     */
+    function loadLogs() {
+        const data = localStorage.getItem(LOGS_KEY);
+        // Asegurarse de que el historial se cargue ordenado por timestamp
+        let logs = data ? JSON.parse(data) : [];
+        // Ordenar del más reciente al más antiguo
+        logs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        return logs;
+    }
+
+    /**
+     * Guarda la lista de logs en LocalStorage.
+     * @param {Array} logs - Lista de objetos de log.
+     */
+    function saveLogs(logs) {
+        localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+        renderLogs(logs); // Vuelve a renderizar el historial
+    }
+    
+    /**
+     * Añade un nuevo log al historial.
+     * @param {string} medicationName - Nombre del medicamento.
+     * @param {string} status - 'Tomada', 'Tomada Tarde', u 'Omitida'.
+     * @param {string} symptom - Descripción del síntoma.
+     * @param {string} alarmId - ID de la alarma.
+     * @param {boolean} takenLate - Si fue tomada tarde.
+     */
+    function addLogEntry(medicationName, status, symptom = '', alarmId = 'N/A', takenLate = false) {
+        const logs = loadLogs();
+        const logData = {
+            id: generateUniqueId(),
+            medicationName,
+            status,
+            symptom,
+            timestamp: new Date().toISOString(),
+            alarmId,
+            takenLate
+        };
+        logs.push(logData);
+        saveLogs(logs);
+    }
+
+    // --- Lógica de Alarmas ---
+
+    /**
+     * Crea una nueva alarma a partir de los datos del formulario.
+     * @param {Event} e - Evento de envío del formulario.
+     */
+    function createAlarm(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('medication-name').value.trim();
+        const dose = parseFloat(document.getElementById('medication-dose').value);
+        const unit = document.getElementById('medication-unit').value;
+        const frequency = document.getElementById('alarm-frequency').value;
+        const timeInput = document.getElementById('alarm-time').value;
+        const recurrentHours = frequency === 'recurrente' ? parseInt(document.getElementById('recurrent-hours').value) : null;
+
+        if (!name || isNaN(dose) || !timeInput) {
+            alert("Por favor, rellena todos los campos obligatorios.");
+            return;
+        }
+
+        const [hours, minutes] = timeInput.split(':').map(Number);
+        
+        // Calcular la próxima dosis: la dosis debe ser hoy si la hora aún no pasa, o mañana si ya pasó.
+        let nextDose = new Date();
+        nextDose.setHours(hours, minutes, 0, 0);
+
+        // Si la hora de la dosis ya pasó hoy, la programamos para mañana.
+        if (nextDose < new Date()) {
+            nextDose.setDate(nextDose.getDate() + 1);
+        }
+
+        const newAlarm = {
+            id: generateUniqueId(),
+            medicationName: name,
+            medicationDose: dose,
+            medicationUnit: unit,
+            frequency: frequency,
+            recurrentHours: recurrentHours,
+            nextDoseTime: nextDose.toISOString(), // Guardamos como string ISO
+            status: 'Activa' 
+        };
+
+        const alarms = loadAlarms();
+        alarms.push(newAlarm);
+        saveAlarms(alarms);
+
+        newAlarmModal.style.display = 'none';
+        alarmForm.reset();
+        alert(`Alarma para ${name} creada con éxito.`);
+    }
+
+    /**
+     * Marca una dosis como tomada y recalcula la próxima hora.
+     * @param {string} alarmId - ID de la alarma.
+     * @param {string} status - 'Tomada' o 'Tomada Tarde'.
+     */
+    function takeDose(alarmId, status = 'Tomada') {
+        const alarms = loadAlarms();
+        const alarmIndex = alarms.findIndex(a => a.id === alarmId);
+
+        if (alarmIndex === -1) {
+            console.error("Alarma no encontrada:", alarmId);
+            return;
+        }
+
+        const alarm = alarms[alarmIndex];
+        const now = new Date();
+        let nextDose = new Date(alarm.nextDoseTime);
+
+        // 1. Calcular la nueva próxima dosis
+        if (alarm.frequency === 'diaria') {
+            // Avanzar 24 horas a partir de la hora original
+            nextDose.setDate(nextDose.getDate() + 1);
+        } else if (alarm.frequency === 'recurrente' && alarm.recurrentHours) {
+            // Avanzar X horas a partir de la hora de la toma real (now)
+            nextDose = new Date(now.getTime() + alarm.recurrentHours * 60 * 60 * 1000);
+        } else if (alarm.frequency === 'prn') {
+            // Para PRN, no hay próxima dosis programada automáticamente
+            nextDose = now; // La próxima dosis es la actual, pero no se mostrará como activa
+        }
+
+        // Si la próxima dosis calculada sigue estando en el pasado, la avanzamos
+        while (nextDose < now) {
+            if (alarm.frequency === 'diaria') {
+                nextDose.setDate(nextDose.getDate() + 1);
+            } else if (alarm.frequency === 'recurrente' && alarm.recurrentHours) {
+                nextDose.setTime(nextDose.getTime() + alarm.recurrentHours * 60 * 60 * 1000);
+            } else {
+                 // Si es PRN, salimos del bucle
+                 break;
+            }
+        }
+
+        // 2. Actualizar el estado y próxima hora de la alarma
+        alarm.nextDoseTime = nextDose.toISOString();
+        alarm.status = status === 'Tomada' || status === 'Tomada Tarde' ? 'Tomada' : 'Activa'; 
+        
+        // 3. Registrar en el historial
+        addLogEntry(alarm.medicationName, status, '', alarm.id, status === 'Tomada Tarde');
+
+        // 4. Guardar y actualizar la vista
+        alarms[alarmIndex] = alarm;
+        saveAlarms(alarms);
+        
+        // Ocultar la sección de pendiente si la dosis fue marcada desde allí
+        missedAlarmSection.style.display = 'none';
+        
+        alert(`Dosis de ${alarm.medicationName} marcada como ${status}.`);
+    }
+    
+    /**
+     * Marca una dosis como omitida y registra síntomas.
+     * @param {string} alarmId - ID de la alarma.
+     * @param {string} medicationName - Nombre del medicamento.
+     */
+    function omitDose(alarmId, medicationName) {
+        const symptom = symptomInput.value.trim() || 'No se registraron síntomas adicionales.';
+
+        // 1. Registrar en el historial como Omitida
+        addLogEntry(medicationName, 'Omitida', symptom, alarmId);
+        
+        // 2. Recalcular la próxima dosis como si se hubiera tomado tarde (para continuar el ciclo)
+        takeDoseRecalcOnly(alarmId);
+        
+        // 3. Limpiar y ocultar
+        symptomInput.value = '';
+        missedAlarmSection.style.display = 'none';
+        alert(`Dosis de ${medicationName} marcada como Omitida. Síntomas registrados.`);
+    }
+    
+    /**
+     * Función interna para recalcular la próxima dosis sin registrar un log (usado en omitir).
+     * @param {string} alarmId - ID de la alarma.
+     */
+    function takeDoseRecalcOnly(alarmId) {
+        const alarms = loadAlarms();
+        const alarmIndex = alarms.findIndex(a => a.id === alarmId);
+
+        if (alarmIndex === -1) return;
+
+        const alarm = alarms[alarmIndex];
+        const now = new Date();
+        let nextDose = new Date(alarm.nextDoseTime);
+        
+        // Calcular la nueva próxima dosis
+        if (alarm.frequency === 'diaria') {
+            nextDose.setDate(nextDose.getDate() + 1);
+        } else if (alarm.frequency === 'recurrente' && alarm.recurrentHours) {
+             // Si se omite, la próxima dosis debe ser X horas después de la hora *original*
+             // Para evitar que la siguiente dosis se atrase indefinidamente, calculamos el próximo punto
+             // de toma a partir del ciclo normal, pero asegurándonos de que sea en el futuro.
+             let calculatedNext = new Date(alarm.nextDoseTime);
+             while (calculatedNext < now) {
+                 calculatedNext.setTime(calculatedNext.getTime() + alarm.recurrentHours * 60 * 60 * 1000);
+             }
+             nextDose = calculatedNext;
+        } else if (alarm.frequency === 'prn') {
+            // No hay próxima dosis programada para PRN
+            return; 
+        }
+
+        // Si la próxima dosis calculada sigue estando en el pasado, la avanzamos (seguro)
+        while (nextDose < now) {
+            if (alarm.frequency === 'diaria') {
+                nextDose.setDate(nextDose.getDate() + 1);
+            } else if (alarm.frequency === 'recurrente' && alarm.recurrentHours) {
+                nextDose.setTime(nextDose.getTime() + alarm.recurrentHours * 60 * 60 * 1000);
+            } else {
+                 break;
+            }
+        }
+        
+        // Actualizar el estado y próxima hora de la alarma
+        alarm.nextDoseTime = nextDose.toISOString();
+        alarm.status = 'Activa'; 
+        
+        // Guardar y actualizar la vista
+        alarms[alarmIndex] = alarm;
+        saveAlarms(alarms);
+    }
+
+    // --- Funciones de Renderizado ---
+
+    /**
+     * Renderiza la lista de logs (historial).
+     * @param {Array} logs - Lista de objetos de log.
+     */
+    function renderLogs(logs) {
+        logList.innerHTML = '';
+        if (logs.length === 0) {
+            logList.innerHTML = '<li>El historial de dosis está vacío.</li>';
+            return;
+        }
+
+        logs.slice(0, 10).forEach(log => { // Limitar a los 10 más recientes
+            const item = document.createElement('li');
+            item.className = `log-item ${log.status.includes('Omitida') ? 'missed' : ''}`;
+            
+            const time = new Date(log.timestamp);
+            const statusText = log.status.includes('Omitida') ? 'OMITIDA' : (log.status.includes('Tarde') ? 'Tomada Tarde' : 'Tomada');
+            const statusStyle = log.status.includes('Omitida') ? 'color: var(--color-danger);' : 'color: var(--color-success);';
+
+            item.innerHTML = `
+                <strong style="${statusStyle}">${statusText}</strong> de ${log.medicationName} a las ${formatTime(time)} (${time.toLocaleDateString('es-ES')}).
+                ${log.symptom ? `<p>Síntomas/Notas: ${log.symptom}</p>` : ''}
+            `;
+            logList.appendChild(item);
+        });
+    }
+
+    /**
+     * Renderiza la lista de alarmas y maneja el estado de la alarma pendiente.
+     * @param {Array} alarms - Lista de objetos de alarma.
+     */
+    function renderAlarms(alarms) {
+        alarmList.innerHTML = '';
+        missedAlarmSection.style.display = 'none';
+        
+        if (alarms.length === 0) {
+            alarmList.innerHTML = '<li>No hay alarmas activas. ¡Crea la primera!</li>';
+            return;
+        }
+
+        let pendingAlarm = null;
+        const now = new Date();
+        
+        // 1. Identificar alarmas pendientes y renderizar la lista principal
+        const sortedAlarms = alarms.sort((a, b) => new Date(a.nextDoseTime) - new Date(b.nextDoseTime));
+        
+        for (const alarm of sortedAlarms) {
+            // Convertir la hora de la próxima dosis a objeto Date
+            const nextDoseTime = new Date(alarm.nextDoseTime);
+
+            // Criterio de Pendiente: La hora ya pasó y no ha sido marcada como Tomada *hoy*
+            const isLate = nextDoseTime < now;
+            const isTakenToday = alarm.status === 'Tomada' && nextDoseTime.toDateString() === now.toDateString();
+
+
+            const item = document.createElement('li');
+            item.className = 'alarm-item';
+            item.dataset.id = alarm.id;
+            item.dataset.name = alarm.medicationName;
+
+            let statusBadge = '';
+            let actionButton = '';
+
+            if (alarm.frequency === 'prn') {
+                statusBadge = `<span class="time-badge" style="background-color: #fce3a2; color: #b88b00;">PRN</span>`;
+                actionButton = `<button class="taken-button" data-action="take-prn">Registrar Toma</button>`;
+            } else if (isTakenToday) {
+                // Alarma tomada hoy
+                statusBadge = `<span class="time-badge" style="background-color: var(--color-success); color: white;">Tomada</span>`;
+                actionButton = '';
+                item.classList.add('taken');
+            } else {
+                 // Alarma pendiente/próxima
+                let badgeStyle = isLate ? 'background-color: var(--color-danger); color: white;' : '';
+                let badgeText = isLate ? 'PENDIENTE' : (alarm.frequency === 'diaria' ? 'Diaria' : `Cada ${alarm.recurrentHours}h`);
+                
+                statusBadge = `<span class="time-badge" style="${badgeStyle}">${badgeText}</span>`;
+                actionButton = `<button class="taken-button" data-action="take" ${isLate ? 'style="background-color: var(--color-danger);"' : ''}>Marcar Tomada</button>`;
+            }
+            
+            item.innerHTML = `
+                <div class="alarm-details">
+                    <div class="alarm-icon-pill"><i class="fas fa-capsules"></i></div>
+                    <div class="alarm-info">
+                        <strong>${alarm.medicationName} (${alarm.medicationDose} ${alarm.medicationUnit})</strong>
+                        <span>Ciclo: ${alarm.frequency === 'prn' ? 'Según necesidad' : (alarm.frequency === 'diaria' ? 'Cada 24 horas' : `Cada ${alarm.recurrentHours} horas`)} | Próxima: ${formatDoseTime(nextDoseTime)}</span>
+                    </div>
+                </div>
+                <div class="alarm-status-actions">
+                    ${statusBadge}
+                    ${actionButton}
+                </div>
+            `;
+            alarmList.appendChild(item);
+            
+            // Si es tardía y no ha sido marcada hoy, la establecemos como la alarma pendiente
+            if (isLate && !isTakenToday && !pendingAlarm) {
+                 pendingAlarm = alarm;
+            }
+        }
+        
+        // 2. Renderizar la alarma pendiente en la sección superior si existe
+        if (pendingAlarm) {
+            renderPendingAlarm(pendingAlarm);
+        }
+        
+        attachAlarmEventListeners();
+    }
+
+    /**
+     * Renderiza la alarma pendiente para atención inmediata.
+     * @param {Object} alarm - El objeto de la alarma pendiente.
+     */
+    function renderPendingAlarm(alarm) {
+        missedAlarmSection.style.display = 'block';
+        const doseTime = new Date(alarm.nextDoseTime);
+        document.getElementById('missed-alarm-title').innerHTML = `<i class="fas fa-exclamation-triangle"></i> Dosis Pendiente: ${alarm.medicationName}`;
+        document.getElementById('missed-alarm-prompt').innerHTML = `La hora para tu dosis de las ${formatTime(doseTime)} ha pasado. **¿Te la saltaste?**`;
+        
+        // Asignar el ID de la alarma pendiente a los botones de acción
+        omitLogBtn.dataset.alarmId = alarm.id;
+        omitLogBtn.dataset.alarmName = alarm.medicationName;
+        takeLateBtn.dataset.alarmId = alarm.id;
+        takeLateBtn.dataset.alarmName = alarm.medicationName;
+    }
+
+    // --- Control de Eventos y UI ---
+
+    /**
+     * Adjunta event listeners a los botones de la lista de alarmas.
+     */
+    function attachAlarmEventListeners() {
+        document.querySelectorAll('.alarm-item .taken-button').forEach(button => {
+            button.onclick = (e) => {
+                const item = e.target.closest('.alarm-item');
+                if (!item) return;
+
+                const alarmId = item.dataset.id;
+                const action = e.target.dataset.action;
+
+                if (action === 'take' || action === 'take-prn') {
+                    // Si la alarma es tardía, la marcamos como "Tomada Tarde"
+                    const alarms = loadAlarms();
+                    const alarm = alarms.find(a => a.id === alarmId);
+                    
+                    if (alarm && new Date(alarm.nextDoseTime) < new Date()) {
+                        takeDose(alarmId, 'Tomada Tarde');
+                    } else {
+                        takeDose(alarmId, 'Tomada');
+                    }
+                }
+            };
+        });
+    }
+
+    /**
+     * Lógica al cargar la página.
+     */
+    function initializeApp() {
+        // Cargar datos iniciales de LocalStorage
+        const initialAlarms = loadAlarms();
+        const initialLogs = loadLogs();
+        
+        renderAlarms(initialAlarms);
+        renderLogs(initialLogs);
+    }
+    
+    // --- Listeners de UI ---
+
+    // Mostrar/Ocultar el campo de horas recurrentes
+    frequencySelect.addEventListener('change', () => {
+        recurrentOptions.style.display = frequencySelect.value === 'recurrente' ? 'block' : 'none';
+    });
+
+    // Abrir modal
+    newAlarmBtn.addEventListener('click', () => {
+        newAlarmModal.style.display = 'block';
+    });
+
+    // Cerrar modal
+    closeBtn.addEventListener('click', () => {
+        newAlarmModal.style.display = 'none';
+        alarmForm.reset();
+    });
+
+    cancelAlarmBtn.addEventListener('click', () => {
+        newAlarmModal.style.display = 'none';
+        alarmForm.reset();
+    });
+
+    // Manejar el envío del formulario de nueva alarma
+    alarmForm.addEventListener('submit', createAlarm);
+    
+    // Botón Marcar como Tomada Tarde
+    takeLateBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const alarmId = takeLateBtn.dataset.alarmId;
+        if (alarmId) {
+            takeDose(alarmId, 'Tomada Tarde');
+        }
+    });
+
+    // Botón Registrar Síntoma y Marcar como Omitida
+    omitLogBtn.addEventListener('click', () => {
+        const alarmId = omitLogBtn.dataset.alarmId;
+        const alarmName = omitLogBtn.dataset.alarmName;
+        if (alarmId && alarmName) {
+            omitDose(alarmId, alarmName);
+        }
+    });
+
+    // Iniciar la aplicación al cargar el script
+    initializeApp();
+</script>
+</body>
+</html>

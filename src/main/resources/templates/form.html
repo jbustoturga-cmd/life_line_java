@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine - Regístrate</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg,#1a2c54 , #495f83);
+  color: #1a1a1a;
+  padding: 20px 0;
+}
+.back-arrow {
+  position: absolute; top: 25px; left: 25px;
+  font-size: 32px; color: #2d3e5f;
+  cursor: pointer; text-decoration: none;
+}
+.container {
+  max-width: 550px; margin: 30px auto;
+  background-color: white; padding: 45px 50px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+.logo {
+  display: flex; justify-content: center;
+  align-items: center; font-size: 55px;
+  font-weight: bold; margin-bottom: 5px;
+  color: #3d5273;
+}
+.logi { width: 55px; height: auto; margin-left: 8px; }
+.contac {
+  text-align: center; font-size: 36px;
+  font-weight: bold; color: #2d3e5f;
+  margin: 5px 0 35px;
+}
+form { display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 10px; }
+.form-group.hidden { display: none; }
+label { font-weight: 600; color: #3d5273; font-size: 16px; }
+.input-wrapper { position: relative; }
+input[type="text"], input[type="email"], input[type="date"],
+input[type="password"], select, input[type="file"] {
+  padding: 14px 18px; border: 1.5px solid #d0d0d0;
+  border-radius: 8px; font-size: 15px;
+  background-color: white; width: 100%;
+}
+input::placeholder, select option[disabled] { color: #b0b0b0; }
+input.error, select.error { border: 2px solid #e74c3c; background-color: #fff5f5; }
+.error-message { color: #e74c3c; font-size: 13px; margin-top: -6px; display: none; }
+.error-message.show { display: block; }
+.error-icon {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 22px; background-color: #e74c3c; color: white;
+  border-radius: 50%; display: none; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: bold;
+}
+.error-icon.show { display: flex; }
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23333' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 18px center;
+  cursor: pointer;
+}
+.terms { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #666; }
+.terms input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+button {
+  background-color: #5b6e94; color: white;
+  padding: 16px; border: none; border-radius: 8px;
+  cursor: pointer; font-size: 17px; font-weight: 600;
+  margin-top: 15px; transition: all 0.2s ease;
+}
+button:hover { background-color: #4a5a7a; }
+button:active { transform: scale(0.97); background-color: #3d4a66; }
+.login-link { text-align: center; font-size: 14px; margin-top: 20px; color: #666; }
+.login-link a { color: #5b7fd6; text-decoration: none; font-weight: 600; }
+.login-link a:hover { text-decoration: underline; }
+.volver { text-align: center; margin-top: 15px; font-size: 14px; }
+.volver a { text-decoration: none; color: #999; }
+.volver a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<a class="back-arrow" onclick="history.back()">←</a>
+
+<div class="container">
+
+<div class="logo">
+  LifeLine
+  <img th:src="@{/imagenes/Group 243 (3).png}" class="logi">
+</div>
+
+<div class="contac" style="color: #122246;">Regístrate</div>
+
+<form id="registerForm"
+      th:action="${#authorization.expression('hasRole(''ADMIN'')') ? '/usuarios/guardar' : '/perfil/guardar'}"
+      th:object="${usuario}" method="post" enctype="multipart/form-data">
+
+<input type="hidden" th:field="*{id}" />
+
+<div class="form-group">
+  <label>Nombre</label>
+  <div class="input-wrapper">
+    <input type="text" th:field="*{userName}" id="nombre" required placeholder="Ingresa tu nombre">
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="nombreError">Nombre no válido.</span>
+</div>
+
+<div class="form-group">
+  <label>Correo Electrónico</label>
+  <div class="input-wrapper">
+    <input type="email" th:field="*{email}" id="email" placeholder="Ingresa tu Correo">
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="emailError">Correo electrónico no válido.</span>
+</div>
+
+<div class="form-group">
+  <label>Fecha Nacimiento</label>
+  <div class="input-wrapper">
+    <input type="date" th:field="*{fechaNacimiento}" id="fecha">
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="fechaError">Fecha de nacimiento requerida.</span>
+</div>
+
+<div class="form-group">
+  <label>Tipo de Documento</label>
+  <div class="input-wrapper">
+    <select id="tipoDoc" th:field="*{tipoDocumento}">
+      <option value="" disabled selected>Elige tu Documento</option>
+      <option value="cc">Cédula de ciudadanía</option>
+      <option value="ti">Tarjeta de identidad</option>
+      <option value="ce">Cédula extranjera</option>
+    </select>
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="tipoDocError">Selecciona un tipo de documento.</span>
+</div>
+
+<div class="form-group">
+  <label>Número de Documento</label>
+  <div class="input-wrapper">
+    <input type="text" id="numDoc" th:field="*{numeroDocumento}" placeholder="Escribe tu Documento" maxlength="15">
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="numDocError">Debe contener mínimo 10 dígitos.</span>
+</div>
+
+<div class="form-group">
+  <label>ROL</label>
+
+  <div class="input-wrapper" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <select id="rol" th:field="*{rol}">
+      <option value="" disabled selected>Elige tu ROL</option>
+      <option value="PACIENTE">paciente</option>
+      <option value="CUIDADOR">cuidador</option>
+      <option value="PROFESIONAL">profesional de salud</option>
+      <option value="ADMIN">ADMIN</option>
+      <option value="USER">USER</option>
+    </select>
+    <span class="error-icon">!</span>
+  </div>
+
+  <input type="hidden" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}"
+         th:field="*{rol}" th:value="'USER'" />
+
+  <span class="error-message" id="rolError">Selecciona un ROL.</span>
+</div>
+
+<div class="form-group hidden" id="estadioGroup">
+  <label>Tipo Estadio</label>
+  <div class="input-wrapper">
+    <select id="estadio" th:field="*{estadio}">
+      <option value="" disabled selected>Elige tu Estadio</option>
+      <option value="ESTADO1">Estadio 1</option>
+      <option value="ESTADO2">Estadio 2</option>
+      <option value="ESTADO3">Estadio 3</option>
+      <option value="ESTADO4">Estadio 4</option>
+    </select>
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="estadioError">Selecciona un estadio.</span>
+</div>
+
+<div class="form-group">
+  <label>Contraseña</label>
+  <div class="input-wrapper">
+    <input type="password" th:field="*{password}" id="password" placeholder="Contraseña" required>
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="passwordError">La contraseña debe tener al menos 6 caracteres.</span>
+</div>
+
+<div class="form-group">
+  <label>Verifique su contraseña</label>
+  <div class="input-wrapper">
+    <input type="password" id="confirmPassword" placeholder="Contraseña">
+    <span class="error-icon">!</span>
+  </div>
+  <span class="error-message" id="confirmPasswordError">Las contraseñas no coinciden.</span>
+</div>
+
+<div class="terms">
+  <input type="checkbox" id="terms">
+  <label for="terms" style="font-weight: normal; color: #666;">Acepta Términos y condiciones</label>
+</div>
+
+<button type="submit">Registrarse</button>
+</form>
+
+<div class="login-link">¿Ya tienes una cuenta? <a th:href="@{/login}">Iniciar sesión</a></div>
+<div class="volver"><a th:href="@{/home}">Volver al Inicio</a></div>
+
+</div>
+
+<script>
+document.getElementById('numDoc').addEventListener('input', function(e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+const rolElement = document.getElementById('rol');
+if (rolElement) {
+  rolElement.addEventListener('change', function() {
+    const estadioGroup = document.getElementById('estadioGroup');
+    const estadioSelect = document.getElementById('estadio');
+
+    if (this.value === 'PACIENTE') {
+      estadioGroup.classList.remove('hidden');
+    } else {
+      estadioGroup.classList.add('hidden');
+      estadioSelect.value = '';
+      estadioSelect.classList.remove('error');
+      document.getElementById('estadioError').classList.remove('show');
+      estadioSelect.parentNode.querySelector('.error-icon').classList.remove('show');
+    }
+  });
+}
+
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  const nombre = document.getElementById('nombre');
+  const email = document.getElementById('email');
+  const fecha = document.getElementById('fecha');
+  const tipoDoc = document.getElementById('tipoDoc');
+  const numDoc = document.getElementById('numDoc');
+  const rol = document.getElementById('rol');
+  const estadio = document.getElementById('estadio');
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirmPassword');
+  const terms = document.getElementById('terms');
+
+  document.querySelectorAll('input, select').forEach(f => f.classList.remove('error'));
+  document.querySelectorAll('.error-message').forEach(m => m.classList.remove('show'));
+  document.querySelectorAll('.input-wrapper .error-icon').forEach(i => i.classList.remove('show'));
+
+  let hasError = false;
+
+  if (nombre.value.trim().length < 3) { showError(nombre, 'nombreError'); hasError = true; }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.value.trim())) { showError(email, 'emailError'); hasError = true; }
+
+  if (fecha.value === '') { showError(fecha, 'fechaError'); hasError = true; }
+
+  if (tipoDoc.value === '') { showError(tipoDoc, 'tipoDocError'); hasError = true; }
+
+  if (numDoc.value.trim().length < 10) { showError(numDoc, 'numDocError'); hasError = true; }
+
+  if (rol && rol.value === '') { showError(rol, 'rolError'); hasError = true; }
+
+  if (rol && rol.value === 'PACIENTE' && estadio.value === '') { showError(estadio, 'estadioError'); hasError = true; }
+
+  if (password.value.length < 6) { showError(password, 'passwordError'); hasError = true; }
+
+  if (confirmPassword.value !== password.value) { showError(confirmPassword, 'confirmPasswordError'); hasError = true; }
+
+  if (!terms.checked) { alert('Debes aceptar los términos y condiciones'); hasError = true; }
+
+  if (hasError) e.preventDefault();
+});
+
+function showError(element, id) {
+  element.classList.add('error');
+  document.getElementById(id).classList.add('show');
+  const icon = element.parentNode.querySelector('.error-icon');
+  if (icon) icon.classList.add('show');
+}
+</script>
+
+</body>
+</html>

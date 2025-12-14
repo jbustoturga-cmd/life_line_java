@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine - Mural de Bienestar</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #142ea0;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: white;
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --day-difficult-bg: #1f1f3a;
+    --day-difficult-text: #ecf0f1;
+    --day-difficult-accent: #f1c40f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ---------------------- BODY ---------------------- */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #ffffff, #d2daf5);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ---------------------- HEADER ---------------------- */
+
+.header-bar {
+    background: var(--color-top-bar-bg);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: white;
+}
+
+.search-box {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 15px;
+    color: white;
+    width: 200px;
+    margin-left: 8px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-icon a {
+    color: white;
+    font-size: 24px;
+}
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---------------------- MENÚ ---------------------- */
+
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+    overflow-x: auto;
+}
+
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.main-tabs a:hover { background-color: #3b507b; }
+
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+
+/* ---------------------- LAYOUT ---------------------- */
+
+.feed-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.feed-column { width: 100%; max-width: 650px; }
+
+.side-column {
+    width: 300px;
+    padding-top: 20px;
+    display: none;
+}
+
+@media (min-width: 1050px) {
+    .side-column { display: block; }
+}
+
+/* ---------------------- CREAR POST ---------------------- */
+
+.post-creator {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.post-input-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.avatar-small {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    margin-right: 12px;
+    border: 2px solid var(--color-bg-light);
+}
+
+.post-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: none;
+    background-color: var(--color-bg-light);
+    border-radius: 25px;
+    font-size: 16px;
+    color: var(--color-text-dark);
+    outline: none;
+    cursor: pointer;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-option-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s;
+}
+
+.post-option-item:hover { background-color: #f0f8ff; }
+
+.post-option-item i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.icon-novelty { color: var(--color-primary); }
+.icon-photo { color: var(--color-accent); }
+
+/* ---------------------- POST ---------------------- */
+
+.post-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.post-user-info { flex-grow: 1; }
+
+.post-user-info p {
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.post-user-info small {
+    color: var(--color-text-light);
+    font-size: 13px;
+}
+
+.post-content p {
+    padding: 0 15px 15px;
+    font-size: 16px;
+}
+
+.post-media img {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+/* ---------------------- MODAL ---------------------- */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.close-modal {
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color-text-light);
+}
+
+#postText {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius-sm);
+    padding: 10px;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+.file-input-label {
+    background-color: #f0f2f5;
+    color: var(--color-primary);
+    padding: 8px 15px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish-btn {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+}
+
+</style>
+</head>
+
+<body>
+<!-- TU HTML SIGUE IGUAL... -->
+
+
+</style>
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <div class="avatar-small" style="margin-right:0; background-color: var(--color-accent);"><i class="fas fa-heartbeat"></i></div>
+    </div>
+    <div class="navbar-right">
+        <div class="user-photo"><i class="fas fa-user"></i></div>
+    </div>
+</div>
+
+<!-- MENÚ PRINCIPAL (CONTROL DE VISTAS) -->
+<nav class="main-tabs">
+    <a href="#" onclick="changeView('mural')" id="tab-mural"><i class="fas fa-user-friends"></i>Mural</a>
+    <a href="#" onclick="changeView('store')" id="tab-store" class="active"><i class="fas fa-store"></i>Productos</a>
+    <a href="#" onclick="changeView('cart')" id="tab-cart" class="cart-tab"><i class="fas fa-shopping-cart"></i>Carrito <span class="cart-badge" id="cart-count">0</span></a>
+    <a href="#" onclick="showModal('Not implemented', 'Esta función requiere autenticación. (Simulación)')"><i class="fas fa-user"></i>Perfil</a>
+</nav>
+
+<!-- CONTENEDOR PRINCIPAL DEL CONTENIDO DINÁMICO -->
+<div class="content-container">
+    <div class="content-area" id="main-content">
+        <!-- El contenido de la Tienda, Carrito o Mural se inyecta aquí -->
+        <h2>Cargando Tienda...</h2>
+    </div>
+</div>
+
+<!-- Modal Simple (Reemplazo de Alert) -->
+<div class="modal-overlay" id="simple-modal">
+    <div class="modal-content">
+        <h3 id="modal-title"></h3>
+        <p id="modal-message"></p>
+        <button onclick="closeModal()">Cerrar</button>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// DATOS SIMULADOS (MOCK DATA) DE PRODUCTOS
+// Simula la información que vendría de su base de datos MySQL.
+// ============================================================
+
+const mockProducts = [
+    { id: 1, name: 'Kit Esencial de Relajación', price: 35.99, description: 'Aceite de lavanda, antifaz de seda y té de manzanilla. Perfecto para terminar el día.', icon: 'fas fa-spa', options: { color: ['Azul', 'Verde', 'Rosa'] } },
+    { id: 2, name: 'Diario de Gratitud Guiado', price: 18.50, description: 'Libro de 90 días para cultivar el optimismo y la atención plena. Tapa dura y ecológica.', icon: 'fas fa-book', options: { size: ['Pequeño', 'Mediano'] } },
+    { id: 3, name: 'Almohada de Yoga y Meditación', price: 49.99, description: 'Soporte ergonómico con relleno de cáscara de trigo sarraceno para mayor comodidad.', icon: 'fas fa-seedling', options: { color: ['Gris Claro', 'Marrón'] } },
+    { id: 4, name: 'Reloj Inteligente LifeLine', price: 129.00, description: 'Monitoriza el ritmo cardíaco, el sueño y el nivel de estrés. Batería de larga duración.', icon: 'fas fa-mobile-alt', options: { size: ['S/M', 'L/XL'] } },
+];
+
+// ============================================================
+// LÓGICA DEL CARRITO (ESTADO SIMULADO EN FRONTEND)
+// Simula la tabla 'Carrito' de MySQL.
+// ============================================================
+let cart = [];
+let nextCartItemId = 1; // ID único para cada entrada en el carrito (incluso si es el mismo producto)
+
+const mainContent = document.getElementById('main-content');
+const cartCountBadge = document.getElementById('cart-count');
+const mainTabs = document.querySelectorAll('.main-tabs a');
+
+/* ------------------------------------------------------------
+   FUNCIONES DE VISTA (View Switcher)
+------------------------------------------------------------ */
+
+function changeView(viewName) {
+    // Desactivar todas las pestañas
+    mainTabs.forEach(tab => tab.classList.remove('active'));
+
+    // Limpiar el contenido principal
+    mainContent.innerHTML = '';
+    
+    // Activar la pestaña correcta y cargar la vista
+    document.getElementById(`tab-${viewName}`).classList.add('active');
+
+    switch (viewName) {
+        case 'store':
+            renderStoreView();
+            break;
+        case 'cart':
+            renderCartView();
+            break;
+        case 'mural':
+            renderMuralPlaceholder();
+            break;
+        default:
+            renderStoreView();
+    }
+}
+
+function updateCartBadge() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCountBadge.textContent = totalItems;
+    
+    const cartTab = document.getElementById('tab-cart');
+    if (totalItems > 0) {
+        cartTab.classList.add('has-items');
+    } else {
+        cartTab.classList.remove('has-items');
+    }
+}
+
+function showTemporaryMessage(message, type = 'info') {
+    // Limpia mensajes anteriores
+    document.querySelectorAll('.temp-message').forEach(el => el.remove());
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `temp-message ${type}`;
+    messageDiv.textContent = message;
+    document.body.appendChild(messageDiv);
+
+    setTimeout(() => messageDiv.remove(), 4000);
+}
+
+function showModal(title, message) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-message').innerText = message;
+    document.getElementById('simple-modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('simple-modal').classList.remove('active');
+}
+
+/* ------------------------------------------------------------
+   VISTAS
+------------------------------------------------------------ */
+
+function renderMuralPlaceholder() {
+    mainContent.innerHTML = `
+        <h2>Mural de Apoyo</h2>
+        <p style="font-size: 1.1em; color: var(--color-text-light);">
+            El código del Mural fue simplificado para centrarse en la funcionalidad de la Tienda y el Carrito, tal como se solicitó.
+            <br><br>
+            Volver a <a href="#" onclick="changeView('store')" style="color: var(--color-accent); font-weight: bold;">Productos</a>.
+        </p>
+    `;
+}
+
+function renderStoreView() {
+    mainContent.innerHTML = '<h2>Tienda de Productos de Bienestar</h2><div class="product-grid" id="product-grid"></div>';
+    const grid = document.getElementById('product-grid');
+
+    mockProducts.forEach(product => {
+        const optionsHTML = Object.keys(product.options).map(key => {
+            const values = product.options[key];
+            return `
+                <label for="select-${key}-${product.id}" style="text-transform: capitalize;">${key}:</label>
+                <select id="select-${key}-${product.id}" data-option-key="${key}" class="product-option-select">
+                    ${values.map(value => `<option value="${value}">${value}</option>`).join('')}
+                </select>
+            `;
+        }).join('');
+
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <div class="product-image-placeholder"><i class="${product.icon}"></i></div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="product-price">$${product.price.toFixed(2)}</p>
+                <p class="product-description">${product.description}</p>
+                <div class="product-options">${optionsHTML}</div>
+                <button class="add-to-cart-btn" data-id="${product.id}">Agregar al Carrito</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    // Agregar listener a los botones de agregar al carrito
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            const card = e.target.closest('.product-card');
+            
+            // Recoger las opciones seleccionadas (color, talla, etc.)
+            const options = {};
+            card.querySelectorAll('.product-option-select').forEach(select => {
+                const key = select.dataset.optionKey;
+                options[key] = select.value;
+            });
+
+            addToCart(productId, 1, options);
+        });
+    });
+}
+
+function renderCartView() {
+    // Encabezado de la vista
+    let html = '<h2>Mi Carrito de Compras</h2>';
+
+    if (cart.length === 0) {
+        html += `
+            <p style="text-align: center; margin-top: 50px; font-size: 1.2em; color: var(--color-text-light);">
+                Tu carrito está vacío. ¡Es hora de empezar a cuidarte!
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="add-to-cart-btn" onclick="changeView('store')">Ver Productos</button>
+            </div>
+        `;
+    } else {
+        let subtotal = 0;
+
+        // Tabla de Carrito
+        html += `
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Detalles</th>
+                        <th>Precio Unit.</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        cart.forEach(item => {
+            const product = mockProducts.find(p => p.id === item.productId);
+            if (!product) return;
+
+            const itemSubtotal = product.price * item.quantity;
+            subtotal += itemSubtotal;
+
+            // Formatear los detalles del producto (Color, Talla, etc.)
+            const detailsText = Object.keys(item.options).map(key =>
+                `<small style="text-transform: capitalize;">${key}: ${item.options[key]}</small>`
+            ).join('<br>');
+
+            html += `
+                <tr data-cart-id="${item.id}">
+                    <td class="cart-item-details">
+                        <strong>${product.name}</strong>
+                    </td>
+                    <td>${detailsText}</td>
+                    <td>$${product.price.toFixed(2)}</td>
+                    <td class="quantity-control">
+                        <input
+                            type="number"
+                            min="1"
+                            value="${item.quantity}"
+                            onchange="updateCartItemQuantity(${item.id}, this.value)"
+                        >
+                    </td>
+                    <td><strong id="subtotal-${item.id}">$${itemSubtotal.toFixed(2)}</strong></td>
+                    <td>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += '</tbody></table>';
+
+        // Resumen de Carrito
+        html += `
+            <div class="cart-summary">
+                <div>
+                    <span>Subtotal:</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <div>
+                    <span>Envío (Simulado):</span>
+                    <span>$5.00</span>
+                </div>
+                <h4>
+                    <span>Total:</span>
+                    <span>$${(subtotal + 5.00).toFixed(2)}</span>
+                </h4>
+                <button class="checkout-btn" onclick="showModal('Procesando Pago (Simulado)', 'Simulación de llamada a API de pago. Su orden por $${(subtotal + 5.00).toFixed(2)} ha sido procesada con éxito.')">
+                    <i class="fas fa-credit-card"></i> Finalizar Compra
+                </button>
+            </div>
+        `;
+    }
+
+    mainContent.innerHTML = html;
+}
+
+/* ------------------------------------------------------------
+   LÓGICA DEL CARRITO (CRUD SIMULADO)
+------------------------------------------------------------ */
+
+/**
+ * Simula la adición de un producto al carrito (INSERT INTO Carrito).
+ * @param {number} productId
+ * @param {number} quantity
+ * @param {object} options Opciones seleccionadas (color, size, etc.)
+ */
+function addToCart(productId, quantity, options) {
+    const product = mockProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    // Buscamos si ya existe el producto con EXACTAMENTE las mismas opciones
+    const existingItem = cart.find(item =>
+        item.productId === productId &&
+        JSON.stringify(item.options) === JSON.stringify(options)
+    );
+
+    if (existingItem) {
+        // Si existe, actualizamos la cantidad (Simulación de UPDATE)
+        existingItem.quantity += quantity;
+        showTemporaryMessage(`Se agregó otra unidad de ${product.name} al carrito.`, 'info');
+    } else {
+        // Si no existe, agregamos un nuevo ítem (Simulación de INSERT)
+        const newItem = {
+            id: nextCartItemId++, // Generar ID de fila de carrito único
+            productId: productId,
+            quantity: quantity,
+            options: options
+        };
+        cart.push(newItem);
+        showTemporaryMessage(`¡${product.name} agregado al carrito!`, 'success');
+    }
+
+    // Sincronización de UI
+    updateCartBadge();
+}
+
+/**
+ * Simula la actualización de la cantidad de un ítem en el carrito (UPDATE Carrito SET cantidad = X).
+ * @param {number} itemId ID único del ítem en el carrito (no del producto)
+ * @param {string} newQuantityStr Nueva cantidad como cadena de texto
+ */
+function updateCartItemQuantity(itemId, newQuantityStr) {
+    const newQuantity = parseInt(newQuantityStr);
+    if (isNaN(newQuantity) || newQuantity < 1) {
+        // Si la cantidad es inválida, forzar la UI a reflejar el valor actual y salir
+        const currentItem = cart.find(item => item.id === itemId);
+        if (currentItem) {
+            document.querySelector(`tr[data-cart-id="${itemId}"] input`).value = currentItem.quantity;
+        }
+        showTemporaryMessage('La cantidad debe ser un número entero mayor a 0.', 'error');
+        return;
+    }
+
+    const itemIndex = cart.findIndex(item => item.id === itemId);
+    if (itemIndex !== -1) {
+        cart[itemIndex].quantity = newQuantity;
+
+        // Recalcular y actualizar subtotal de la fila y el badge
+        const product = mockProducts.find(p => p.id === cart[itemIndex].productId);
+        const newSubtotal = product.price * newQuantity;
+        document.getElementById(`subtotal-${itemId}`).textContent = `$${newSubtotal.toFixed(2)}`;
+        
+        showTemporaryMessage(`Cantidad actualizada para ${product.name}. (Simulación API UPDATE)`, 'info');
+
+        // Re-renderizar la vista de carrito para actualizar el resumen total
+        renderCartView();
+        updateCartBadge();
+    }
+}
+
+/**
+ * Simula la eliminación de un ítem del carrito (DELETE FROM Carrito).
+ * @param {number} itemId ID único del ítem en el carrito
+ */
+function removeFromCart(itemId) {
+    // Simulación de llamada a API DELETE
+    const item = cart.find(i => i.id === itemId);
+    const productName = item ? mockProducts.find(p => p.id === item.productId).name : 'Producto';
+
+    cart = cart.filter(item => item.id !== itemId);
+
+    showTemporaryMessage(`"${productName}" fue eliminado del carrito. (Simulación API DELETE)`, 'error');
+
+    // Sincronización de UI
+    renderCartView();
+    updateCartBadge();
+}
+
+// Inicialización: Cargar la vista de la tienda y el contador del carrito al inicio
+document.addEventListener('DOMContentLoaded', () => {
+    changeView('store');
+    updateCartBadge();
+});
+
+// Hacer las funciones de carrito globales para que puedan ser llamadas desde el HTML
+window.changeView = changeView;
+window.showModal = showModal;
+window.closeModal = closeModal;
+window.updateCartItemQuantity = updateCartItemQuantity;
+window.removeFromCart = removeFromCart;
+</script>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine - Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+       /* ============================================================
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   (Permiten modificar fácilmente los colores del sitio)
+   ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --color-accent: #142ea0; /* Rojo/coral del corazón (para acentos y "Me Gusta") */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+              --color-light-blue: #72a4d9;
+            --color-bg-white: white;
+}
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #b7bdd8, #162149);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR (LOGO + ENLACES)
+   ============================================================ */
+.header-bar {
+     background: linear-gradient(135deg, #ffffff, #d2daf5);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL (Pestañas de navegación)
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #212b63;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+        @media (min-width: 1150px) {
+            .side-column {
+                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar-center {
+                gap: 20px;
+            }
+            .search-box {
+                display: none; /* Ocultar búsqueda en móvil */
+            }
+        }
+         /* Campo de búsqueda mejorado y más limpio */
+          .search-box {
+            background-color: rgba(213, 188, 235, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(19, 18, 71, 0.3);
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: rgb(15, 17, 54);
+            width: 250px;
+            margin-left: 8px;
+        }
+        .search-box input::placeholder {
+            color: rgba(48, 27, 95, 0.7);
+        }
+        .search-box i {
+            color: rgb(25, 18, 65);
+            font-size: 16px;
+        }
+         /* --- Contenedor Principal del Perfil --- */
+        .profile-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--color-bg-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 2px 4px rgba(55, 0, 255, 0.1);
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* --- Sección de Cabecera (Cover y Avatar) --- */
+        .profile-header {
+            position: relative;
+        }
+
+        .cover-photo {
+            height: 250px;
+            background: linear-gradient(135deg, #5f7b8f, #132644);
+            border-top-left-radius: var(--border-radius-lg);
+            border-top-right-radius: var(--border-radius-lg);
+            overflow: hidden;
+        }
+
+        .cover-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6; /* Para simular el efecto de la imagen */
+        }
+
+        .profile-info {
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            right: 50px;
+            transform: translateY(50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-avatar {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            border: 4px solid var(--color-bg-white);
+            background: linear-gradient(135deg, rgb(33, 203, 233), #132644);
+            overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-camera-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--color-bg-white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 20px;
+            flex-grow: 1;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--color-text-dark);
+            margin-bottom: 5px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px; /* Para alinear con el nombre */
+        }
+
+        .action-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .add-post-btn {
+            background-color: var(--color-light-blue);
+            color: var(--color-bg-white);
+        }
+
+        .add-post-btn:hover {
+            background-color: #5d8ccc;
+        }
+
+        .edit-profile-btn {
+            background-color: #e4e6eb;
+            color: var(--color-text-dark);
+        }
+
+        .edit-profile-btn:hover {
+            background-color: #d8dadf;
+        }
+
+        /* --- Navegación de Pestañas --- */
+        .profile-nav-wrapper {
+            margin-top: 100px; /* Espacio para el avatar */
+            border-top: 1px solid #c4c0c0;
+            padding: 0 50px;
+        }
+
+        .profile-nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .profile-nav-item a {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 600;
+            padding: 15px 0;
+            display: block;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .profile-nav-item.active a {
+            color: var(--color-primary);
+        }
+        
+        .profile-nav-item.active a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+        }
+        .profile-nav a {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 600;
+            padding: 10px 0;
+            display: block;
+            border-bottom: 3px solid transparent;
+            transition: color 0.2s, border-bottom-color 0.2s;
+        }
+         .profile-nav a.active,
+        .profile-nav a:hover {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        /* --- Contenido Principal --- */
+        .main-content {
+            padding: 20px 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* --- Caja de Publicación --- */
+        .create-post {
+            background-color: var(--color-bg-white);
+            border-radius: var(--border-radius-lg);
+            padding: 15px;
+            box-shadow: 0 10px 20px rgba(28, 31, 61, 0.1);
+        }
+
+        .post-input-area {
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-input-area .profile-avatar {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .post-input-area input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            background-color: #f0f2f5;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .post-options {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+        
+        .post-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--color-text-light);
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .post-option:hover {
+            background-color: #949494;
+        }
+
+        .option-personal i { color: #8e44ad; } 
+        .option-photo i { color: #2ecc71; }
+
+        /* --- Caja de Publicación Individual (Post) --- */
+        .post-card {
+            background-color: var(--color-bg-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 20px 40px rgba(25, 20, 65, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 15px 0;
+        }
+        
+        .post-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: black;
+            margin-right: 10px;
+        }
+
+        .post-author-name {
+            font-weight: 600;
+        }
+
+        .post-time {
+            color: var(--color-text-light);
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .post-image-container {
+            margin-top: 10px;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            display: block;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #5e5d5d;
+            padding: 10px 0;
+        }
+
+        .post-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--color-text-light);
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .post-action-btn:hover {
+            background-color: #f0f2f5;
+        }
+    </style>
+</head>
+<body>
+
+ <div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="img/Group 243 (3).png" width="55" alt="logo">
+    </div>
+     <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar en LifeLine...">
+            </div> 
+    <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+        </div>
+<div class="user-photo">
+       <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+    </div>
+   
+
+</div>
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"class="active"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+    <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+    <a th:href="@{/nutricion}" ><i class="fas fa-apple-alt" ></i> Nutrición</a>
+    <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a  th:href="@{/Contactanos}">Contactanos</a>
+</nav>
+
+
+    <div class="navbar-right"></div>
+</nav>
+
+    <div class="profile-container">
+
+        <header class="profile-header">
+            <div class="cover-photo">
+                </div>
+
+            <div class="profile-info">
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar">
+                        </div>
+                    <div class="avatar-camera-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+                    <h1 class="profile-name" id="userNameDisplay">LifeLine</h1> <a style="font-size: 13px;color: #353535;">ROL: Admin</a></div>
+
+
+                <div class="profile-actions" method="post">
+            
+<a    th:href="@{/productos/nuevo}" method="post">
+    <button class="action-button add-post-btn">
+                        Agregar productos<i class="fas fa-plus"></i>
+                           </button> </a>
+ 
+
+                     <form th:action="@{/logout}" method="post">
+                    <button class="action-button edit-profile-btn">
+                        Editar Perfil  <i class="fas fa-pencil-alt"></i>
+                    </button></form>
+                    <form th:action="@{/logout}" method="post">
+                    <button class="action-button edit-profile-btn">
+                        Cerrar Sesion
+                    </button></form>
+                </div>
+            </div>
+        </header>
+
+        <div class="profile-nav-wrapper">
+            <ul class="profile-nav">
+                <li class="profile-nav-item active"><a href="#">publicaciones</a></li>
+                <li class="profile-nav-item"><a href="#">informacion</a></li>
+                <li class="profile-nav-item"><a href="#">fotos</a></li>
+                <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a th:href="@{/usuarios}">Ver usuarios</a>
+               
+        </div>
+              
+                <li class="profile-nav-item"><a th:href="@{/productos}">Lista Productos</a></li>
+                  <li class="profile-nav-item"><a th:href="@{/vista-clientes}">Clientes</a></li>
+            </ul>
+        </div>
+        
+
+        <main class="main-content">
+            
+            <div class="create-post">
+                <div class="post-input-area">
+                    <div class="profile-avatar"></div>
+                    <input type="text" placeholder="que piensas?">
+                </div>
+                <div class="post-options">
+                    <div class="post-option option-personal">
+                        <i class="fas fa-magic"></i> Novedad personal
+                    </div>
+                    <div class="post-option option-photo">
+                        <i class="fas fa-images"></i> Fotos/videos
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-author-avatar"></div>
+                    <div>
+                        <div class="post-author-name">LifeLine</div> <span class="post-time"><i class="fas fa-clock"></i> 13 Noviembre 2025</span>
+                    </div>
+                </div>
+  <div class="post-content">
+                        <p>Acompañar a un ser querido en su proceso es un acto de amor puro y la base de su fortaleza. ¡Gracias por ser un LifeLine para ellos!</p>
+                    </div>
+                <div class="post-image-container">
+                    <img src="img/img3.jpg" class="post-image" alt="Publicación">
+                </div>
+                <div class="post-actions">
+                    <div class="post-action-btn like-btn">
+                        <i class="far fa-thumbs-up"></i> 10 Me gusta
+                    </div>
+                    <div class="post-action-btn comment-btn">
+                        <i class="far fa-comment-dots"></i> 4 Comentarios
+                    </div>
+                    <div class="post-action-btn share-btn">
+                        <i class="fas fa-share"></i> 1 Comparte
+                    </div>
+                </div>
+            </div>
+    <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-author-avatar"></div>
+                        <div class="avatar-small"></div>
+                        <div class="post-user-info">
+                            <p>Usuario Ejemplo</p>
+                            <small>Hace 2 horas · <i class="fas fa-user-friends"></i></small>
+                        </div>
+                        <i class="fas fa-ellipsis-h" style="color: var(--color-text-light);"></i>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>¡Gracias a la crema Ultra-Hidratante de la tienda LifeLine! Mi piel se siente mucho mejor después de las sesiones. Totalmente recomendada. 😊</p>
+                    </div>
+                <div class="post-actions">
+                    <div class="post-action-btn like-btn">
+                        <i class="far fa-thumbs-up"></i> 15 Me gusta
+                    </div>
+                    <div class="post-action-btn comment-btn">
+                        <i class="far fa-comment-dots"></i> 6 Comentarios
+                    </div>
+                    <div class="post-action-btn share-btn">
+                        <i class="fas fa-share"></i> 1 Comparte
+                    </div>
+                </div>
+            </div>
+
+            </main>
+    </div>
+
+    <script>
+        // *** FUNCIÓN PARA MOSTRAR EL NOMBRE DEL USUARIO REGISTRADO ***
+        document.addEventListener('DOMContentLoaded', () => {
+            const userName = localStorage.getItem('userName');
+            const userNameDisplayElement = document.getElementById('userNameDisplay');
+            const postAuthorNameElements = document.querySelectorAll('.post-author-name');
+
+            if (userName) {
+                // Actualiza el nombre principal del perfil
+                userNameDisplayElement.textContent = userName;
+                
+                // Actualiza el nombre en las publicaciones de ejemplo
+                postAuthorNameElements.forEach(element => {
+                    element.textContent = userName;
+                });
+            }
+            // Si no hay nombre, se queda el valor predeterminado 'LifeLine' en el HTML
+        });
+
+        // *** FUNCIONALIDADES BÁSICAS INTERACTIVAS (sin backend) ***
+        
+        // Simular dar "Me gusta"
+        document.querySelectorAll('.like-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const icon = button.querySelector('i');
+                if (icon.classList.contains('far')) { // Si tiene outline (no le gusta)
+                    icon.classList.remove('far', 'fa-thumbs-up');
+                    icon.classList.add('fas', 'fa-thumbs-up'); // Relleno (le gusta)
+                    button.style.color = 'var(--color-primary)';
+                    alert('¡Te gusta esta publicación!');
+                } else { // Si tiene relleno (ya le gusta)
+                    icon.classList.remove('fas', 'fa-thumbs-up');
+                    icon.classList.add('far', 'fa-thumbs-up');
+                    button.style.color = 'var(--color-text-light)';
+                    alert('Ya no te gusta esta publicación.');
+                }
+            });
+        });
+
+        // Simular "Comentar"
+        document.querySelectorAll('.comment-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Funcionalidad de comentar activada. Se abriría un campo de texto o un modal.');
+            });
+        });
+
+        
+        setTimeout(function () {
+            const mensaje = document.getElementById("mensajeExito");
+            if (mensaje) {
+                mensaje.style.display = "none";
+            }
+        }, 4000); // 4 segundos
+    </script>
+    </script>
+
+</body>
+</html>

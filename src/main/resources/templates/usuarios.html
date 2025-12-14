@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administración de Usuarios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #3d5273;
+            --color-secondary: #5b6e94;
+            --color-accent: #142ea0;
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            --color-bg-light: #f0f2f5;
+            --color-menu-bg: #2d3e5f;
+            --color-menu-hover: #3b507b;
+            --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+            --border-radius-lg: 10px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff, #d2daf5);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; }
+
+        .header-bar {
+             background: linear-gradient(135deg, #ffffff, #cad3f0);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-text {
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 28px;
+            color: rgb(18, 36, 71);
+        }
+        .header-logo-section img {
+            width: 35px;
+            object-fit: contain;
+        }
+        .user-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgb(15, 40, 77);
+            margin-left: 20px;
+        }
+        .user-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar-icon a {
+            color: rgb(40, 23, 102);
+            font-size: 20px;
+            transition: color 0.2s;
+        }
+        .navbar-icon a:hover { color: #f2f2f2; }
+
+        .search-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            width: 300px;
+            margin-right: auto;
+            margin-left: 50px;
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: rgb(0, 0, 0);
+            width: 100%;
+            margin-left: 8px;
+        }
+        .search-box i { color: rgba(255, 255, 255, 0.7); }
+
+        .main-tabs {
+            background-color: var(--color-menu-bg);
+            display: flex;
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+        .main-tabs a {
+            color: white;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .main-tabs a:hover { background-color: var(--color-menu-hover); }
+        .main-tabs a.active { background-color: var(--color-primary); }
+
+        .container {
+            padding: 40px 20px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #18366d;
+            margin-bottom: 30px;
+        }
+        .add-btn {
+            text-align: left;
+            width: 80%;
+            margin: 0 auto 20px;
+        }
+        a.btn-nuevo {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(64, 70, 102);
+            color: rgb(255, 255, 255);
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        a.btn-nuevo:hover { background-color: #1f2a6b; }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #3F4C7B;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        tr:hover { background-color: #f7f7f7; }
+
+        a.btn-accion {
+            display: inline-block;
+            margin: 2px 4px;
+            padding: 6px 10px;
+            background-color: var(--color-secondary);
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        a.btn-accion:hover { background-color: #4a5a7a; }
+        a.btn-accion[style*="ff9165"] { background-color: #e74c3c !important; }
+        a.btn-accion[style*="ff9165"]:hover { background-color: #c0392b !important; }
+
+        .logout-form {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .logout-form button {
+            background-color: #831b0f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            font-family: inherit;
+        }
+        .logout-form button:hover { background-color: #c0392b; }
+
+        @media (max-width: 768px) {
+            .header-bar { flex-wrap: wrap; justify-content: center; }
+            .header-logo-section, .navbar-right { margin-bottom: 10px; }
+            .search-box { order: 3; width: 100%; margin: 10px 0; }
+            table { width: 95%; font-size: 14px; }
+            th, td { padding: 10px 8px; }
+            .add-btn { width: 95%; }
+            .main-tabs { justify-content: space-around; }
+        }
+        .back-arrow {
+ 
+  top: 25px;
+  left: 25px;
+  font-size: 32px;
+  color: #1e233d;
+  cursor: pointer;
+  text-decoration: none;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-bar">
+        <div class="header-logo-section">
+            <div class="logo-text">Life<br>Line</div>
+            <img th:src="@{/imagenes/Group 243 (3).png}" width="55" alt="logo">
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar en LifeLine...">
+        </div>
+
+        <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+            <div class="user-photo">
+                <img th:src="@{/imagenes/Group 244.png}" alt="Logo LifeLine">
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-tabs">
+        <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+        <a th:href="@{/mural}"><i class="fas fa-user-friends"></i>Mural</a>
+        <a th:href="@{/perfil}"><i class="fas fa-user"></i>Perfil</a>
+        <a th:href="@{/productos}"><i class="fas fa-store" title="Tienda"></i>Productos</a>
+        <a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+        <a th:href="@{/nutricion}"><i class="fas fa-apple-alt"></i>Nutrición</a>
+        <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+        <a th:href="@{/contactanos}">Contactanos</a>
+    </nav>
+</header>
+
+
+<div class="container"><a class="back-arrow" onclick="history.back()">←</a>
+    <h1>Administración de Usuarios</h1>
+
+    <div class="add-btn">
+        <a th:href="@{/usuarios/nuevo}" class="btn-nuevo">➕ Nuevo Usuario</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Correo Electrónico</th>
+                <th>Doc. Identidad</th>
+                <th>Rol/Estadio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.id}">1</td>
+                <td th:text="${u.userName}">admin</td>
+                <td th:text="${u.rol}">ADMIN</td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.numeroDocumento}"></td>
+                <td>
+                    <span th:text="${u.rol}"></span>
+                    <span th:if="${u.rol == 'PACIENTE'}" th:text="' (' + ${u.estadio} + ')'"></span>
+                </td>
+                <td>
+                    <a th:href="@{'/usuarios/editar/' + ${u.id}}" class="btn-accion">Editar</a>
+                    <a th:href="@{'/usuarios/eliminar/' + ${u.id}}" class="btn-accion" style="background-color:#e74c3c !important;">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="logout-form">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

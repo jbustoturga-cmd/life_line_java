@@ -1,0 +1,967 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeLine - Tienda de Bienestar</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+<style>
+
+/* ============================================================
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   (Permiten modificar fácilmente los colores del sitio)
+   ============================================================ */
+:root {
+    --color-primary: #3d5273;
+    --color-secondary: #5b6e94;
+    --color-accent: #4f3b69;
+    --color-text-dark: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg-light: #f0f2f5;
+    --color-bg-white: rgb(171, 176, 180);
+    --color-menu-bg: #526eaa;
+    --color-menu-hover: #2d3c7e;
+    --color-top-bar-bg: linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg: 10px;
+    --border-radius-sm: 5px;
+    --color-accent: #142ea0; /* Rojo/coral del corazón (para acentos y "Me Gusta") */
+            --color-text-dark: #1a1a1a;
+            --color-text-light: #555;
+            
+            --color-bg-white: white;
+             --color-primary:#3d5273;
+    --color-secondary:#5b6e94;
+    --color-accent:#142ea0;
+    --color-text-dark:#1a1a1a;
+    --color-text-light:#555;
+    --color-bg-light:#f0f2f5;
+    --color-bg-white:white;
+    --color-menu-bg:#526eaa;
+    --color-menu-hover:#2d3c7e;
+    --color-top-bar-bg:linear-gradient(135deg, #040418, #102468);
+    --border-radius-lg:10px;
+    --border-radius-sm:5px;
+ 
+    /* Variables para Modo Día Difícil */
+    --day-difficult-bg: #1f1f3a;
+    --day-difficult-text: #ecf0f1;
+    --day-difficult-accent: #f1c40f;
+}
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ============================================================
+   ESTILOS GENERALES DEL CUERPO
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #b7bdd8, #162149);
+    color: var(--color-text-dark);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+/* ============================================================
+   BARRA SUPERIOR (LOGO + ENLACES)
+   ============================================================ */
+.header-bar {
+     background: linear-gradient(135deg, #ffffff, #d2daf5);
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Sección del logo */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header-logo-section img {
+    width: 35px;
+    margin-right: 5px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL (Pestañas de navegación)
+   ============================================================ */
+.main-tabs {
+    background-color: #2d3e5f;
+    display: flex;
+    padding: 0 20px;
+}
+.main-tabs a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+}
+.main-tabs a:hover { background-color: #3b507b; }
+.main-tabs a.active { background-color: var(--color-menu-bg); }
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 900px) {
+    .page-layout { flex-direction: column; padding: 10px; }
+    .admin-sidebar { display: none; }
+    .main-tabs { overflow-x: auto; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+}
+
+/* Logo principal */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #0e1330;
+}
+/* ICONO USUARIO */
+    .user-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #0e1330;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+    }
+
+    .user-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+     .navbar-icon a {
+            color: var(--color-text-dark);
+            font-size: 24px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+
+        .navbar-icon a:hover {
+            color: var(--color-secondary);
+        }
+
+        .navbar-icon.active a {
+            color: var(--color-primary);
+        }
+        
+        .navbar-right {
+          display: flex;
+    align-items: center;
+    gap: 0px;
+    margin-left: 700px;
+}
+ /* Media Queries para responsividad */
+        @media (min-width: 1150px) {
+            .side-column {
+                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar-center {
+                gap: 20px;
+            }
+            .search-box {
+                display: none; /* Ocultar búsqueda en móvil */
+            }
+        }
+         /* Campo de búsqueda mejorado y más limpio */
+          .search-box {
+            background-color: rgba(213, 188, 235, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(19, 18, 71, 0.3);
+        }
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 15px;
+            color: rgb(15, 17, 54);
+            width: 250px;
+            margin-left: 8px;
+        }
+        .search-box input::placeholder {
+            color: rgba(48, 27, 95, 0.7);
+        }
+        .search-box i {
+            color: rgb(25, 18, 65);
+            font-size: 16px;
+        }
+        
+
+       /* ============================================================
+   LAYOUT PRINCIPAL DEL MURAL
+   ============================================================ */
+.feed-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- Sidebar Izquierda (Filtros/Menú) --- */
+.left-sidebar {
+    width: 250px;
+    background-color: var(--color-menu-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: white;
+    padding: 15px 0;
+    flex-shrink: 0;
+}
+.admin-menu-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--color-menu-hover);
+}
+
+.admin-menu a {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+.admin-menu a i { margin-right: 10px; }
+.admin-menu a:hover { background-color: var(--color-menu-hover); }
+
+.submenu-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+.submenu {
+    padding-left: 20px;
+    background-color: #2d619c;
+}
+.submenu a {
+    padding-left: 30px;
+    font-weight: normal;
+    font-size: 13px;
+    display: block;
+}
+.submenu a.active {
+    background-color: #243666;
+}
+
+
+/* --- Columna Central (Feed/Mural) --- */
+.feed-column {
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.post-creator {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.post-input-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.avatar-small {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    margin-right: 12px;
+    flex-shrink: 0;
+    border: 2px solid var(--color-bg-light);
+    /* Placeholder Icon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+}
+.avatar-small i { color: white; }
+
+.post-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: none;
+    background-color: var(--color-bg-light);
+    border-radius: 25px;
+    font-size: 16px;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.post-input:focus {
+    background-color: #e5e7eb;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-option-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s;
+}
+
+.post-option-item:hover {
+    background-color: #f0f8ff;
+}
+
+.post-option-item i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.icon-novelty { color: var(--color-primary); } 
+.icon-photo { color: var(--color-accent); } 
+
+.post-option-item span {
+    color: var(--color-text-dark);
+    font-weight: 500;
+}
+
+/* --- Tarjeta de Publicación (Post) --- */
+.post-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.post-user-info {
+    flex-grow: 1;
+}
+
+.post-user-info p {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.post-user-info small {
+    color: var(--color-text-light);
+    font-size: 13px;
+}
+
+.post-content p {
+    padding: 0 15px 15px;
+    font-size: 16px;
+    color: var(--color-text-dark);
+}
+
+.post-media {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.post-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.post-stats {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-text-light);
+    border-bottom: 1px solid #eee;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+}
+
+.action-button {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    color: var(--color-text-light);
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.action-button:hover {
+    background-color: #f0f8ff;
+    color: var(--color-primary);
+}
+
+.action-button i {
+    font-size: 18px;
+}
+
+.action-button.like:hover i {
+    color: var(--color-accent);
+}
+
+/* --- Columna Lateral Derecha (Side Column) --- */
+.side-column {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.sidebar-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+}
+.sidebar-card h4 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+.sidebar-card ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar-card li {
+    padding: 5px 0;
+    font-size: 15px;
+    color: var(--color-text-dark);
+}
+.sidebar-card a {
+    color: var(--color-primary);
+}
+.sidebar-card p {
+    margin: 5px 0;
+}
+
+/* --- Emergencia (Día Difícil) --- */
+.emergency-section{
+    background-color: #ebcbfd; /* Fondo de alerta suave */
+    padding:20px;
+    border-radius:var(--border-radius-lg);
+    box-shadow:0 4px 15px rgba(23, 6, 24, 0.1);
+    margin-bottom:20px;
+    text-align:center;
+    border:2px solid var(--color-accent);
+}
+
+.emergency-section h2{
+    color: var(--color-accent); /* Color principal de acento */
+    margin-bottom:15px;
+}
+
+.difficult-day-button{
+    background-color: var(--color-accent); /* Color de botón llamativo */
+    color:white;
+    padding:15px 20px;
+    border:none;
+    border-radius:var(--border-radius-lg);
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    width: 100%;
+    box-shadow:0 4px 10px rgba(20, 46, 160, 0.4);
+    transition:all 0.3s;
+}
+
+.difficult-day-button:hover{
+    background-color:#1c37b3;
+    transform:translateY(-2px);
+}
+
+/* ============================================================
+   MODO DÍA DIFÍCIL (Dark Mode/Calm Mode)
+   ============================================================ */
+body.difficult-mode {
+    background: var(--day-difficult-bg);
+    color: var(--day-difficult-text);
+}
+
+body.difficult-mode .header-bar {
+    background: linear-gradient(135deg, #0d122e, #1a2754);
+    box-shadow: none;
+}
+body.difficult-mode .logo-text { color: var(--day-difficult-accent); }
+body.difficult-mode .logo-image { filter: invert(0); } /* Deshacer la inversión si es necesario */
+
+body.difficult-mode .main-tabs { background-color: #1a2754; }
+body.difficult-mode .main-tabs a.active { background-color: var(--day-difficult-accent); color: var(--day-difficult-bg); }
+body.difficult-mode .main-tabs a:hover { background-color: #2e437c; }
+
+
+body.difficult-mode .left-sidebar,
+body.difficult-mode .post-creator,
+body.difficult-mode .post-card,
+body.difficult-mode .sidebar-card,
+body.difficult-mode .emergency-section {
+    background-color: #2c3e50;
+    color: var(--day-difficult-text);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #4a6385;
+}
+
+body.difficult-mode .post-user-info p,
+body.difficult-mode .sidebar-card h4,
+body.difficult-mode .post-content p {
+    color: var(--day-difficult-text);
+}
+
+body.difficult-mode .difficult-day-button {
+    background-color: var(--day-difficult-accent);
+    color: var(--day-difficult-bg);
+    box-shadow: none;
+}
+body.difficult-mode .difficult-day-button:hover {
+    background-color: #f3c921;
+}
+
+/* ============================================================
+   MODAL DE MENSAJE (Reemplazo de alert())
+   ============================================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--color-bg-white);
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-content h3 {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.modal-content button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.modal-content button:hover {
+    background-color: var(--color-secondary);
+}
+
+
+/* ============================================================
+   RESPONSIVE PARA MÓVILES
+   ============================================================ */
+@media (max-width: 1100px) {
+    .left-sidebar, .side-column {
+        display: none; /* Ocultar sidebars en pantallas pequeñas */
+    }
+    .feed-container {
+        padding: 0 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .feed-column {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .header-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .logo-area { width: 100%; justify-content: center; margin-bottom: 5px;}
+    .search-box { 
+        order: 3; 
+        width: 90%; 
+        margin: 0 auto;
+        background-color: white; 
+    }
+    .search-box input { color: var(--color-text-dark); }
+    .search-box i { color: var(--color-text-light); }
+    .main-tabs { justify-content: space-between; padding: 0 5px; }
+    .main-tabs a { padding: 10px 10px; font-size: 13px; }
+}
+</style>
+<div class="header-bar">
+    <div class="header-logo-section">
+        <div class="logo-text">Life<br>Line</div>
+        <img src="imagenes/Group 243 (3).png" width="55" alt="logo">
+    </div>
+     <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar en LifeLine...">
+            </div>
+    <div class="navbar-right">
+            <div class="navbar-icon cart-icon"><a  th:href="@{/carrito}"><i class="fas fa-shopping-cart" title="Carrito"></i></a></div>
+        </div>
+<div class="user-photo">
+       <img src="imagenes/Group 244.png" alt="Logo LifeLine" >
+    </div>
+   
+
+</div>
+
+<nav class="main-tabs">
+    <a th:href="@{/home}"><i class="fas fa-home" title="Inicio"></i>Inicio</a>
+    <a th:href="@{/Mural}" class="active"><i class="fas fa-user-friends"></i>Mural</a>
+    <a th:href="@{/Perfil}"><i class="fas fa-user"></i>Perfil</a>
+    <a th:href="@{/Tienda}" ><i class="fas fa-store" title="Tienda"></i>Productos</a>
+<a th:href="@{/calendario}"><i class="fas fa-calendar-alt" title="Calendario"></i>Calendario</a>
+
+<a th:href="@{/nutricion}"><i class="fas fa-apple-alt" ></i> Nutrición</a>
+<a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
+    <a th:href="@{/Contactanos}">Contactanos</a>
+</nav>
+<!-- Contenedor Principal del Feed -->
+<div class="feed-container">
+    
+    <!-- Columna Izquierda (Filtros y Menú) -->
+    <aside class="left-sidebar">
+        <div class="admin-menu-title">Menú de Navegación</div>
+
+        <div class="admin-menu">
+            <a href="#"><i class="fas fa-plus-circle"></i>Crear nueva Publicación</a>
+            <a href="#"><i class="fas fa-layer-group"></i>Configuración de Cuenta</a>
+             
+            <div class="filter-header">
+                <!-- Submenú de Categorías -->
+                <a href="#" class="submenu-toggle"><i class="fas fa-tag"></i>Categoría de Muro <i class="fas fa-caret-down"></i></a>
+                <div class="submenu">
+                    <ul class="category-list">
+                        <a href="#" class="active"><i class="fas fa-angle-right"></i>Todas las publicaciones</a>
+                        <a href="#"><i class="fas fa-book-medical"></i> Artículos de Salud</a>
+                        <a href="#"><i class="fas fa-hands-helping"></i> Grupos de Apoyo</a>
+                        <a href="#"><i class="fas fa-calendar-alt"></i> Eventos Locales</a>
+                        <a href="#"><i class="fas fa-seedling"></i> Consejos de Bienestar</a>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="menu-separator"></div>
+
+            <a href="#"><i class="fas fa-tags"></i>Mis Descuentos</a>
+            <a href="#"><i class="fas fa-clipboard-list"></i>Mis Pedidos</a>
+            <a href="#"><i class="fas fa-users"></i>Usuarios Amigos</a>
+
+            <div class="menu-separator"></div>
+
+                    <form th:action="@{/logout}" method="post" >
+                    <button class="action-button edit-profile-btn" style="background-color: #102468;color: white;margin-left: 20px;">
+                        Cerrar Sesion
+                    </button></form>
+    </aside>
+
+    <!-- Columna Central (Feed) -->
+    <main class="feed-column">
+
+        <!-- Caja de Creación de Publicación -->
+        <div class="post-creator">
+            <div class="post-input-area">
+                <div class="avatar-small"><i class="fas fa-user"></i></div>
+                <input type="text" class="post-input" placeholder="¿Qué apoyo o novedad quieres compartir hoy?">
+            </div>
+            <div class="post-options">
+                <div class="post-option-item">
+                    <i class="fas fa-magic icon-novelty"></i>
+                    <span>Novedad</span>
+                </div>
+                <div class="post-option-item">
+                    <i class="fas fa-image icon-photo"></i>
+                    <span>Fotos/Vídeos</span>
+                </div>
+                <div class="post-option-item">
+                    <i class="fas fa-heartbeat icon-novelty"></i>
+                    <span>Sentimiento</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Publicación 1 (Ejemplo de LifeLine - con imagen) -->
+        <div class="post-card">
+            <div class="post-header">
+                <div class="avatar-small" style="background-color: var(--color-accent);"><i class="fas fa-shield-alt"></i></div>
+                <div class="post-user-info">
+                    <p>LifeLine Oficial</p>
+                    <small>13 Noviembre 2025 · <i class="fas fa-globe"></i></small>
+                </div>
+                <i class="fas fa-ellipsis-h" style="color: var(--color-text-light);"></i>
+            </div>
+            
+            <div class="post-content">
+                <p>Acompañar a un ser querido en su proceso es un acto de amor puro y la base de su fortaleza. ¡Gracias por ser un LifeLine para ellos!</p>
+            </div>
+            
+            <div class="post-media">
+                <img src="imagenes/img3.jpg" alt="Imagen de soporte familiar">
+            </div>
+            
+            <div class="post-stats">
+                <span><i class="fas fa-heart" style="color: var(--color-accent);"></i> 245</span>
+                <span>12 Comentarios · 8 Compartidos</span>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-button like">
+                    <i class="fas fa-heart"></i> Me gusta
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-comment-alt"></i> Comentar
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-share"></i> Compartir
+                </div>
+            </div>
+        </div>
+
+        <!-- Publicación 2 (Ejemplo de Usuario - sin imagen) -->
+        <div class="post-card">
+            <div class="post-header">
+                <div class="avatar-small" style="background-color: #A9A9A9;"><i class="fas fa-user"></i></div>
+                <div class="post-user-info">
+                    <p>Elena M.</p>
+                    <small>Hace 2 horas · <i class="fas fa-user-friends"></i></small>
+                </div>
+                <i class="fas fa-ellipsis-h" style="color: var(--color-text-light);"></i>
+            </div>
+            
+            <div class="post-content">
+                <p>Comencé a usar los Turbantes Oncológicos Suaves y ¡qué alivio! Son super cómodos y no irritan para nada. Me han ayudado mucho con mi autoestima. Recomiendo este producto de la tienda LifeLine. ¡Mucha fuerza a todos!</p>
+            </div>
+            
+            <div class="post-stats">
+                <span><i class="fas fa-heart" style="color: var(--color-accent);"></i> 58</span>
+                <span>10 Comentarios</span>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-button like">
+                    <i class="fas fa-heart"></i> Me gusta
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-comment-alt"></i> Comentar
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-share"></i> Compartir
+                </div>
+            </div>
+        </div>
+        
+        <!-- Publicación 3 (Ejemplo de LifeLine - con imagen 2) -->
+        <div class="post-card">
+            <div class="post-header">
+                <div class="avatar-small" style="background-color: var(--color-accent);"><i class="fas fa-shield-alt"></i></div>
+                <div class="post-user-info">
+                    <p>LifeLine Oficial</p>
+                    <small>12 Noviembre 2025 · <i class="fas fa-globe"></i></small>
+                </div>
+                <i class="fas fa-ellipsis-h" style="color: var(--color-text-light);"></i>
+            </div>
+            
+            <div class="post-content">
+                <p>¡Artículo Nuevo! La importancia de la nutrición durante el tratamiento. Lee nuestro nuevo blog.</p>
+            </div>
+            
+            <div class="post-media">
+                    <img src="imagenes/ChatGPT Image 27 nov 2025, 08_40_18 p.m..png" alt="Imagen de soporte familiar">
+            </div>
+            
+            <div class="post-stats">
+                <span><i class="fas fa-heart" style="color: var(--color-accent);"></i> 150</span>
+                <span>25 Comentarios · 15 Compartidos</span>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-button like">
+                    <i class="fas fa-heart"></i> Me gusta
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-comment-alt"></i> Comentar
+                </div>
+                <div class="action-button">
+                    <i class="fas fa-share"></i> Compartir
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- Columna Derecha (Widgets de apoyo) -->
+    <aside class="side-column">
+
+        <!-- 1. Sección de Emergencia / Modo Calmado -->
+        <div class="emergency-section">
+            <h2>¿Necesitas un respiro inmediato?</h2>
+
+            <button class="difficult-day-button" onclick="toggleDifficultMode()">
+                <i class="fas fa-cloud-moon"></i> PRESIONA AQUÍ: DÍA DIFÍCIL
+            </button>
+
+            <p style="margin-top:15px;color:var(--color-text-light); font-size: 14px;">
+                Cambia la plataforma a un modo calmado (oscuro) y accede a herramientas de apoyo instantáneo.
+            </p>
+
+            <p style="margin-top:15px;font-weight:600;color:var(--color-primary); font-size: 14px;">
+                <i class="fas fa-comments"></i> Chat con Voluntarios Capacitados
+            </p>
+        </div>
+        
+        <!-- 2. Grupos Populares -->
+        <div class="sidebar-card">
+            <h4><i class="fas fa-users"></i> Grupos Populares</h4>
+            <ul>
+                <li><a href="#">Apoyo Emocional</a> (8.5K miembros)</li>
+                <li><a href="#">Recetas Saludables</a> (5.2K miembros)</li>
+                <li><a href="#">Yoga y Meditación</a> (3.1K miembros)</li>
+                <li><a href="#">Cuidados Post-Cirugía</a> (1.9K miembros)</li>
+            </ul>
+        </div>
+        
+        <!-- 3. Tendencias -->
+        <div class="sidebar-card">
+            <h4><i class="fas fa-fire"></i> Tendencias</h4>
+            <p style="font-size: 14px; color: var(--color-accent); font-weight: 600;">#DiaDeLucha</p>
+            <p style="font-size: 14px; color: var(--color-primary); font-weight: 600;">#FuerzaYEsperanza</p>
+            <p style="font-size: 14px; color: var(--color-accent); font-weight: 600;">#GraciasLifeLine</p>
+        </div>
+
+    </aside>
+</div>
+
+<!-- Modal de Mensaje (Reemplazo de Alert) -->
+<div class="modal-overlay" id="messageModal">
+    <div class="modal-content">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button onclick="closeModal()">Aceptar</button>
+    </div>
+</div>
+
+<script>
+/* =========== FUNCIONES DEL MODAL =========== */
+function showModal(title, message) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('messageModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('messageModal').classList.remove('active');
+}
+
+/* =========== MODO DÍA DIFÍCIL =========== */
+let isDifficultMode = false;
+const body = document.body;
+const button = document.querySelector('.difficult-day-button');
+const originalButtonText = button.innerHTML;
+
+function toggleDifficultMode() {
+    isDifficultMode = !isDifficultMode;
+    
+    if (isDifficultMode) {
+        body.classList.add('difficult-mode');
+        button.innerHTML = '<i class="fas fa-sun"></i> MODO CALMADO ACTIVO (Presiona para salir)';
+        showModal(
+            '¡Modo Calmado Activado!', 
+            'Respira profundo. Recuerda: "Eres suficiente". El modo oscuro te ofrece un ambiente más tranquilo.'
+        );
+    } else {
+        body.classList.remove('difficult-mode');
+        button.innerHTML = originalButtonText;
+        showModal(
+            'Modo Estándar Restaurado', 
+            'Volviendo a los colores brillantes. Siempre estamos aquí para ti.'
+        );
+    }
+}
+</script>
+</body>
+</html>

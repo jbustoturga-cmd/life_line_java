@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login LifeLine</title>
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+.container{display:flex;height:100vh;}
+.left-panel{flex:1;background:linear-gradient(135deg,#1a2c54,#3d5273);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;gap:20px;}
+.left-panel img{border-radius:10px;width:500px;height:auto;object-fit:cover;}
+.right-panel{flex:1;background-color:#f0f0f0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:50px;}
+.logo{display:flex;align-items:center;justify-content:center;font-size:55px;font-weight:bold;margin-bottom:5px;color:#3d5273;margin-top:30px;}
+.logo span{color:#4b6ee2;}
+.logi{width:55px;height:auto;margin-left:8px;}
+.contac{font-size:38px;font-weight:bold;color:#0a0e22;margin:-10px 0 30px;text-align:center;}
+.form-group{display:flex;flex-direction:column;gap:12px;}
+.right-panel form{width:100%;max-width:300px;display:flex;flex-direction:column;gap:15px;}
+label{font-weight:600;color:#3d5273;font-size:17px;margin-left:-60px;}
+input[type="text"],input[type="password"]{padding:16px 20px;border:1.5px solid #d0d0d0;border-radius:8px;font-size:15px;background-color:white;width:140%;margin-left:-60px;}
+input::placeholder{color:#b0b0b0;}
+input.error{border:2px solid #e74c3c;background-color:#fff5f5;}
+.error-message{color:#e74c3c;font-size:14px;margin-top:-8px;display:none;margin-left:-60px;}
+.error-message.show{display:block;}
+.thymeleaf-error{color:#e74c3c;font-size:14px;margin-top:-8px;margin-left:-60px;font-weight:600;}
+.error-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:22px;height:22px;background-color:#e74c3c;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:14px;font-weight:bold;margin-right:-60px;}
+.error-icon.show{display:flex;}
+.input-wrapper{position:relative;}
+.btn{background-color:#5b6e94;color:white;padding:15px;border:none;border-radius:8px;cursor:pointer;transition:.3s ease;font-size:17px;font-weight:600;margin-top:17px;width:120%;margin-left:-30px;}
+.btn:hover{background-color:#4a5a7a;}
+.right-panel a{text-align:center;color:#5b7fd6;font-size:14px;text-decoration:none;}
+.right-panel a:hover{text-decoration:underline;}
+.back-link,.back-link2{text-align:center;margin-top:20px;}
+.back-arrow{position:absolute;top:25px;left:25px;font-size:32px;color:#2d3e5f;cursor:pointer;text-decoration:none;}
+</style>
+</head>
+
+<body>
+<a href="logi.html" class="back-arrow">←</a>
+<div class="container">
+<div class="left-panel">
+<img th:src="@{/img/Group 67.png}" alt="familia feliz">
+</div>
+
+<div class="right-panel">
+<div class="logo">
+LifeLine
+<img th:src="@{/img/Group 243 (3).png}" class="logi" alt="Logo LifeLine">
+</div>
+
+<div class="contac">Inicio Sesión</div>
+
+<form id="loginForm" th:action="@{/login}" method="post">
+<div class="form-group">
+<label for="username">Usuario</label>
+<div class="input-wrapper">
+<input type="text" id="username" name="username" placeholder="usuario o correo electrónico" required>
+<span class="error-icon" id="usernameIcon">!</span>
+</div>
+<div th:if="${param.error}">
+<span class="thymeleaf-error">Usuario incorrecto.</span>
+</div>
+<span class="error-message" id="userValidationError">El usuario es requerido.</span>
+</div>
+
+<div class="form-group">
+<label for="password">Contraseña</label>
+<div class="input-wrapper">
+<input type="password" id="password" name="password" placeholder="contraseña" required>
+<span class="error-icon" id="passwordIcon">!</span>
+</div>
+<div th:if="${param.error}">
+<span class="thymeleaf-error" id="passwordThymeleafError" style="display:none;">Clave incorrecta.</span>
+</div>
+<span class="error-message" id="passwordValidationError">La contraseña es requerida.</span>
+</div>
+
+<div th:if="${param.logout}">
+<p style="color:rgb(12,160,12);">Sesión cerrada correctamente</p>
+</div>
+
+<div th:if="${param.denied}">
+<p style="color:rgb(124,11,11);">Acceso denegado. No tienes permisos para ver esta página.</p>
+</div>
+
+<button class="btn" type="submit">Iniciar Sesión</button>
+
+<div class="back-link2">
+<a href="#">¿Olvidaste tu contraseña?</a>
+</div>
+
+<p>¿No tienes una cuenta? <a th:href="@{/registro}">Regístrate</a></p>
+
+<div class="back-link">
+<a th:href="@{/logi}">Volver al Inicio</a>
+</div>
+
+</form>
+</div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit',function(e){
+const username=document.getElementById('username');
+const password=document.getElementById('password');
+const userIcon=document.getElementById('usernameIcon');
+const passIcon=document.getElementById('passwordIcon');
+const userValidation=document.getElementById('userValidationError');
+const passValidation=document.getElementById('passwordValidationError');
+username.classList.remove('error');
+password.classList.remove('error');
+userIcon.classList.remove('show');
+passIcon.classList.remove('show');
+userValidation.classList.remove('show');
+passValidation.classList.remove('show');
+const thymeleafError=document.querySelector('.thymeleaf-error');
+if(thymeleafError){thymeleafError.style.display='none';}
+let hasError=false;
+if(username.value.trim().length<3){
+username.classList.add('error');
+userIcon.classList.add('show');
+userValidation.classList.add('show');
+userValidation.textContent="El usuario debe tener al menos 3 caracteres.";
+hasError=true;
+}
+if(password.value.trim().length<3){
+password.classList.add('error');
+passIcon.classList.add('show');
+passValidation.classList.add('show');
+passValidation.textContent="La clave debe tener al menos 4 caracteres.";
+hasError=true;
+}
+if(hasError){e.preventDefault();}
+});
+window.onload=function(){
+const urlParams=new URLSearchParams(window.location.search);
+const errorParam=urlParams.get('error');
+if(errorParam){
+const userError=document.querySelector('.form-group:nth-child(1) .thymeleaf-error');
+if(userError){userError.textContent="Usuario incorrecto.";userError.style.display='block';}
+const passError=document.querySelector('.form-group:nth-child(2) .thymeleaf-error');
+if(passError){passError.textContent="Clave incorrecta.";passError.style.display='block';}
+}
+setTimeout(function(){
+const logoutMessage=document.querySelector('p[style*="rgb(12,160,12)"]');
+if(logoutMessage){logoutMessage.style.display="none";}
+},3000);
+};
+</script>
+
+</body>
+</html>

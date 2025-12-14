@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural Digital de Post-its (MySQL Ready)</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fondo gris claro */
+        }
+        /* Estilo para simular el borde rasgado de un post-it */
+        .post-it {
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .post-it:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8">
+
+    <div id="app-container" class="max-w-6xl mx-auto bg-white shadow-2xl rounded-xl p-6 md:p-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2 border-b-4 border-yellow-500 pb-2">
+            Mural Digital de Post-its
+        </h1>
+        <p class="text-sm text-gray-500 mb-6">
+            Agrega ideas, tareas o pendientes. Conecta las funciones a tu API REST de MySQL.
+        </p>
+
+        <!-- Formulario para agregar/editar notas -->
+        <div class="mb-8 p-4 bg-yellow-50 rounded-lg shadow-inner border border-yellow-200">
+            <form id="note-form">
+                <input type="hidden" id="note-id" value="">
+                <div class="flex flex-col gap-4">
+                    <!-- Campo de texto de la nota -->
+                    <textarea id="note-text" placeholder="Escribe tu idea o nota aquí (máx. 150 caracteres)"
+                        maxlength="150" rows="3"
+                        class="p-3 border border-yellow-300 rounded-lg resize-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150"
+                        required></textarea>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+                        <!-- Selector de Categoría/Color -->
+                        <select id="note-category" 
+                            class="p-3 border border-yellow-300 rounded-lg bg-white focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150 sm:w-1/3">
+                            <option value="Idea">Idea (Amarillo)</option>
+                            <option value="Tarea">Tarea (Azul)</option>
+                            <option value="Importante">Importante (Rojo)</option>
+                            <option value="Hecho">Hecho (Verde)</option>
+                        </select>
+                        
+                        <!-- Botón de Enviar -->
+                        <button type="submit" id="submit-button"
+                            class="w-full sm:flex-grow px-6 py-3 bg-yellow-600 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-700 transition duration-150 transform hover:scale-[1.02]">
+                            Agregar Post-it
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Contenedor del Mural (Grid de Post-its) -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Mural de Ideas</h2>
+        <div id="note-mural" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-2">
+            <!-- Los post-its se inyectarán aquí -->
+        </div>
+
+        <!-- Mensaje de estado/error -->
+        <div id="status-message" class="mt-6 p-3 text-center rounded-lg hidden"></div>
+    </div>
+
+    <script>
+        // Colección de notas que se manejaría en MySQL
+        let notes = [];
+        let nextId = 1; // Para simular auto-incremento de ID
+
+        const noteMural = document.getElementById('note-mural');
+        const noteForm = document.getElementById('note-form');
+        const noteTextInput = document.getElementById('note-text');
+        const noteCategoryInput = document.getElementById('note-category');
+        const noteIdInput = document.getElementById('note-id');
+        const submitButton = document.getElementById('submit-button');
+        const statusMessage = document.getElementById('status-message');
+
+        // Mapa de colores para las categorías
+        const colorMap = {
+            'Idea': 'bg-yellow-200 border-yellow-600 text-yellow-900',
+            'Tarea': 'bg-blue-200 border-blue-600 text-blue-900',
+            'Importante': 'bg-red-200 border-red-600 text-red-900',
+            'Hecho': 'bg-green-200 border-green-600 text-green-900'
+        };
+        const buttonColorMap = {
+            'Idea': 'bg-yellow-500 hover:bg-yellow-600',
+            'Tarea': 'bg-blue-500 hover:bg-blue-600',
+            'Importante': 'bg-red-500 hover:bg-red-600',
+            'Hecho': 'bg-green-500 hover:bg-green-600'
+        };
+
+        // Función de utilidad para mostrar mensajes
+        function showMessage(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = `mt-6 p-3 text-center rounded-lg block`;
+            
+            // Estilos Tailwind basados en el tipo de mensaje
+            if (type === 'success') {
+                statusMessage.classList.add('bg-green-100', 'text-green-800');
+            } else if (type === 'error') {
+                statusMessage.classList.add('bg-red-100', 'text-red-800');
+            } else { // info (o cualquier otro)
+                statusMessage.classList.add('bg-blue-100', 'text-blue-800');
+            }
+            // Ocultar mensaje después de 4 segundos
+            setTimeout(() => {
+                statusMessage.classList.add('hidden');
+            }, 4000);
+        }
+
+        // --- FUNCIONES QUE DEBES ADAPTAR PARA TU API REST DE MYSQL ---
+
+        /**
+         * @async
+         * Carga todas las notas del Mural de la base de datos MySQL.
+         * REEMPLAZA este cuerpo por una llamada 'fetch' a tu endpoint GET /api/notes
+         */
+        async function loadNotes() {
+            console.log('--- Simulando carga de datos desde MySQL ---');
+            try {
+                // *** INICIO: CÓDIGO DE SIMULACIÓN (Reemplazar con fetch) ***
+                
+                // Simulación de datos iniciales
+                if (notes.length === 0) {
+                     notes = [
+                        { id: 1, text: 'Definir el esquema de la tabla de notas en MySQL (id, content, category)', category: 'Tarea' },
+                        { id: 2, text: 'Diseño inicial de la interfaz del mural', category: 'Idea' },
+                        { id: 3, text: 'Revisar la documentación de la API REST', category: 'Importante' }
+                    ];
+                    nextId = 4;
+                }
+                
+                // Simulación de tiempo de carga (ej. 500ms de latencia de red)
+                await new Promise(resolve => setTimeout(resolve, 500)); 
+                
+                // *** FIN: CÓDIGO DE SIMULACIÓN ***
+
+                renderNotes();
+                showMessage('Notas cargadas correctamente (simulación).', 'success');
+            } catch (error) {
+                console.error('Error al cargar las notas:', error);
+                showMessage('Error al conectar con la base de datos (simulación).', 'error');
+            }
+        }
+
+        /**
+         * @async
+         * Guarda una nota nueva o actualiza una existente en MySQL.
+         * REEMPLAZA este cuerpo por una llamada 'fetch' (POST para nuevo, PUT/PATCH para actualizar).
+         */
+        async function saveNote(noteData) {
+            console.log('--- Simulando guardar/actualizar nota en MySQL ---', noteData);
+            try {
+                // Simulación de tiempo de guardado
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                if (noteData.id) {
+                    // *** ACTUALIZAR (Llamada PUT/PATCH a /api/notes/{id}) ***
+                    const index = notes.findIndex(n => n.id === noteData.id);
+                    if (index !== -1) {
+                        notes[index].text = noteData.text;
+                        notes[index].category = noteData.category;
+                        showMessage('Nota actualizada exitosamente (simulación).', 'success');
+                    }
+                } else {
+                    // *** CREAR NUEVO (Llamada POST a /api/notes) ***
+                    const newNote = { 
+                        id: nextId++, 
+                        text: noteData.text, 
+                        category: noteData.category 
+                    };
+                    notes.push(newNote);
+                    showMessage('Nota agregada exitosamente (simulación).', 'success');
+                }
+                
+                renderNotes(); // Volver a renderizar para reflejar el cambio
+            } catch (error) {
+                console.error('Error al guardar la nota:', error);
+                showMessage('Error de servidor al guardar la nota (simulación).', 'error');
+            }
+        }
+
+        /**
+         * @async
+         * Elimina una nota de MySQL.
+         * REEMPLAZA este cuerpo por una llamada 'fetch' a tu endpoint DELETE /api/notes/{id}
+         */
+        async function deleteNote(id) {
+            console.log('--- Simulando eliminar nota en MySQL --- ID:', id);
+            try {
+                // Simulación de tiempo de eliminación
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Filtrar el array para remover la nota
+                notes = notes.filter(n => n.id !== id);
+                
+                renderNotes();
+                showMessage('Nota eliminada exitosamente (simulación).', 'success');
+            } catch (error) {
+                console.error('Error al eliminar la nota:', error);
+                showMessage('Error de servidor al eliminar la nota (simulación).', 'error');
+            }
+        }
+        
+        // --- LÓGICA DEL FRONT-END ---
+
+        // Maneja el envío del formulario (agregar o editar)
+        noteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = noteTextInput.value.trim();
+            const category = noteCategoryInput.value;
+            const id = noteIdInput.value ? parseInt(noteIdInput.value) : null;
+
+            if (text === '') return;
+
+            await saveNote({ id, text, category });
+
+            // Limpiar el formulario y resetear el botón
+            noteTextInput.value = '';
+            noteCategoryInput.value = 'Idea'; // Resetear a default
+            noteIdInput.value = '';
+            submitButton.textContent = 'Agregar Post-it';
+        });
+
+        // Maneja clicks en los botones de la lista (editar, eliminar)
+        noteMural.addEventListener('click', async (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+            
+            const id = parseInt(button.dataset.id);
+            if (isNaN(id)) return;
+
+            if (button.classList.contains('delete-btn')) {
+                // Eliminar Nota
+                if (confirm('¿Estás seguro de que quieres eliminar este Post-it?')) {
+                    await deleteNote(id);
+                }
+            } else if (button.classList.contains('edit-btn')) {
+                // Editar Nota: Carga los datos al formulario
+                const note = notes.find(n => n.id === id);
+                if (note) {
+                    noteTextInput.value = note.text;
+                    noteCategoryInput.value = note.category;
+                    noteIdInput.value = id;
+                    submitButton.textContent = 'Guardar Edición';
+                    noteTextInput.focus();
+                    showMessage(`Editando Post-it con ID ${id}.`, 'info');
+                }
+            }
+        });
+
+        // Renderiza el Mural en el DOM
+        function renderNotes() {
+            noteMural.innerHTML = ''; // Limpiar mural
+            
+            if (notes.length === 0) {
+                noteMural.innerHTML = '<p class="text-gray-500 text-center py-4 col-span-full">Tu mural está vacío. ¡Agrega tu primera idea!</p>';
+                return;
+            }
+
+            // Ordenar por ID para una vista consistente
+            const sortedNotes = [...notes].sort((a, b) => a.id - b.id);
+
+            sortedNotes.forEach(note => {
+                const colors = colorMap[note.category] || colorMap['Idea'];
+                const buttonColors = buttonColorMap[note.category] || buttonColorMap['Idea'];
+
+                const noteItem = document.createElement('div');
+                noteItem.className = `post-it p-5 rounded-lg border-b-8 shadow-lg break-inside-avoid ${colors}`;
+                
+                // Contenido del post-it
+                noteItem.innerHTML = `
+                    <p class="font-bold text-sm mb-2">${note.category}</p>
+                    <p class="whitespace-pre-wrap mb-4 text-lg">${note.text}</p>
+                    
+                    <div class="flex justify-end space-x-2 border-t pt-2 border-current">
+                        <!-- Botón de Editar -->
+                        <button data-id="${note.id}" class="edit-btn p-2 rounded-full text-white ${buttonColors} transition duration-150 transform hover:scale-110"
+                            title="Editar Post-it">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-1.414 7.072L6 14.172V12H3v-2.172L12.586 3.586 16.414 7.414z" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Botón de Eliminar -->
+                        <button data-id="${note.id}" class="delete-btn p-2 bg-gray-500 hover:bg-gray-600 rounded-full text-white transition duration-150 transform hover:scale-110"
+                            title="Eliminar Post-it">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                noteMural.appendChild(noteItem);
+            });
+        }
+
+        // Iniciar la aplicación cargando las notas
+        window.onload = loadNotes;
+
+    </script>
+</body>
+</html>
