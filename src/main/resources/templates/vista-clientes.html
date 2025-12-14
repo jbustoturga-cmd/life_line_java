@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         /* ============================================================
-    VARIABLES DE COLOR Y ESTILO PRINCIPALES
+    VARIABLES DE COLOR Y ESTILO PRINCIPALES.
     (Permiten modificar fácilmente los colores del sitio)
     ============================================================ */
 :root {
@@ -39,7 +39,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ============================================================
-    ESTILOS GENERALES DEL CUERPO
+    ESTILOS GENERALES DEL CUERPO.
     ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -105,7 +105,7 @@ a { text-decoration: none; }
     .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
 }
 
-/* Logo principal */
+/* Logo principal. */
 .logo-area {
     display: flex;
     align-items: center;
@@ -195,7 +195,7 @@ a { text-decoration: none; }
          }
 </style>
     <script>
-        // Configuración de Tailwind para usar una paleta de colores personalizada
+        // Configuración_de Tailwind para usar una paleta de colores personalizada
         tailwind.config = {
             theme: {
                 extend: {
@@ -245,6 +245,7 @@ a { text-decoration: none; }
             <img th:src="@{/imagenes/Group 243 (3).png}" width="55" alt="logo">
         </div>
 
+
         <div class="search-box">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Buscar en LifeLine...">
@@ -286,7 +287,7 @@ a { text-decoration: none; }
         <form method="get" action="/vista-clientes" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <!-- Card 1: Filtro por Nombre -->
+                <!-- Card 1: Filtro por Nombre .-->
                 <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-md">
                     <div class="flex items-center text-primary-blue mb-3">
                         <i data-lucide="user" class="w-5 h-5 mr-2"></i>
@@ -346,7 +347,7 @@ a { text-decoration: none; }
                     </div>
                 </div>
 
-                <!-- Card 3: Acción de Filtrado -->
+                <!-- Card 3: Acción de Filtrado, -->
                 <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-md flex flex-col justify-center items-center">
                     <div class="flex items-center text-primary-blue mb-3">
                         <i data-lucide="filter" class="w-5 h-5 mr-2"></i>
