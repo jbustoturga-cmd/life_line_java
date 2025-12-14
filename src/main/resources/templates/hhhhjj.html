@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mural Digital de Post-its (MySQL Ready)</title>
-    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -45,7 +45,7 @@
                         required></textarea>
                     
                     <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
-                        <!-- Selector de Categoría/Color -->
+                        <!-- Selector de Categoría/Color. -->
                         <select id="note-category" 
                             class="p-3 border border-yellow-300 rounded-lg bg-white focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150 sm:w-1/3">
                             <option value="Idea">Idea (Amarillo)</option>
@@ -77,7 +77,7 @@
     <script>
         // Colección de notas que se manejaría en MySQL
         let notes = [];
-        let nextId = 1; // Para simular auto-incremento de ID
+        let nextId = 1; // Para simular auto-incremento de ID.
 
         const noteMural = document.getElementById('note-mural');
         const noteForm = document.getElementById('note-form');
@@ -120,7 +120,7 @@
             }, 4000);
         }
 
-        // --- FUNCIONES QUE DEBES ADAPTAR PARA TU API REST DE MYSQL ---
+        // --- FUNCIONES QUE DEBES ADAPTAR PARA TU API REST DE MYSQL. ---
 
         /**
          * @async
@@ -167,7 +167,7 @@
                 await new Promise(resolve => setTimeout(resolve, 500));
                 
                 if (noteData.id) {
-                    // *** ACTUALIZAR (Llamada PUT/PATCH a /api/notes/{id}) ***
+                    // *** ACTUALIZAR (Llamada PUT/PATCH a /api/notes/{id}). ***
                     const index = notes.findIndex(n => n.id === noteData.id);
                     if (index !== -1) {
                         notes[index].text = noteData.text;
@@ -270,7 +270,7 @@
                 return;
             }
 
-            // Ordenar por ID para una vista consistente
+            // Ordenar por ID para una vista consistente.
             const sortedNotes = [...notes].sort((a, b) => a.id - b.id);
 
             sortedNotes.forEach(note => {
