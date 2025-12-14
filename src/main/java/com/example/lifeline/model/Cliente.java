@@ -23,16 +23,16 @@ public class Cliente {
     
     private String telefono;
 
-    // ESTE CAMPO ERA EL QUE FALTABA Y CAUSABA EL ERROR DE getPassword/setPassword
+    // ESTE CAMPO ERA EL QUE FALTABA Y CAUSABA EL ERROR DE getPassword/setPassword.
     @Column(nullable = false)
     private String password;
 
-    // El ClienteService también necesita getFechaRegistro()
+    // El ClienteService también necesita getFechaRegistro().
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
     
     /**
-     * Inicializa la fecha de registro automáticamente si no ha sido establecida.
+     * Inicializa la fecha de registro automáticamente si no ha sido establecida..
      * Nota: Si el ClienteService ya establece esta fecha, este hook es redundante.
      */
     @PrePersist
@@ -43,5 +43,6 @@ public class Cliente {
     }
 
     // Los métodos getPassword(), setPassword(), getFechaRegistro(), etc.
-    // son generados por Lombok (@Data) y ahora compilan porque el campo 'password' existe.
+    // son generados por Lombok (@Data) y ahora compilan porque el campo 'password' existe..
 }
+//
