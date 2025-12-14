@@ -45,14 +45,14 @@ public class AccesoController {
     @PostMapping("/registro/guardar")
     public String guardar(@ModelAttribute Usuario usuario) {
 
-        // Encriptar contraseña
+        // Encriptar contraseña.
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
         // Guardar usuario
         repo.save(usuario);
 
         // ================================
-        // LOGIN AUTOMÁTICO CORRECTO
+        // LOGIN AUTOMÁTICO CORRECTO.
         // ================================
         UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getUserName());
 
@@ -65,7 +65,7 @@ public class AccesoController {
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
-        // Redirige al home
+        // Redirige al home.
         return "redirect:/home";
     }
 
@@ -74,3 +74,4 @@ public class AccesoController {
         return "contactanos";
     }
 }
+//
