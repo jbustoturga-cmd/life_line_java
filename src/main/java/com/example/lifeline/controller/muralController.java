@@ -8,8 +8,9 @@ public class muralController {
       
     @GetMapping("/Mural")
     public String mostrarMural() {
-        // Retorna el nombre del archivo HTML (ubicado en /templates/mural.html)
+        // Retorna el nombre del archivo HTML (ubicado en /templates/mural.html).
         return "mural";
     }
 }
 
+//
