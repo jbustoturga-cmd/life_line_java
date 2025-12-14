@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Entidad que representa un ítem individual dentro del carrito de compras.
+ * Entidad que representa un ítem individual dentro del carrito de compras..
  */
 @Entity
 @Table(name = "cart_items")
@@ -16,7 +16,7 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación con el usuario (quién es el dueño del carrito)
+    // Relación con el usuario (quién es el dueño del carrito).
     private Long userId;
 
     // Relación ManyToOne con el producto
@@ -27,7 +27,7 @@ public class CartItem {
     // Cantidad de este producto que el usuario desea
     private int quantity;
 
-    // El precio unitario al momento de añadir el ítem
+    // El precio unitario al momento de añadir el ítem.
     private BigDecimal unitPrice;
 
     // Opciones del producto como "color" o "talla"
@@ -37,7 +37,7 @@ public class CartItem {
     public CartItem() {
     }
 
-    // Constructor completo
+    // Constructor completo.
     public CartItem(Long userId, Producto producto, int quantity, BigDecimal unitPrice, String productOptions) {
         this.userId = userId;
         this.producto = producto;
@@ -46,7 +46,7 @@ public class CartItem {
         this.productOptions = productOptions;
     }
 
-    // --- Getters y Setters ---
+    // --- Getters y Setters ---.
 
     public Long getId() {
         return id;
@@ -100,7 +100,7 @@ public class CartItem {
         this.productOptions = productOptions;
     }
 
-    // Método de ayuda para calcular el subtotal de este ítem
+    // Método de ayuda para calcular el subtotal de este ítem.
     public BigDecimal getSubTotal() {
         if (unitPrice == null || quantity <= 0) {
             return BigDecimal.ZERO;
@@ -108,7 +108,7 @@ public class CartItem {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
 
-    // Método para obtener el precio como double (para el JSON del frontend)
+    // Método para obtener el precio como double (para el JSON del frontend).
     @JsonProperty("price")
     public double getPriceAsDouble() {
         return unitPrice != null ? unitPrice.doubleValue() : 0.0;
@@ -120,9 +120,10 @@ public class CartItem {
         return producto != null ? producto.getId() : null;
     }
 
-    // Mantener compatibilidad con el nombre "product" para el JSON del frontend
+    // Mantener compatibilidad con el nombre "product" para el JSON del frontend.
     @JsonProperty("product")
     public Producto getProduct() {
         return producto;
     }
 }
+//
