@@ -548,7 +548,7 @@
         });
 
         /**
-         * Muestra un mensaje temporal
+         * Muestra un mensaje temporal.
          */
         function showMessage(message, duration = 3000) {
             const modal = document.getElementById('modal-message');
@@ -575,7 +575,7 @@
                     const data = await response.json();
                     console.log('📦 Datos recibidos:', data);
                     
-                    // Filtrar items válidos
+                    // Filtrar items válidos.
                     cartItems = data.filter(item => {
                         const isValid = item.producto && item.unitPrice && item.unitPrice > 0;
                         if (!isValid) {
@@ -641,7 +641,7 @@
         }
 
         /**
-         * Renderiza los items del carrito
+         * Renderiza los items del carrito.
          */
         function renderCart() {
             const container = document.getElementById('cart-items-container');
@@ -692,7 +692,7 @@
         }
 
         /**
-         * Actualiza la cantidad de un producto
+         * Actualiza la cantidad de un producto.
          */
         async function updateQuantity(itemId, newQuantityStr) {
             const quantity = parseInt(newQuantityStr);
@@ -724,7 +724,7 @@
         }
 
         /**
-         * Elimina un producto del carrito
+         * Elimina un producto del carrito.
          */
         async function removeItem(itemId) {
             try {
@@ -745,7 +745,7 @@
         }
 
         /**
-         * Aplica un código de descuento
+         * Aplica un código de descuento.
          */
         function applyDiscount() {
             const input = document.getElementById('discount-input');
@@ -779,7 +779,7 @@
         }
 
         /**
-         * Procede al pago
+         * Procede al pago.
          */
         function checkout() {
             if (cartItems.length === 0) {
@@ -791,7 +791,7 @@
             // window.location.href = '/checkout';
         }
 
-        // Cargar el carrito al iniciar la página
+        // Cargar el carrito al iniciar la página.
         window.onload = function() {
             loadCart();
         };
