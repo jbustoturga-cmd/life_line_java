@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+//
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -29,13 +29,13 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(
                                                                 "/", // Ruta raíz (Landing Page: index.html)
-                                                                "/iniciosesion", // Página de Login
+                                                                "/iniciosesion", // Página de Login.
                                                                 "/registro", // Página de Registro
                                                                 "/registro/guardar",
-                                                                "/Contact", // Página de Contacto
+                                                                "/Contact", // Página de Contacto.
                                                                 "/api/carrito/**", // Rutas API del carrito
                                                                 "/css/**", // Archivos CSS estáticos
-                                                                "/js/**", // Archivos JavaScript estáticos
+                                                                "/js/**", // Archivos JavaScript estáticos.
                                                                 "/imagenes/**", // Archivos de imágenes estáticas
                                                                 "/img/**")
                                                 .permitAll()
@@ -46,7 +46,7 @@ public class SecurityConfig {
                                                 // Rutas que solo el rol 'ADMIN' puede acceder
                                                 .requestMatchers("/usuarios/Perfil").hasRole("ADMIN")
 
-                                                // Cualquier otra solicitud requiere autenticación
+                                                // Cualquier otra solicitud requiere autenticación.
                                                 .anyRequest().authenticated())
 
                                 // 2. Configuración del Formulario de Inicio de Sesión
@@ -56,7 +56,7 @@ public class SecurityConfig {
                                                 .defaultSuccessUrl("/home", true)
                                                 .permitAll())
 
-                                // 3. Configuración de Cierre de Sesión
+                                // 3. Configuración de Cierre de Sesión.
                                 .logout(logout -> logout
                                                 .logoutUrl("/logout")
                                                 .logoutSuccessUrl("/")
@@ -76,3 +76,4 @@ public class SecurityConfig {
                 return http.build();
         }
 }
+//
