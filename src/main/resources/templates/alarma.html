@@ -11,8 +11,8 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     <style>
         :root {
-            /* Colores LifeLine */
-            --color-primary: #3d5273; /* Azul oscuro */
+            /* Colores LifeLine. */
+            --color-primary: #3d5273; /*. Azul oscuro */
             --color-secondary: #5b6e94; /* Azul intermedio */
             --color-accent: #8e44ad; /* Púrpura para Organización/Calendario */
             --color-text-dark: #1a1a1a;
@@ -25,11 +25,11 @@
             --border-radius-sm: 5px;
 
             /* Colores LifeLine */
-            --color-primary: #3d5273; /* Azul oscuro */
+            --color-primary: #3d5273; /* .Azul oscuro */
             --color-secondary: #5b6e94; /* Azul intermedio */
             --color-accent: #e67e22; /* Naranja Ámbar para Alertas/Medicación */
             --color-success: #2ecc71; /* Verde de éxito */
-            --color-danger: #c0392b; /* Rojo */
+            --color-danger: #c0392b; /* .Rojo */
             --color-text-dark: #1a1a1a;
             --color-text-light: #555;
             --color-bg-light: #fef8f0; /* Fondo muy claro y cálido */
@@ -43,7 +43,7 @@
         /* Estilos Base */
         * { box-sizing: border-box; margin: 0; padding: 0; }
       /* ============================================================
-   ESTILOS GENERALES DEL CUERPO
+   ESTILOS GENERALES DEL CUERPO.
    ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -55,7 +55,7 @@ body {
 a { text-decoration: none; }
 
 /* ============================================================
-   BARRA SUPERIOR (LOGO + ENLACES)
+   BARRA SUPERIOR (LOGO + ENLACES).
    ============================================================ */
 .header-bar {
      background: linear-gradient(135deg, #ffffff, #d2daf5);
@@ -83,7 +83,7 @@ a { text-decoration: none; }
 }
 
 /* ============================================================
-   MENÚ PRINCIPAL (Pestañas de navegación)
+   MENÚ PRINCIPAL (Pestañas de navegación).
    ============================================================ */
 .main-tabs {
     background-color: #2d3e5f;
@@ -165,7 +165,7 @@ a { text-decoration: none; }
  /* Media Queries para responsividad */
         @media (min-width: 1150px) {
             .side-column {
-                display: block; /* Mostramos las columnas laterales en pantallas grandes */
+                display: block; /*. Mostramos las columnas laterales en pantallas grandes */
             }
         }
         
@@ -177,7 +177,7 @@ a { text-decoration: none; }
                 display: none; /* Ocultar búsqueda en móvil */
             }
         }
-         /* Campo de búsqueda mejorado y más limpio */
+         /* Campo de búsqueda mejorado y más limpio. */
         .search-box {
             background-color: var(--color-bg-light);
             border-radius: 20px;
@@ -221,7 +221,7 @@ a { text-decoration: none; }
             gap: 25px;
         }
 
-        /* TÍTULO Y BOTONES */
+        /* TÍTULO Y BOTONES. */
         .module-header {
             display: flex;
             justify-content: space-between;
@@ -249,7 +249,7 @@ a { text-decoration: none; }
         }
         .action-button:hover { background-color: #d8680b; }
 
-        /* LISTA DE ALARMAS */
+        /* LISTA DE ALARMAS. */
         .alarm-list {
             list-style: none;
             padding: 0;
@@ -731,7 +731,7 @@ a { text-decoration: none; }
     // --- Funciones de Utilidad ---
 
     /**
-     * Genera un ID único para los nuevos objetos.
+     * Genera un ID único para los nuevos objetos..
      */
     function generateUniqueId() {
         return 'id-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
@@ -751,7 +751,7 @@ a { text-decoration: none; }
 
     /**
      * Formatea la fecha y hora de la dosis.
-     * @param {Date} date - Objeto Date.
+     * @param {Date} date - Objeto Date..
      * @returns {string} - Fecha y hora formateada (Ej: Hoy a las 10:30)
      */
     function formatDoseTime(date) {
@@ -793,7 +793,7 @@ a { text-decoration: none; }
 
     /**
      * Carga los logs de LocalStorage.
-     * @returns {Array} - Lista de objetos de log.
+     * @returns {Array} - Lista de objetos de log..
      */
     function loadLogs() {
         const data = localStorage.getItem(LOGS_KEY);
@@ -819,7 +819,7 @@ a { text-decoration: none; }
      * @param {string} status - 'Tomada', 'Tomada Tarde', u 'Omitida'.
      * @param {string} symptom - Descripción del síntoma.
      * @param {string} alarmId - ID de la alarma.
-     * @param {boolean} takenLate - Si fue tomada tarde.
+     * @param {boolean} takenLate - Si fue tomada tarde..
      */
     function addLogEntry(medicationName, status, symptom = '', alarmId = 'N/A', takenLate = false) {
         const logs = loadLogs();
@@ -863,7 +863,7 @@ a { text-decoration: none; }
         let nextDose = new Date();
         nextDose.setHours(hours, minutes, 0, 0);
 
-        // Si la hora de la dosis ya pasó hoy, la programamos para mañana.
+        // Si la hora de la dosis ya pasó hoy, la programamos para mañana..
         if (nextDose < new Date()) {
             nextDose.setDate(nextDose.getDate() + 1);
         }
@@ -958,7 +958,7 @@ a { text-decoration: none; }
         // 1. Registrar en el historial como Omitida
         addLogEntry(medicationName, 'Omitida', symptom, alarmId);
         
-        // 2. Recalcular la próxima dosis como si se hubiera tomado tarde (para continuar el ciclo)
+        // 2. Recalcular la próxima dosis como si se hubiera tomado tarde (para continuar el ciclo).
         takeDoseRecalcOnly(alarmId);
         
         // 3. Limpiar y ocultar
@@ -1009,7 +1009,7 @@ a { text-decoration: none; }
             }
         }
         
-        // Actualizar el estado y próxima hora de la alarma
+        // Actualizar el estado y próxima hora de la alarma.
         alarm.nextDoseTime = nextDose.toISOString();
         alarm.status = 'Activa'; 
         
@@ -1048,7 +1048,7 @@ a { text-decoration: none; }
     }
 
     /**
-     * Renderiza la lista de alarmas y maneja el estado de la alarma pendiente.
+     * Renderiza la lista de alarmas y maneja el estado de la alarma pendiente..
      * @param {Array} alarms - Lista de objetos de alarma.
      */
     function renderAlarms(alarms) {
@@ -1092,7 +1092,7 @@ a { text-decoration: none; }
                 actionButton = '';
                 item.classList.add('taken');
             } else {
-                 // Alarma pendiente/próxima
+                 // Alarma pendiente/próxima.
                 let badgeStyle = isLate ? 'background-color: var(--color-danger); color: white;' : '';
                 let badgeText = isLate ? 'PENDIENTE' : (alarm.frequency === 'diaria' ? 'Diaria' : `Cada ${alarm.recurrentHours}h`);
                 
@@ -1149,7 +1149,7 @@ a { text-decoration: none; }
     // --- Control de Eventos y UI ---
 
     /**
-     * Adjunta event listeners a los botones de la lista de alarmas.
+     * Adjunta event listeners a los botones de la lista de alarmas..
      */
     function attachAlarmEventListeners() {
         document.querySelectorAll('.alarm-item .taken-button').forEach(button => {
@@ -1189,7 +1189,7 @@ a { text-decoration: none; }
     
     // --- Listeners de UI ---
 
-    // Mostrar/Ocultar el campo de horas recurrentes
+    // Mostrar/Ocultar el campo de horas recurrentes.
     frequencySelect.addEventListener('change', () => {
         recurrentOptions.style.display = frequencySelect.value === 'recurrente' ? 'block' : 'none';
     });
@@ -1231,7 +1231,7 @@ a { text-decoration: none; }
         }
     });
 
-    // Iniciar la aplicación al cargar el script
+    // Iniciar la aplicación al cargar el script.
     initializeApp();
 </script>
 </body>
