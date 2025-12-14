@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
        /* ============================================================
-   VARIABLES DE COLOR Y ESTILO PRINCIPALES
+   VARIABLES DE COLOR Y ESTILO PRINCIPALES.
    (Permiten modificar fácilmente los colores del sitio)
    ============================================================ */
 :root {
@@ -87,6 +87,7 @@ a { text-decoration: none; }
     border-right: 1px solid rgba(255,255,255,0.1);
     transition: background-color 0.2s;
 }
+
 .main-tabs a:hover { background-color: #3b507b; }
 .main-tabs a.active { background-color: var(--color-menu-bg); }
 /* ============================================================
@@ -146,6 +147,7 @@ a { text-decoration: none; }
             color: var(--color-primary);
         }
         
+
         .navbar-right {
           display: flex;
     align-items: center;
@@ -283,7 +285,7 @@ a { text-decoration: none; }
         .profile-actions {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px; /* Para alinear con el nombre */
+            margin-bottom: 20px; /* Para alinear con el nombre, */
         }
 
         .action-button {
@@ -355,6 +357,7 @@ a { text-decoration: none; }
             background-color: var(--color-primary);
             border-radius: 2px;
         }
+
         .profile-nav a {
             text-decoration: none;
             color: var(--color-text-light);
@@ -426,6 +429,7 @@ a { text-decoration: none; }
             font-weight: 500;
             transition: background-color 0.2s;
         }
+
 
         .post-option:hover {
             background-color: #949494;
@@ -531,6 +535,7 @@ a { text-decoration: none; }
     <a th:href="@{/alarma}" ><i class="fas fa-clock"></i> Alarmas</a>
     <a  th:href="@{/Contactanos}">Contactanos</a>
 </nav>
+
 
 
     <div class="navbar-right"></div>
@@ -664,7 +669,7 @@ a { text-decoration: none; }
     </div>
 
     <script>
-        // *** FUNCIÓN PARA MOSTRAR EL NOMBRE DEL USUARIO REGISTRADO ***
+        // *** FUNCIÓN PARA MOSTRAR EL NOMBRE DEL USUARIO REGISTRADO. ***
         document.addEventListener('DOMContentLoaded', () => {
             const userName = localStorage.getItem('userName');
             const userNameDisplayElement = document.getElementById('userNameDisplay');
