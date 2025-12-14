@@ -2,7 +2,7 @@ package com.example.lifeline.model;
 
 
 import java.math.BigDecimal;
-
+//
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +38,8 @@ public class Producto {
 
     private Boolean estado;
 
-    // ✔ Nombre coherente con el service
+    // ✔ Nombre coherente con el service.
     @Column(name = "imagen")
     private String imagen;
 }
+//
