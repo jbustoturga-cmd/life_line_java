@@ -13,6 +13,7 @@ body {
   color: #1a1a1a;
   padding: 20px 0;
 }
+
 .back-arrow {
   position: absolute; top: 25px; left: 25px;
   font-size: 32px; color: #2d3e5f;
@@ -72,6 +73,7 @@ button {
   cursor: pointer; font-size: 17px; font-weight: 600;
   margin-top: 15px; transition: all 0.2s ease;
 }
+
 button:hover { background-color: #4a5a7a; }
 button:active { transform: scale(0.97); background-color: #3d4a66; }
 .login-link { text-align: center; font-size: 14px; margin-top: 20px; color: #666; }
@@ -126,6 +128,7 @@ button:active { transform: scale(0.97); background-color: #3d4a66; }
   </div>
   <span class="error-message" id="fechaError">Fecha de nacimiento requerida.</span>
 </div>
+
 
 <div class="form-group">
   <label>Tipo de Documento</label>
@@ -193,6 +196,7 @@ button:active { transform: scale(0.97); background-color: #3d4a66; }
   </div>
   <span class="error-message" id="passwordError">La contraseña debe tener al menos 6 caracteres.</span>
 </div>
+
 
 <div class="form-group">
   <label>Verifique su contraseña</label>
@@ -280,6 +284,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
 
   if (hasError) e.preventDefault();
 });
+
 
 function showError(element, id) {
   element.classList.add('error');
