@@ -1,5 +1,5 @@
 package com.example.lifeline.model;
-
+//
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +30,9 @@ public class Usuario {
     private String password;
 
     @Column(nullable = false)
-    private String rol; // Ej: ROLE_ADMIN, ROLE_USER, ROLE_PACIENTE
+    private String rol; // Ej: ROLE_ADMIN, ROLE_USER, ROLE_PACIENTE.
 
-    // Campos extra del formulario
+    // Campos extra del formulario.
     @Column(unique = true)
     private String email;
 
@@ -43,5 +43,6 @@ public class Usuario {
     @Column(unique = true)
     private String numeroDocumento;
 
-    private String estadio; // Solo si el usuario es paciente
+    private String estadio; // Solo si el usuario es paciente.
 }
+//
