@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class envioscontroller {
     @GetMapping("/envios")
     public String mostrarEnvios() {
-        // Retorna el nombre del archivo HTML (ubicado en /templates/envios.html)
+        // Retorna el nombre del archivo HTML (ubicado en /templates/envios.html).
         return "envios";
     }
 
 }
+//
