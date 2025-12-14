@@ -13,7 +13,7 @@ import java.time.LocalDate;
 /**
  * Utilidad para generar archivos PDF a partir de plantillas FreeMarker.
  * 
- * Esta clase se encarga de:
+ * Esta clase se encarga de:.
  * <ul>
  * <li>Cargar una plantilla HTML definida en FreeMarker.</li>
  * <li>Procesar la plantilla con un modelo de datos.</li>
@@ -32,7 +32,7 @@ public class PdfGenerator {
     }
 
     /**
-     * Genera un archivo PDF a partir de una plantilla FreeMarker y una lista de
+     * Genera un archivo PDF a partir de una plantilla FreeMarker y una lista de.
      * datos.
      *
      * @param templateName nombre de la plantilla (sin extensión) que se usará para
@@ -43,7 +43,7 @@ public class PdfGenerator {
      *                     generado
      * @throws Exception si ocurre algún error durante la carga de la plantilla o la
      *                   generación del PDF
-     *
+     *.
      *                   <p>
      *                   Flujo del método:
      *                   </p>
@@ -59,7 +59,7 @@ public class PdfGenerator {
      *                   <li>Se utiliza ITextRenderer para convertir el HTML en
      *                   PDF.</li>
      *                   <li>El PDF se escribe en el OutputStream de la
-     *                   respuesta.</li>
+     *                   respuesta.</li>.
      *                   </ol>
      */
     public void generarPdf(String templateName, List<?> datos, LocalDate desde, LocalDate hasta,
@@ -84,3 +84,4 @@ public class PdfGenerator {
     }
 }
 
+//
