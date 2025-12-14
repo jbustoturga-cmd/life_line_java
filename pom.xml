@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.7</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository. -->
 	</parent>
 	
 	<groupId>com.example</groupId>
@@ -23,7 +23,7 @@
 	<dependencies>
 
 		<!-- Spring Boot Starters -->
-		<!-- ...Generar pdf.. -->
+		<!-- ...Generar pdf... -->
 		<dependency>
 			<groupId>org.xhtmlrenderer</groupId>
 			<artifactId>flying-saucer-pdf</artifactId>
@@ -56,7 +56,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<!-- Thymeleaf Spring Security Integration -->
+		<!-- Thymeleaf Spring Security Integration. -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
@@ -99,7 +99,7 @@
 
 	<build>
 		<plugins>
-			<!-- Maven Compiler Plugin with Lombok support -->
+			<!-- Maven Compiler Plugin with Lombok support. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
