@@ -18,21 +18,21 @@ public class ProductoController {
         this.servicio = servicio;
     }
 
-    // LISTAR
+    // LISTAR.
     @GetMapping
     public String listar(Model modelo) {
         modelo.addAttribute("productos", servicio.listar());
         return "listar";
     }
 
-    // NUEVO FORMULARIO
+    // NUEVO FORMULARIO.
     @GetMapping("/nuevo")
     public String nuevoFormulario(Model modelo) {
         modelo.addAttribute("producto", new Producto());
         return "formulario";
     }
 
-    // GUARDAR PRODUCTO NUEVO + IMAGEN
+    // GUARDAR PRODUCTO NUEVO + IMAGEN.
     @PostMapping("/guardar")
     public String guardar(
             @ModelAttribute Producto producto,
@@ -42,14 +42,14 @@ public class ProductoController {
         return "redirect:/productos";
     }
 
-    // EDITAR
+    // EDITAR.
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model modelo) {
         modelo.addAttribute("producto", servicio.obtenerPorId(id));
         return "formulario";
     }
 
-    // ACTUALIZAR PRODUCTO + IMAGEN
+    // ACTUALIZAR PRODUCTO + IMAGEN.
     @PostMapping("/actualizar/{id}")
     public String actualizar(
             @PathVariable Long id,
@@ -60,10 +60,11 @@ public class ProductoController {
         return "redirect:/productos";
     }
 
-    // ELIMINAR
+    // ELIMINAR.
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         servicio.eliminar(id);
         return "redirect:/productos";
     }
 }
+//
